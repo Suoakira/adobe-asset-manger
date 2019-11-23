@@ -8,6 +8,7 @@
   "author": "<github username> <suoarik@gmail.com>",
   "private": true,
   "scripts": {
+    "edev": "quasar dev -m electron",
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0"
   },

@@ -1,11 +1,15 @@
 <template>
   <div id="q-app">
-    <router-view />
+    <BrowserWrapper />
   </div>
 </template>
 
 <script>
+import BrowserWrapper from "./layouts/BrowserWrapper";
+
 export default {
-  name: 'App'
-}
+  components: {
+    BrowserWrapper
+  }
+};
 </script>
