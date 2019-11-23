@@ -3,21 +3,25 @@
     <q-input
       class="navigation-input"
       :value="getBrowserPath"
-      @input="(value) => handleNavInput(value)"
+      @input="value => handleNavInput(value)"
     />
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import fs from "fs-extra";
 
 export default {
   data: () => ({
     browserPath: null
   }),
   methods: {
-    handleNavInput(value) {
-      this.$store.dispatch("setBrowserPath", value);
+    handleNavInput(path) {
+      this.$store.dispatch("setBrowserPath", path);
+      if (fs.existsSync(path)) {
+        this.$store.dispatch("retrieveFolderContents", path);
+      }
     }
   },
 
@@ -25,9 +29,7 @@ export default {
     ...mapGetters(["getBrowserPath"])
   },
   watch: {
-    getBrowserPath() {
-      console.log(this.getBrowserPath);
-    }
+    getBrowserPath() {}
   }
 };
 </script>

@@ -5,7 +5,8 @@ import actions from "./actions";
 const state = {
   browser: {
     path: "/"
-  }
+  },
+  filesAndFolders: []
 };
 
 export default {
