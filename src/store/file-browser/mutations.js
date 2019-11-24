@@ -5,5 +5,14 @@ export default {
 
   setFilesAndFolders(state, Fnf) {
     state.filesAndFolders = Fnf.slice();
+  },
+
+  // browser history
+  addBrowserHistory(state, path) {
+    state.browser.history.push(path);
+  },
+
+  removeBrowserHistory(state) {
+    state.browser.history.shift();
   }
 };

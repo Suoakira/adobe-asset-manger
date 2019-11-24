@@ -23,3 +23,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.file-browser-container {
+  position: relative;
+
+  max-width: 1000px;
+}
+</style>

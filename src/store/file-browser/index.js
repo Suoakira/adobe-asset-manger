@@ -4,8 +4,13 @@ import actions from "./actions";
 
 const state = {
   browser: {
-    path: "/"
+    path: "/",
+
+    history: [],
+    historyCounter: 1
+    // historyFilesAndFolder: []
   },
+
   filesAndFolders: []
 };
 

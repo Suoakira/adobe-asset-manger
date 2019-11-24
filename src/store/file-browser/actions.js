@@ -1,15 +1,36 @@
 import path from "path";
 import mime from "mime-types";
+import fs from "fs-extra";
 
 import walkFolders from "../../../custom_modules/walk-folders";
 import blacklistedPaths from "./blacklisted-paths";
 
 export default {
-  setBrowserPath({ commit, dispatch }, path) {
+  setBrowserPath({ commit }, path) {
     commit("setBrowserPath", path);
   },
 
-  retrieveFolderContents({ commit }, folder) {
+  updateBrowserHistory({ commit, getters }, path) {
+    const { getBrowserHistory } = getters;
+    let lastPath = getBrowserHistory[getBrowserHistory.length - 1];
+
+    const pathValid = fs.existsSync(path);
+
+    if (getBrowserHistory.length > 20 && lastPath != path && pathValid) {
+      commit("removeBrowserHistory");
+      commit("addBrowserHistory", path);
+    } else if (lastPath != path && pathValid) {
+      commit("addBrowserHistory", path);
+    }
+  },
+
+  retrieveFolderContents({ commit, dispatch }, folder) {
+    // some condition to update browser history
+
+    if (true) {
+      dispatch("updateBrowserHistory", folder);
+    }
+
     console.log(folder);
     let folderContents = [];
 

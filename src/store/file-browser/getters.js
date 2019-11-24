@@ -1,5 +1,7 @@
 export default {
   getBrowserPath: state => state.browser.path,
 
-  getFilesAndFolders: state => state.filesAndFolders
+  getFilesAndFolders: state => state.filesAndFolders,
+
+  getBrowserHistory: state => state.browser.history
 };

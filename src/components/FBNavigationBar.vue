@@ -1,5 +1,10 @@
 <template>
   <div class="navigation-bar">
+    <div class="history-nav">
+      <q-btn color="white" text-color="black" label="<" />
+      <q-btn color="white" text-color="black" label=">" />
+      <q-btn @click="refreshPath" color="white" text-color="black" label="R" />
+    </div>
     <q-input
       class="navigation-input"
       :value="getBrowserPath"
@@ -22,6 +27,40 @@ export default {
       if (fs.existsSync(path)) {
         this.$store.dispatch("retrieveFolderContents", path);
       }
+    },
+
+    refreshPath() {
+      this.handleNavInput(this.getBrowserPath);
+    },
+
+    // history navigation
+    setHistoryPath() {
+      let historyPath = this.getBrowserHistory[
+        this.getBrowserHistory.length - this.getHistoryCounter
+      ];
+
+      // if this is pressed dont add to history
+      this.$store.dispatch("setBrowserPath", {
+        path: historyPath,
+        historyPath: true
+      });
+
+      this.$store.dispatch(
+        "setFilesAndFolders",
+        this.getBrowserHistoryFilesAndFolders[
+          this.getBrowserHistory.length - this.getHistoryCounter
+        ]
+      );
+    },
+
+    backPath() {
+      this.$store.dispatch("incrementHistoryCounter");
+      this.setHistoryPath();
+    },
+
+    forwardPath() {
+      this.$store.dispatch("decrementHistoryCounter");
+      this.setHistoryPath();
     }
   },
 
@@ -30,6 +69,9 @@ export default {
   },
   watch: {
     getBrowserPath() {}
+  },
+  created() {
+    this.handleNavInput(this.getBrowserPath);
   }
 };
 </script>
@@ -48,6 +90,15 @@ export default {
     width: 80%;
     height: 20px;
     background: yellow;
+    margin-left: 130px;
+  }
+
+  .history-nav {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: purple;
   }
 }
 </style>
