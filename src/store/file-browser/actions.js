@@ -68,6 +68,14 @@ export default {
     if (getters.getHistoryCounter > 1) {
       commit("decrementHistoryCounter", value);
     }
+  },
+
+  addSavedFolder({ commit }, path) {
+    commit("addSavedFolder", path);
+  },
+
+  removeSavedFolder({ commit }, path) {
+    commit("removeSavedFolder", path);
   }
 };
 

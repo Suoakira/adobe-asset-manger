@@ -10,6 +10,7 @@ const state = {
     historyCounter: 1
     // historyFilesAndFolder: []
   },
+  savedFolders: [],
 
   filesAndFolders: []
 };

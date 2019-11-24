@@ -5,5 +5,7 @@ export default {
 
   getBrowserHistory: state => state.browser.history,
 
-  getHistoryCounter: state => state.browser.historyCounter
+  getHistoryCounter: state => state.browser.historyCounter,
+
+  getSavedFolders: state => state.savedFolders
 };
