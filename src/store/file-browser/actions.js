@@ -27,11 +27,14 @@ export default {
   retrieveFolderContents({ commit, dispatch }, folder) {
     // some condition to update browser history
 
-    if (true) {
+    // hack way of telling if the path is coming from history nav buttons
+    if (!folder.includes("__HISTORY__")) {
+      dispatch("setHistoryCounter");
       dispatch("updateBrowserHistory", folder);
+    } else {
+      folder = folder.slice(0, folder.length - 11);
     }
 
-    console.log(folder);
     let folderContents = [];
 
     if (!folder || typeof folder !== "string") {
@@ -41,7 +44,6 @@ export default {
     for (const fileInfo of walkFolders(folder, false)) {
       // all files and folders
       if ("error" in fileInfo) {
-        console.log();
         console.error(`Error: ${fileInfo.rootDir} - ${fileInfo.error}`);
         continue;
       }
@@ -49,6 +51,22 @@ export default {
       folderContents.push(node);
 
       commit("setFilesAndFolders", folderContents);
+    }
+  },
+
+  setHistoryCounter({ commit }, value = 1) {
+    commit("setHistoryCounter", value);
+  },
+
+  incrementHistoryCounter({ commit, getters }, value = 1) {
+    if (getters.getHistoryCounter < getters.getBrowserHistory.length) {
+      commit("incrementHistoryCounter", value);
+    }
+  },
+
+  decrementHistoryCounter({ commit, getters }, value = 1) {
+    if (getters.getHistoryCounter > 1) {
+      commit("decrementHistoryCounter", value);
     }
   }
 };

@@ -14,5 +14,17 @@ export default {
 
   removeBrowserHistory(state) {
     state.browser.history.shift();
+  },
+
+  incrementHistoryCounter(state, value) {
+    state.browser.historyCounter += value;
+  },
+
+  decrementHistoryCounter(state, value) {
+    state.browser.historyCounter -= value;
+  },
+
+  setHistoryCounter(state, value) {
+    state.browser.historyCounter = value;
   }
 };

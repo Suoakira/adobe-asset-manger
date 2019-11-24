@@ -3,5 +3,7 @@ export default {
 
   getFilesAndFolders: state => state.filesAndFolders,
 
-  getBrowserHistory: state => state.browser.history
+  getBrowserHistory: state => state.browser.history,
+
+  getHistoryCounter: state => state.browser.historyCounter
 };

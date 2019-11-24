@@ -1,8 +1,8 @@
 <template>
   <div class="navigation-bar">
     <div class="history-nav">
-      <q-btn color="white" text-color="black" label="<" />
-      <q-btn color="white" text-color="black" label=">" />
+      <q-btn @click="backPath" color="white" text-color="black" label="<" />
+      <q-btn @click="forwardPath" color="white" text-color="black" label=">" />
       <q-btn @click="refreshPath" color="white" text-color="black" label="R" />
     </div>
     <q-input
@@ -33,24 +33,21 @@ export default {
       this.handleNavInput(this.getBrowserPath);
     },
 
-    // history navigation
+    //
     setHistoryPath() {
       let historyPath = this.getBrowserHistory[
         this.getBrowserHistory.length - this.getHistoryCounter
       ];
 
       // if this is pressed dont add to history
-      this.$store.dispatch("setBrowserPath", {
-        path: historyPath,
-        historyPath: true
-      });
-
-      this.$store.dispatch(
-        "setFilesAndFolders",
-        this.getBrowserHistoryFilesAndFolders[
-          this.getBrowserHistory.length - this.getHistoryCounter
-        ]
-      );
+      this.$store.dispatch("setBrowserPath", historyPath);
+      console.log("__history path", historyPath);
+      if (fs.existsSync(historyPath)) {
+        this.$store.dispatch(
+          "retrieveFolderContents",
+          `${historyPath}__HISTORY__`
+        );
+      }
     },
 
     backPath() {
@@ -65,7 +62,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["getBrowserPath"])
+    ...mapGetters(["getBrowserPath", "getHistoryCounter", "getBrowserHistory"])
   },
   watch: {
     getBrowserPath() {}
