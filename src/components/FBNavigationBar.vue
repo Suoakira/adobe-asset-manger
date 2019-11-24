@@ -41,7 +41,6 @@ export default {
 
       // if this is pressed dont add to history
       this.$store.dispatch("setBrowserPath", historyPath);
-      console.log("__history path", historyPath);
       if (fs.existsSync(historyPath)) {
         this.$store.dispatch(
           "retrieveFolderContents",
@@ -75,8 +74,11 @@ export default {
 
 <style lang="scss" scoped>
 .navigation-bar {
-  position: relative;
+  position: fixed;
+  top: 0;
   width: 100%;
+  z-index: 2;
+  max-width: 780px;
   background: red;
   height: 40px;
 

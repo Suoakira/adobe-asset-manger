@@ -41,6 +41,8 @@ export default {
 <style lang="scss" scoped>
 .windowview-container {
   width: 100%;
+  max-width: 780px;
+  top: 40px;
   height: 100%;
   background: purple;
 }

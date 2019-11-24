@@ -2,6 +2,7 @@
   <div class="file-browser-container">
     <FBNavigationBar />
     <FBWindowView />
+    <FBSidebar />
   </div>
 </template>
 
