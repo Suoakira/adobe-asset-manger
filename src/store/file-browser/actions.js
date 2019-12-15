@@ -24,9 +24,9 @@ export default {
     }
   },
 
+  
   retrieveFolderContents({ commit, dispatch }, folderPath) {
 
-    
     // hack way of telling if the path is coming from history nav buttons
     if (!folderPath.includes("__HISTORY__")) {
       dispatch("setHistoryCounter");
