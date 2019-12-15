@@ -76,6 +76,10 @@ export default {
 
   removeSavedFolder({ commit }, path) {
     commit("removeSavedFolder", path);
+  },
+
+  setPreviewFile({commit}, file) {
+    commit("setPreviewFile", file)
   }
 };
 

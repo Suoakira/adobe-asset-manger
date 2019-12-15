@@ -12,7 +12,9 @@ const state = {
   },
   savedFolders: [],
 
-  filesAndFolders: []
+  filesAndFolders: [],
+
+  previewFile: null,
 };
 
 export default {

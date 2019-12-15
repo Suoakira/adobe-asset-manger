@@ -38,5 +38,9 @@ export default {
 
   removeSavedFolder(state, passedPath) {
     state.savedFolders = state.savedFolders.filter(path => path !== passedPath);
+  },
+
+  setPreviewFile(state, file) {
+    state.previewFile = file
   }
 };

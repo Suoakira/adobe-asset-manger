@@ -9,10 +9,7 @@
       <q-card>
         <q-card-section>
           <div v-for="savedFolder in getSavedFolders" :key="savedFolder">
-            <SavedFolderCard
-              @click="navigate(savedFolder)"
-              :niceName="folderNicename(savedFolder)"
-            ></SavedFolderCard>
+            <SavedFolderCard @click="navigate(savedFolder)" :niceName="folderNicename(savedFolder)"></SavedFolderCard>
           </div>
         </q-card-section>
       </q-card>
@@ -26,10 +23,7 @@
     >
       <q-card>
         <q-card-section>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius
-          reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum
-          officiis modi facere maiores architecto suscipit iste eveniet
-          doloribus ullam aliquid.
+          <FBSidebarPreview />
         </q-card-section>
       </q-card>
     </q-expansion-item>
@@ -40,6 +34,7 @@ import { mapGetters } from "vuex";
 import fs from "fs-extra";
 
 import SavedFolderCard from "./_SavedFolderCard";
+import FBSidebarPreview from "./FBSidebarPreview";
 
 export default {
   data() {
@@ -50,7 +45,7 @@ export default {
     };
   },
 
-  components: { SavedFolderCard },
+  components: { SavedFolderCard, FBSidebarPreview },
 
   methods: {
     handleClickFavExpanded() {

@@ -53,6 +53,10 @@ export default {
   },
   methods: {
     navigate(fileOrFolder) {
+
+      // if not directory show preview file
+      !fileOrFolder.isDir && this.$store.dispatch("setPreviewFile", fileOrFolder)
+
       let navigatePath = fileOrFolder.nodeKey;
 
       if (fs.existsSync(navigatePath)) {
@@ -124,8 +128,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getFilesAndFolders"])
+    ...mapGetters(["getFilesAndFolders", "getPreviewFile"])
   },
+  watch: {
+    getPreviewFile() {
+      console.log("__preview", this.getPreviewFile)
+    }
+  }
 };
 </script>
 
