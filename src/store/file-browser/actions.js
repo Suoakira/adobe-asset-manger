@@ -2,7 +2,6 @@ import path from "path";
 import mime from "mime-types";
 import fs from "fs-extra";
 
-import walkFolders from "../../../custom_modules/walk-folders";
 import blacklistedPaths from "./blacklisted-paths";
 
 export default {
@@ -11,6 +10,7 @@ export default {
   },
 
   updateBrowserHistory({ commit, getters }, path) {
+
     const { getBrowserHistory } = getters;
     let lastPath = getBrowserHistory[getBrowserHistory.length - 1];
 
@@ -24,33 +24,33 @@ export default {
     }
   },
 
-  retrieveFolderContents({ commit, dispatch }, folder) {
-    // some condition to update browser history
+  retrieveFolderContents({ commit, dispatch }, folderPath) {
 
+    
     // hack way of telling if the path is coming from history nav buttons
-    if (!folder.includes("__HISTORY__")) {
+    if (!folderPath.includes("__HISTORY__")) {
       dispatch("setHistoryCounter");
-      dispatch("updateBrowserHistory", folder);
+      dispatch("updateBrowserHistory", folderPath);
     } else {
-      folder = folder.slice(0, folder.length - 11);
+      folderPath = folderPath.slice(0, folderPath.length - 11);
     }
+    
+    const isDir = fs.lstatSync(folderPath).isDirectory();
+    
+    const folderContents = isDir ? fs.readdirSync(folderPath) : []
+    const mapedNodes = helperMethods.filterFilesAndFolders(folderContents).map(fileOrFolder => helperMethods.createNode(fileOrFolder, folderPath));
 
-    let folderContents = [];
-
-    if (!folder || typeof folder !== "string") {
-      return folderContents;
+    if (folderContents.length > 0) {
+      commit("setFilesAndFolders", mapedNodes);
     }
+  },
 
-    for (const fileInfo of walkFolders(folder, false)) {
-      // all files and folders
-      if ("error" in fileInfo) {
-        console.error(`Error: ${fileInfo.rootDir} - ${fileInfo.error}`);
-        continue;
-      }
-      const node = helperMethods.createNode(fileInfo);
-      folderContents.push(node);
+  navigatePath({ commit, dispatch }, path) {
+    dispatch("setBrowserPath", path);
 
-      commit("setFilesAndFolders", folderContents);
+    if (fs.existsSync(path)) {
+
+      dispatch("retrieveFolderContents", path);
     }
   },
 
@@ -80,84 +80,36 @@ export default {
 };
 
 const helperMethods = {
-  // helper method - clean up move out of store
-  filterAndSetFilesAndFolders(filesAndFolders) {
+
+  filterFilesAndFolders(filesAndFolders) {
     let folderContents = filesAndFolders.filter(
       fileOrFolder =>
-        !blacklistedPaths.includes(fileOrFolder.nodeKey) &&
-        fileOrFolder.label.charAt(0) !== "." &&
-        fileOrFolder.label.substr(fileOrFolder.label.length - 4) !== ".app"
+
+        // !blacklistedPaths.includes(fileOrFolder.nodeKey) &&
+        fileOrFolder.charAt(0) !== "." &&
+        fileOrFolder.substr(fileOrFolder.length - 4) !== ".app"
+
     );
 
     return folderContents;
   },
 
-  // helper method - clean up move out of store
-  mapFoldersToNodes(filesAndFolders) {
-    return filesAndFolders.map(folder => ({
-      title: folder.label,
-      label: folder.label,
-      truncatedName: helperMethods.truncate(folder.label, 19, "...", folder),
-      isDir: folder.data.isDir,
-      isExpanded: false,
-      data: folder,
-      children: []
-    }));
-  },
+  createNode(file, folderPath) {
 
-  // helper method - clean up move out of store
-  truncate(fullStr, strLen, separator, folder) {
-    if (!folder.data.isDir) {
-      if (fullStr.length <= strLen) return fullStr;
-
-      separator = separator || "...";
-
-      var sepLen = separator.length,
-        charsToShow = strLen - sepLen,
-        frontChars = Math.ceil(charsToShow / 2),
-        backChars = Math.floor(charsToShow / 2);
-
-      return (
-        fullStr.substr(0, frontChars) +
-        separator +
-        fullStr.substr(fullStr.length - backChars)
-      );
-    } else {
-      if (fullStr.length <= strLen) return fullStr;
-
-      return fullStr.substring(0, strLen) + separator;
-    }
-  },
-  createNode(fileInfo) {
-    let nodeKey = fileInfo.rootDir;
-
-    if (nodeKey.charAt(nodeKey.length - 1) !== path.sep) {
-      nodeKey += path.sep;
-    }
-    if (fileInfo.fileName === path.sep) {
-      fileInfo.fileName = nodeKey;
-    } else {
-      nodeKey += fileInfo.fileName;
-    }
-
+    const nodeKey = folderPath + "/" + file
+    const fileStats = fs.lstatSync(nodeKey)
     // get file mime type
     const mimeType = mime.lookup(nodeKey);
 
     // create object
     return {
-      label: fileInfo.fileName,
+      label: file,
       nodeKey: nodeKey,
-      expandable: fileInfo.isDir,
-      tickable: true,
-      lazy: true,
-      children: [],
+      isDir: fileStats.isDirectory(),
       extension: path.extname(nodeKey),
-      data: {
-        rootDir: fileInfo.rootDir,
-        isDir: fileInfo.isDir,
-        mimeType: mimeType,
-        stat: fileInfo.stat
-      }
+      rootDir: folderPath,
+      mimeType: mimeType,
+      stat: fileStats
     };
   }
 };

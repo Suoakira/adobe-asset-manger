@@ -4,12 +4,7 @@
       <q-btn @click="backPath" color="white" text-color="black" label="<" />
       <q-btn @click="forwardPath" color="white" text-color="black" label=">" />
       <q-btn @click="refreshPath" color="white" text-color="black" label="R" />
-      <q-btn
-        @click="saveFolder"
-        color="white"
-        text-color="black"
-        label="Star"
-      />
+      <q-btn @click="saveFolder" color="white" text-color="black" label="Star" />
     </div>
     <q-input
       class="navigation-input"
@@ -30,6 +25,7 @@ export default {
   methods: {
     handleNavInput(path) {
       this.$store.dispatch("setBrowserPath", path);
+      
       if (fs.existsSync(path)) {
         this.$store.dispatch("retrieveFolderContents", path);
       }
@@ -47,6 +43,8 @@ export default {
 
       // if this is pressed dont add to history
       this.$store.dispatch("setBrowserPath", historyPath);
+      console.log(historyPath)
+
       if (fs.existsSync(historyPath)) {
         this.$store.dispatch(
           "retrieveFolderContents",

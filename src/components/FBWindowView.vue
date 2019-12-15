@@ -18,6 +18,11 @@ import FBPreviewCard from "./FBPreviewCard";
 import fs from "fs-extra";
 
 export default {
+  data() {
+    return {
+
+    }
+  },
   components: {
     FBPreviewCard
   },
