@@ -1,7 +1,7 @@
 <template>
   <div class="windowview-container row items-start stretchy-wrapper">
     <div
-      v-for="fileOrFolder in filterSearchInput(getFilesAndFolders)"
+      v-for="fileOrFolder in renderFilteredFiles(getFilesAndFolders)"
       class="col-3"
       :key="fileOrFolder.nodeKey"
       @click="navigate(fileOrFolder)"
@@ -16,7 +16,7 @@
 
       <FBPreviewCardAudio :file="fileOrFolder" v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'audio') && !isAepFile(fileOrFolder)" />
 
-      <FBPreviewCardImage :file="fileOrFolder" v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'image')"  />
+      <FBPreviewCardImage :file="fileOrFolder" v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'image') && !isPsdFile(fileOrFolder)" />
 
       <FBPreviewCardVideo :file="fileOrFolder" v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'video')"  />
       
@@ -27,6 +27,7 @@
 <script>
 import { mapGetters } from "vuex";
 import fs from "fs-extra";
+import _ from "lodash"
 
 // mixins
 import fileFilters from "../mixins/file-filters.js"
@@ -73,8 +74,6 @@ export default {
     filterSearchInput(renderedFilesAndFolders) {
       return renderedFilesAndFolders.filter(file => {
 
-        console.log("mimettpe", file.mimeType)
-        return this.filterFileExtensions(file);
 
         // return file.label.toLowerCase().includes(this.getBrowserSearch);
       });
@@ -107,10 +106,44 @@ export default {
       } else {
         return false;
       }
-    }
+    },
+
+		renderFilteredFiles: _.throttle(
+			function(paramFilesAndFolders) {
+				//  filter file extensions
+				let filteredParamFilesAndFolders = paramFilesAndFolders.filter(file =>
+					this.filterFileExtensions(file)
+				);
+
+				(this.filteredFilesAndFolders = filteredParamFilesAndFolders.sort(
+					(a, b) => {
+						// sort label a-z
+						if (this.getFilter === "a-z") {
+							return a.label.localeCompare(b.label);
+						}
+					}
+				)),
+					// sorts folders on top of files
+					(this.filteredFilesAndFolders = this.filteredFilesAndFolders.sort(
+						(a, b) => {
+							return a.isDir === b.isDir
+								? 0
+								: a.isDir
+								? -1
+								: 1;
+						}
+					));
+
+				return this.filteredFilesAndFolders;
+			},
+			50,
+			{ trailing: false }
+		),
   },
   computed: {
-    ...mapGetters(["getFilesAndFolders", "getPreviewFile"])
+    ...mapGetters(["getFilesAndFolders", "getPreviewFile"]),
+
+    
   },
   watch: {
     getPreviewFile() {

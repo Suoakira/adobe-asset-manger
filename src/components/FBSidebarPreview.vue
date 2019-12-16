@@ -11,7 +11,7 @@
 
       <FBPreviewCardAudio :file="getPreviewFile" v-if="getPreviewFile.mimeType && isMimetype(getPreviewFile, 'audio') && !isAepFile(getPreviewFile)" />
 
-      <FBPreviewCardImage :file="getPreviewFile" v-if="getPreviewFile.mimeType && isMimetype(getPreviewFile, 'image')"  />
+      <FBPreviewCardImage :file="getPreviewFile" v-if="getPreviewFile.mimeType &&  isMimetype(getPreviewFile, 'image') && !isPsdFile(getPreviewFile)" />
 
       <FBPreviewCardVideo :file="getPreviewFile" v-if="getPreviewFile.mimeType && isMimetype(getPreviewFile, 'video')"  />
 
