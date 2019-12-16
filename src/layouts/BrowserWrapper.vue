@@ -3,6 +3,7 @@
     <FBNavigationBar />
     <FBWindowView />
     <FBSidebar />
+    <FBBreadcrumbBar />
   </div>
 </template>
 
@@ -11,16 +12,15 @@ import FBFooterPath from "./../components/FBFooterPath";
 import FBNavigationBar from "./../components/FBNavigationBar";
 import FBSidebar from "./../components/FBSidebar";
 import FBWindowView from "./../components/FBWindowView";
+import FBBreadcrumbBar from  "./../components/FBBreadcrumbBar";
 
 export default {
-  data() {
-    return {};
-  },
   components: {
     FBFooterPath,
     FBNavigationBar,
     FBSidebar,
-    FBWindowView
+    FBWindowView,
+    FBBreadcrumbBar
   }
 };
 </script>

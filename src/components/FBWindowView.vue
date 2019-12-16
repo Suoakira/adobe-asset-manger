@@ -2,7 +2,7 @@
   <div class="windowview-container row items-start stretchy-wrapper">
     <div
       v-for="fileOrFolder in renderFilteredFiles(getFilesAndFolders)"
-      class="col-3"
+      class="col-2"
       :key="fileOrFolder.nodeKey"
       @click="navigate(fileOrFolder)"
     >

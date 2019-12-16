@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="getPreviewFile !== null">
 
       <FBPreviewCardFolder :folder="getPreviewFile" v-if="getPreviewFile.isDir" />
 
