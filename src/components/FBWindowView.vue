@@ -28,6 +28,9 @@
 import { mapGetters } from "vuex";
 import fs from "fs-extra";
 
+// mixins
+import fileFilters from "../mixins/file-filters.js"
+
 // previews cards
 import FBPreviewCardFolder from "./preview-cards/FBPreviewCardFolder";
 import FBPreviewCardAep from "./preview-cards/FBPreviewCardAep";
@@ -42,6 +45,7 @@ export default {
   data() {
     return {};
   },
+  mixins: [fileFilters],
   components: {
     FBPreviewCardFolder, 
     FBPreviewCardAep, 
@@ -74,28 +78,6 @@ export default {
 
         // return file.label.toLowerCase().includes(this.getBrowserSearch);
       });
-    },
-
-    isAepFile(file) {
-      if (file !== null) {
-        return file.label.substr(file.label.length - 4) === ".aep";
-      }
-    },
-
-    isPsdFile(file) {
-      if (file !== null) {
-        return file.label.substr(file.label.length - 4) === ".psd";
-      }
-    },
-
-    isIllustratorFile(file) {
-      if (file !== null) {
-        return file.label.substr(file.label.length - 3) === ".ai";
-      }
-    },
-
-    isMimetype(file, type) {
-      return file.mimeType && file.mimeType.includes(type);
     },
 
     /**
