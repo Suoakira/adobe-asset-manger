@@ -32,11 +32,10 @@ export default {
       pathBuilder.forEach(path => {
 
         if (path !== "") {
+            
           constructedPath += "/" + path;
-        // console.log("constructedPath", fs.stat(constructedPath))
-    
+
         fs.statSync(constructedPath).isDirectory() &&
-            // console.log("_____________", constructedPath.slice(1))
           breadCrumbs.push({
             path: path,
             constructedPath: constructedPath
