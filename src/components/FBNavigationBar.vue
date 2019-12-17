@@ -4,6 +4,7 @@
       <q-btn @click="backPath" color="white" text-color="black" label="<" />
       <q-btn @click="forwardPath" color="white" text-color="black" label=">" />
       <q-btn @click="refreshPath" color="white" text-color="black" label="R" />
+      <q-btn @click="saveFolder" color="white" text-color="black" label="Star" />
     </div>
     <q-input
       class="navigation-input"
@@ -24,6 +25,7 @@ export default {
   methods: {
     handleNavInput(path) {
       this.$store.dispatch("setBrowserPath", path);
+      
       if (fs.existsSync(path)) {
         this.$store.dispatch("retrieveFolderContents", path);
       }
@@ -41,11 +43,24 @@ export default {
 
       // if this is pressed dont add to history
       this.$store.dispatch("setBrowserPath", historyPath);
+      console.log(historyPath)
+
       if (fs.existsSync(historyPath)) {
         this.$store.dispatch(
           "retrieveFolderContents",
           `${historyPath}__HISTORY__`
         );
+      }
+    },
+
+    saveFolder() {
+      const isPathDirectory = fs.statSync(this.getBrowserPath).isDirectory();
+
+      if (isPathDirectory) {
+        //add to favourties
+        this.$store.dispatch("addSavedFolder", this.getBrowserPath);
+      } else {
+        console.log("Sorry that isnt a folder");
       }
     },
 
@@ -62,9 +77,6 @@ export default {
 
   computed: {
     ...mapGetters(["getBrowserPath", "getHistoryCounter", "getBrowserHistory"])
-  },
-  watch: {
-    getBrowserPath() {}
   },
   created() {
     this.handleNavInput(this.getBrowserPath);
@@ -86,10 +98,10 @@ export default {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 80%;
+    width: 50%;
     height: 20px;
     background: yellow;
-    margin-left: 130px;
+    margin-left: 190px;
   }
 
   .history-nav {

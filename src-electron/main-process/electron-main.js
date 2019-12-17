@@ -19,7 +19,9 @@ function createWindow () {
     height: 600,
     useContentSize: true,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      // for local applications
+      webSecurity: false
     }
   })
 

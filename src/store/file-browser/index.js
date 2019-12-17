@@ -10,8 +10,11 @@ const state = {
     historyCounter: 1
     // historyFilesAndFolder: []
   },
+  savedFolders: [],
 
-  filesAndFolders: []
+  filesAndFolders: [],
+
+  previewFile: null,
 };
 
 export default {
