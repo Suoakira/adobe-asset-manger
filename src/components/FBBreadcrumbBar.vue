@@ -13,6 +13,7 @@ import fs from "fs-extra";
 export default {
   methods: {
     navigate(crumbPath) {
+        console.log("__crumb path")
       this.$store.dispatch("navigatePath", crumbPath);
     }
   },
@@ -30,15 +31,18 @@ export default {
 
       pathBuilder.forEach(path => {
 
-
-        constructedPath += "/" + path;
-            console.log(constructedPath)
-        if (fs.stats(constructedPath.slice(1)).isDirectory()) 
-        path !== "" &&
+        if (path !== "") {
+          constructedPath += "/" + path;
+        // console.log("constructedPath", fs.stat(constructedPath))
+    
+        fs.statSync(constructedPath).isDirectory() &&
+            // console.log("_____________", constructedPath.slice(1))
           breadCrumbs.push({
             path: path,
-            constructedPath: constructedPath.slice(1)
+            constructedPath: constructedPath
           });
+
+        }
       });
 
       return breadCrumbs;
