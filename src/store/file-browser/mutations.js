@@ -42,5 +42,9 @@ export default {
 
   setPreviewFile(state, file) {
     state.previewFile = file
+  },
+
+  setBrowserSearchTerm(state, searchTerm) {
+    state.browser.searchTerm = searchTerm
   }
 };

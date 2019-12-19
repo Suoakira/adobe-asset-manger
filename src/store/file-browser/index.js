@@ -4,16 +4,20 @@ import actions from "./actions";
 
 const state = {
   browser: {
+    // current path
     path: "/",
 
+    //history
     history: [],
-    historyCounter: 1
-    // historyFilesAndFolder: []
+    historyCounter: 1,
+
+    searchTerm: null,
   },
+  // favourite files and folders
   savedFolders: [],
-
+  // contents in this path
   filesAndFolders: [],
-
+  // selected preview file
   previewFile: null,
 };
 

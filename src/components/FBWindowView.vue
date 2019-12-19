@@ -147,11 +147,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getFilesAndFolders", "getPreviewFile"]),
+    ...mapGetters(["getFilesAndFolders", "getPreviewFile", "getBrowserSearchTerm"]),
     renderFilteredFiles() {
       //  filter file extensions
-      let filteredFilesAndFolders = this.getFilesAndFolders.filter(file =>
-        this.filterFileExtensions(file)
+      let filteredFilesAndFolders = this.getFilesAndFolders.filter(file => {
+       return  this.filterFileExtensions(file) && file.label.includes(this.getBrowserSearchTerm)
+      }
       );
 
       (this.filteredFilesAndFolders = filteredFilesAndFolders.sort((a, b) => {

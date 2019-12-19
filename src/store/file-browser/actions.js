@@ -80,6 +80,11 @@ export default {
 
   setPreviewFile({ commit }, file) {
     commit("setPreviewFile", file)
+  },
+
+  setBrowserSearchTerm({commit}, searchTerm) {
+    console.log("test")
+    commit("setBrowserSearchTerm", searchTerm)
   }
 };
 
