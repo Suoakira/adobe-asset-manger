@@ -1,10 +1,20 @@
 <template>
   <div class="windowview-container row items-start stretchy-wrapper">
+
+    <VueContext ref="fb-window-view" :closeOnScroll="true">
+      <template slot-scope="child">
+        <!-- Only show this if .aep -->
+        <li @click="revealInFinder($event, child.data)">Reveal in Finder</li>
+        <!-- <li @click.prevent="">{{child.data}}</li> -->
+      </template>
+    </VueContext>
+
     <div
       v-for="fileOrFolder in renderFilteredFiles(getFilesAndFolders)"
       class="col-2"
       :key="fileOrFolder.nodeKey"
       @click="navigate(fileOrFolder)"
+    	@contextmenu.prevent="$refs['fb-window-view'].open($event, fileOrFolder)"
     >
       <FBPreviewCardFolder :folder="fileOrFolder" v-if="fileOrFolder.isDir" />
 
@@ -14,23 +24,35 @@
 
       <FBPreviewCardAi :file="fileOrFolder" v-if="isIllustratorFile(fileOrFolder)" />
 
-      <FBPreviewCardAudio :file="fileOrFolder" v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'audio') && !isAepFile(fileOrFolder)" />
+      <FBPreviewCardAudio
+        :file="fileOrFolder"
+        v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'audio') && !isAepFile(fileOrFolder)"
+      />
 
-      <FBPreviewCardImage :file="fileOrFolder" v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'image') && !isPsdFile(fileOrFolder)" />
+      <FBPreviewCardImage
+        :file="fileOrFolder"
+        v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'image') && !isPsdFile(fileOrFolder)"
+      />
 
-      <FBPreviewCardVideo :file="fileOrFolder" v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'video')"  />
-      
+      <FBPreviewCardVideo
+        :file="fileOrFolder"
+        v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'video')"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import { VueContext } from "vue-context";
 import fs from "fs-extra";
-import _ from "lodash"
+import _ from "lodash";
+
+// open in finder replace with shell
+import cmd from 'node-cmd';
 
 // mixins
-import fileFilters from "../mixins/file-filters.js"
+import fileFilters from "../mixins/file-filters.js";
 
 // previews cards
 import FBPreviewCardFolder from "./preview-cards/FBPreviewCardFolder";
@@ -41,26 +63,27 @@ import FBPreviewCardAudio from "./preview-cards/FBPreviewCardAudio";
 import FBPreviewCardImage from "./preview-cards/FBPreviewCardImage";
 import FBPreviewCardVideo from "./preview-cards/FBPreviewCardVideo";
 
-
 export default {
   data() {
     return {};
   },
   mixins: [fileFilters],
   components: {
-    FBPreviewCardFolder, 
-    FBPreviewCardAep, 
-    FBPreviewCardPsd, 
-    FBPreviewCardAi, 
-    FBPreviewCardAudio, 
+    FBPreviewCardFolder,
+    FBPreviewCardAep,
+    FBPreviewCardPsd,
+    FBPreviewCardAi,
+    FBPreviewCardAudio,
     FBPreviewCardImage,
-    FBPreviewCardVideo 
+    FBPreviewCardVideo,
+		VueContext,
+
   },
   methods: {
     navigate(fileOrFolder) {
-
       // if not directory show preview file
-      !fileOrFolder.isDir && this.$store.dispatch("setPreviewFile", fileOrFolder)
+      !fileOrFolder.isDir &&
+        this.$store.dispatch("setPreviewFile", fileOrFolder);
 
       let navigatePath = fileOrFolder.nodeKey;
 
@@ -70,11 +93,18 @@ export default {
       }
     },
 
+    revealInFinder($event, file) {
+      console.log(event, file)
+			if (fs.existsSync(file.nodeKey)) {
+			cmd.run(`open -R ${file.nodeKey.replace(/(\s+)/g, '\\$1')}`);
+			} else {
+				console.log("FileBrowserWindow.vueL", `${file.nodeKey} is not a valid path`)
+			}
+    },
+
     // filters
     filterSearchInput(renderedFilesAndFolders) {
       return renderedFilesAndFolders.filter(file => {
-
-
         // return file.label.toLowerCase().includes(this.getBrowserSearch);
       });
     },
@@ -108,46 +138,40 @@ export default {
       }
     },
 
-		renderFilteredFiles: _.throttle(
-			function(paramFilesAndFolders) {
-				//  filter file extensions
-				let filteredParamFilesAndFolders = paramFilesAndFolders.filter(file =>
-					this.filterFileExtensions(file)
-				);
+    renderFilteredFiles: _.throttle(
+      function(paramFilesAndFolders) {
+        //  filter file extensions
+        let filteredParamFilesAndFolders = paramFilesAndFolders.filter(file =>
+          this.filterFileExtensions(file)
+        );
 
-				(this.filteredFilesAndFolders = filteredParamFilesAndFolders.sort(
-					(a, b) => {
-						// sort label a-z
-						if (this.getFilter === "a-z") {
-							return a.label.localeCompare(b.label);
-						}
-					}
-				)),
-					// sorts folders on top of files
-					(this.filteredFilesAndFolders = this.filteredFilesAndFolders.sort(
-						(a, b) => {
-							return a.isDir === b.isDir
-								? 0
-								: a.isDir
-								? -1
-								: 1;
-						}
-					));
+        (this.filteredFilesAndFolders = filteredParamFilesAndFolders.sort(
+          (a, b) => {
+            // sort label a-z
+            if (this.getFilter === "a-z") {
+              return a.label.localeCompare(b.label);
+            }
+          }
+        )),
+          // sorts folders on top of files
+          (this.filteredFilesAndFolders = this.filteredFilesAndFolders.sort(
+            (a, b) => {
+              return a.isDir === b.isDir ? 0 : a.isDir ? -1 : 1;
+            }
+          ));
 
-				return this.filteredFilesAndFolders;
-			},
-			50,
-			{ trailing: false }
-		),
+        return this.filteredFilesAndFolders;
+      },
+      50,
+      { trailing: false }
+    )
   },
   computed: {
-    ...mapGetters(["getFilesAndFolders", "getPreviewFile"]),
-
-    
+    ...mapGetters(["getFilesAndFolders", "getPreviewFile"])
   },
   watch: {
     getPreviewFile() {
-      console.log("__preview", this.getPreviewFile)
+      console.log("__preview", this.getPreviewFile);
     }
   }
 };
