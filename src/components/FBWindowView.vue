@@ -10,10 +10,10 @@
 
     <div
       v-for="fileOrFolder in renderFilteredFiles(getFilesAndFolders)"
-      class="col-2"
+      :class="`col-2 ${selectedFilePath === fileOrFolder.nodeKey ? 'selected-file' : '' }`"
       :key="fileOrFolder.nodeKey"
       @dblclick="navigate(fileOrFolder)"
-      @click="serPreviewFile(fileOrFolder)"
+      @click="updatePreviewFile(fileOrFolder)"
       @contextmenu.prevent="$refs['fb-window-view'].open($event, fileOrFolder)"
     >
       <FBPreviewCardFolder :folder="fileOrFolder" v-if="fileOrFolder.isDir" />
@@ -65,7 +65,9 @@ import FBPreviewCardVideo from "./preview-cards/FBPreviewCardVideo";
 
 export default {
   data() {
-    return {};
+    return {
+      selectedFilePath: null
+    };
   },
   mixins: [fileFilters],
   components: {
@@ -82,13 +84,23 @@ export default {
     navigate(fileOrFolder) {
       // if not directory show preview file
 
-      let navigatePath = fileOrFolder.nodeKey;
+      let navigatePath = fileOrFolder;
 
       this.$store.dispatch("navigatePath", fileOrFolder.nodeKey);
     },
 
-    serPreviewFile(fileOrFolder) {
-      this.$store.dispatch("setPreviewFile", fileOrFolder);
+    updatePreviewFile(fileOrFolder) {
+
+        if (this.selectedFilePath === fileOrFolder.nodeKey) {
+          this.setPreviewFile(null);
+        } else {
+          this.setPreviewFile(fileOrFolder);
+        }
+    },
+
+    setPreviewFile(update) {
+      this.selectedFilePath = update ? update.nodeKey : null;
+      this.$store.dispatch("setPreviewFile", update);
     },
 
     revealInFinder($event, file) {
@@ -185,6 +197,10 @@ export default {
   top: 40px;
   height: 100%;
   background: purple;
+
+  .selected-file {
+    background: yellow;
+  }
 }
 
 // aspect ratio  | padding-bottom value
