@@ -1,9 +1,13 @@
 import Vue from "vue";
+
 import Vuex from "vuex";
+Vue.use(Vuex);
+
+import VModal from "vue-js-modal";
+Vue.use(VModal, { dynamic: true, injectModalsContainer: true });
 
 import FileBrowser from "./file-browser/index";
 
-Vue.use(Vuex);
 
 /*
  * If not building with SSR mode, you can

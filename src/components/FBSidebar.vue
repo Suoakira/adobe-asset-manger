@@ -63,7 +63,7 @@ export default {
     },
 
     folderNicename(path) {
-      
+
       const splitPath = path.split("/");
 
       return splitPath[splitPath.length - 1];
@@ -75,7 +75,7 @@ export default {
 
   created() {
     this.$root.$on("expandPreview", value => {
-      console.log("fired");
+
       this.previewExpanded = value;
     });
   },

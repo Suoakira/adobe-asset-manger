@@ -4,15 +4,23 @@
     <FBWindowView />
     <FBSidebar />
     <FBBreadcrumbBar />
+
+    <!-- modals  -->
+    <FBFullscreenPreviewModal />
   </div>
 </template>
 
 <script>
+
+// main component buckets
 import FBFooterPath from "./../components/FBFooterPath";
 import FBNavigationBar from "./../components/FBNavigationBar";
 import FBSidebar from "./../components/FBSidebar";
 import FBWindowView from "./../components/FBWindowView";
 import FBBreadcrumbBar from  "./../components/FBBreadcrumbBar";
+
+// modals
+import FBFullscreenPreviewModal from "../components/modals/FBFullscreenPreviewModal"
 
 export default {
   components: {
@@ -20,7 +28,8 @@ export default {
     FBNavigationBar,
     FBSidebar,
     FBWindowView,
-    FBBreadcrumbBar
+    FBBreadcrumbBar,
+    FBFullscreenPreviewModal
   }
 };
 </script>

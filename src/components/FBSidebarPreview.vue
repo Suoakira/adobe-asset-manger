@@ -26,8 +26,18 @@
     </div>
 
     <div class="sidebar-menu-btns">
-      <q-btn color="primary" text-color="white" label="Preview" />
-      <q-btn @click="saveAsFav(getPreviewFile)" color="primary" text-color="white" :label="folderIsSaved ? 'Un-star' : 'Star'" />
+      <q-btn 
+        @click="fullScreenPreview" 
+        color="primary" 
+        text-color="white" 
+        label="Preview" 
+      />
+      <q-btn
+        @click="saveAsFav(getPreviewFile)"
+        color="primary"
+        text-color="white"
+        :label="folderIsSaved ? 'Un-star' : 'Star'"
+      />
     </div>
 
     <div class="file-stats">
@@ -97,7 +107,7 @@ export default {
   computed: {
     ...mapGetters(["getPreviewFile", "getSavedFolders"]),
     folderIsSaved() {
-      return this.getSavedFolders.includes(this.getPreviewFile.nodeKey)
+      return this.getSavedFolders.includes(this.getPreviewFile.nodeKey);
     }
   },
   components: {
@@ -112,7 +122,14 @@ export default {
   },
   methods: {
     saveAsFav(folder) {
-      this.$store.dispatch("saveAsFavFolder", this.getPreviewFile)
+      this.$store.dispatch("saveAsFavFolder", this.getPreviewFile);
+    },
+
+    fullScreenPreview() {
+      if (!this.getPreviewFile.isDir) {
+        console.log("hit");
+        this.$modal.show("fullscreen-preview");
+      }
     }
   }
 };
