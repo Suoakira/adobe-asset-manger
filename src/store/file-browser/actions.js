@@ -24,7 +24,7 @@ export default {
     }
   },
 
-  
+
   retrieveFolderContents({ commit, dispatch }, folderPath) {
 
     // hack way of telling if the path is coming from history nav buttons
@@ -34,9 +34,9 @@ export default {
     } else {
       folderPath = folderPath.slice(0, folderPath.length - 11);
     }
-    
+
     const isDir = fs.lstatSync(folderPath).isDirectory();
-    
+
     const folderContents = isDir ? fs.readdirSync(folderPath) : []
     const mapedNodes = helperMethods.filterFilesAndFolders(folderContents).map(fileOrFolder => helperMethods.createNode(fileOrFolder, folderPath));
 
@@ -78,7 +78,7 @@ export default {
     commit("removeSavedFolder", path);
   },
 
-  setPreviewFile({commit}, file) {
+  setPreviewFile({ commit }, file) {
     commit("setPreviewFile", file)
   }
 };
