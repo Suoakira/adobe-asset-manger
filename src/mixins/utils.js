@@ -1,4 +1,5 @@
 
+import sizeOf from "image-size";
 
 export default {
     methods: {
@@ -25,5 +26,17 @@ export default {
                 return fullStr.substring(0, strLen) + separator;
             }
         },
-    }
+
+        convertBytesToMegaBytes(bytes) {
+            return (bytes / 1000000.0).toFixed(2);
+        },
+        
+        // dimensions of image
+        dimensions(path) {
+            let dimensions = sizeOf(path);
+            
+            return `${dimensions.width}x${dimensions.height}px`;
+        },
+    },
+
 }

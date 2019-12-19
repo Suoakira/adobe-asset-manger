@@ -27,7 +27,7 @@
 
     <div class="file-stats">
       <h5>File Stats</h5>
-      
+
       <!-- name  -->
       <FBSidebarPreviewStatsCard label="Name" :data="getPreviewFile.label" />
 
@@ -43,8 +43,24 @@
       "
       />
 
+        <!-- image  -->
+      <FBSidebarPreviewStatsCard
+        v-if="!getPreviewFile.isDir && getPreviewFile.mimeType.includes('image')"
+        label="Res"
+        :data="dimensions(getPreviewFile.nodeKey)"
+        />
+
       <!-- size  -->
-      <FBSidebarPreviewStatsCard label="Size" :data="getPreviewFile.label" />
+      <FBSidebarPreviewStatsCard
+        label="Size"
+        :data="`${convertBytesToMegaBytes(getPreviewFile.stat.size)}mb`"
+      />
+
+      <!-- created  -->
+      <FBSidebarPreviewStatsCard label="Created at" data="placeholder" />
+
+      <!-- last updated  -->
+      <FBSidebarPreviewStatsCard label="Updated at" data="placeholder" />
 
       <!-- path  -->
       <FBSidebarPreviewStatsCard label="Path" :data="getPreviewFile.nodeKey" />
@@ -57,6 +73,7 @@ import { mapGetters } from "vuex";
 
 // mixins
 import fileFilters from "../mixins/file-filters.js";
+import utils from "../mixins/utils.js";
 
 // preview cards
 import FBPreviewCardFolder from "./preview-cards/FBPreviewCardFolder";
@@ -70,7 +87,7 @@ import FBPreviewCardVideo from "./preview-cards/FBPreviewCardVideo";
 // stat card
 import FBSidebarPreviewStatsCard from "./FBSidebarPreviewStatsCard";
 export default {
-  mixins: [fileFilters],
+  mixins: [fileFilters, utils],
 
   computed: {
     ...mapGetters(["getPreviewFile"])
