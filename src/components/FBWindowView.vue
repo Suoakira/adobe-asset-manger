@@ -9,7 +9,7 @@
     </VueContext>
 
     <div
-      v-for="fileOrFolder in renderFilteredFiles(getFilesAndFolders)"
+      v-for="fileOrFolder in renderFilteredFiles"
       :class="`col-2 ${selectedFilePath === fileOrFolder.nodeKey ? 'selected-file' : '' }`"
       :key="fileOrFolder.nodeKey"
       @dblclick="navigate(fileOrFolder)"
@@ -82,20 +82,15 @@ export default {
   },
   methods: {
     navigate(fileOrFolder) {
-      // if not directory show preview file
-
-      let navigatePath = fileOrFolder;
-
       this.$store.dispatch("navigatePath", fileOrFolder.nodeKey);
     },
 
     updatePreviewFile(fileOrFolder) {
-
-        if (this.selectedFilePath === fileOrFolder.nodeKey) {
-          this.setPreviewFile(null);
-        } else {
-          this.setPreviewFile(fileOrFolder);
-        }
+      if (this.selectedFilePath === fileOrFolder.nodeKey) {
+        this.setPreviewFile(null);
+      } else {
+        this.setPreviewFile(fileOrFolder);
+      }
     },
 
     setPreviewFile(update) {
@@ -149,38 +144,31 @@ export default {
       } else {
         return false;
       }
-    },
-
-    renderFilteredFiles: _.throttle(
-      function(paramFilesAndFolders) {
-        //  filter file extensions
-        let filteredParamFilesAndFolders = paramFilesAndFolders.filter(file =>
-          this.filterFileExtensions(file)
-        );
-
-        (this.filteredFilesAndFolders = filteredParamFilesAndFolders.sort(
-          (a, b) => {
-            // sort label a-z
-            if (this.getFilter === "a-z") {
-              return a.label.localeCompare(b.label);
-            }
-          }
-        )),
-          // sorts folders on top of files
-          (this.filteredFilesAndFolders = this.filteredFilesAndFolders.sort(
-            (a, b) => {
-              return a.isDir === b.isDir ? 0 : a.isDir ? -1 : 1;
-            }
-          ));
-
-        return this.filteredFilesAndFolders;
-      },
-      50,
-      { trailing: false }
-    )
+    }
   },
   computed: {
-    ...mapGetters(["getFilesAndFolders", "getPreviewFile"])
+    ...mapGetters(["getFilesAndFolders", "getPreviewFile"]),
+    renderFilteredFiles() {
+      //  filter file extensions
+      let filteredFilesAndFolders = this.getFilesAndFolders.filter(file =>
+        this.filterFileExtensions(file)
+      );
+
+      (this.filteredFilesAndFolders = filteredFilesAndFolders.sort((a, b) => {
+        // sort label a-z
+        if (this.getFilter === "a-z") {
+          return a.label.localeCompare(b.label);
+        }
+      })),
+        // sorts folders on top of files
+        (this.filteredFilesAndFolders = this.filteredFilesAndFolders.sort(
+          (a, b) => {
+            return a.isDir === b.isDir ? 0 : a.isDir ? -1 : 1;
+          }
+        ));
+
+      return this.filteredFilesAndFolders;
+    }
   },
   watch: {
     getPreviewFile() {
