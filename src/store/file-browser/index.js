@@ -11,7 +11,7 @@ const state = {
     history: [],
     historyCounter: 1,
 
-    searchTerm: null,
+    searchTerm: "",
   },
   // favourite files and folders
   savedFolders: [],

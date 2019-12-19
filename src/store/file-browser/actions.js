@@ -70,8 +70,14 @@ export default {
     }
   },
 
-  addSavedFolder({ commit }, path) {
-    commit("addSavedFolder", path);
+  saveAsFavFolder({ commit }, folder) {
+    const {isDir, nodeKey} = folder
+
+    if (isDir) {
+      commit("saveAsFavFolder", nodeKey);
+    } else {
+      console.log("Sorry that isnt a folder");
+    }
   },
 
   removeSavedFolder({ commit }, path) {
@@ -82,8 +88,7 @@ export default {
     commit("setPreviewFile", file)
   },
 
-  setBrowserSearchTerm({commit}, searchTerm) {
-    console.log("test")
+  setBrowserSearchTerm({ commit }, searchTerm) {
     commit("setBrowserSearchTerm", searchTerm)
   }
 };

@@ -25,6 +25,11 @@
       />
     </div>
 
+    <div class="sidebar-menu-btns">
+      <q-btn color="primary" text-color="white" label="Preview" />
+      <q-btn @click="saveAsFav(getPreviewFile)" color="primary" text-color="white" :label="folderIsSaved ? 'Un-star' : 'Star'" />
+    </div>
+
     <div class="file-stats">
       <h5>File Stats</h5>
 
@@ -43,12 +48,12 @@
       "
       />
 
-        <!-- image  -->
+      <!-- image  -->
       <FBSidebarPreviewStatsCard
         v-if="!getPreviewFile.isDir && getPreviewFile.mimeType.includes('image')"
         label="Res"
         :data="dimensions(getPreviewFile.nodeKey)"
-        />
+      />
 
       <!-- size  -->
       <FBSidebarPreviewStatsCard
@@ -90,7 +95,10 @@ export default {
   mixins: [fileFilters, utils],
 
   computed: {
-    ...mapGetters(["getPreviewFile"])
+    ...mapGetters(["getPreviewFile", "getSavedFolders"]),
+    folderIsSaved() {
+      return this.getSavedFolders.includes(this.getPreviewFile.nodeKey)
+    }
   },
   components: {
     FBPreviewCardFolder,
@@ -101,6 +109,11 @@ export default {
     FBPreviewCardImage,
     FBPreviewCardVideo,
     FBSidebarPreviewStatsCard
+  },
+  methods: {
+    saveAsFav(folder) {
+      this.$store.dispatch("saveAsFavFolder", this.getPreviewFile)
+    }
   }
 };
 </script>

@@ -4,7 +4,6 @@
       <q-btn @click="backPath" color="white" text-color="black" label="<" />
       <q-btn @click="forwardPath" color="white" text-color="black" label=">" />
       <q-btn @click="refreshPath" color="white" text-color="black" label="R" />
-      <q-btn @click="saveFolder" color="white" text-color="black" label="Star" />
       <q-btn @click="stepBackPath" color="white" text-color="black" label="^" />
     </div>
 
@@ -47,24 +46,12 @@ export default {
 
       // if this is pressed dont add to history
       this.$store.dispatch("setBrowserPath", historyPath);
-      console.log(historyPath);
 
       if (fs.existsSync(historyPath)) {
         this.$store.dispatch(
           "retrieveFolderContents",
           `${historyPath}__HISTORY__`
         );
-      }
-    },
-
-    saveFolder() {
-      const isPathDirectory = fs.statSync(this.getBrowserPath).isDirectory();
-
-      if (isPathDirectory) {
-        //add to favourties
-        this.$store.dispatch("addSavedFolder", this.getBrowserPath);
-      } else {
-        console.log("Sorry that isnt a folder");
       }
     },
 
