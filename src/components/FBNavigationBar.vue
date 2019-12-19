@@ -5,6 +5,8 @@
       <q-btn @click="forwardPath" color="white" text-color="black" label=">" />
       <q-btn @click="refreshPath" color="white" text-color="black" label="R" />
       <q-btn @click="saveFolder" color="white" text-color="black" label="Star" />
+      <q-btn @click="stepBackPath" color="white" text-color="black" label="^" />
+
     </div>
     <q-input
       class="navigation-input"
@@ -72,7 +74,29 @@ export default {
     forwardPath() {
       this.$store.dispatch("decrementHistoryCounter");
       this.setHistoryPath();
-    }
+    },
+
+
+		stepBackPath() {
+
+			let splitPath = this.getBrowserPath.split("/");
+
+			// check if we are at the root path
+			if (splitPath[1] !== undefined) {
+				splitPath.pop();
+
+        // set root path
+				if (splitPath.length === 1 && splitPath[0] === "") {
+
+					this.$store.dispatch("navigatePath", "/");
+				} else {
+          // set steped back path
+					this.$store.dispatch("navigatePath", splitPath.join("/"))
+        }
+			} else {
+				this.$store.dispatch("navigatePath", "/");
+			}
+		},
   },
 
   computed: {
@@ -101,7 +125,7 @@ export default {
     width: 50%;
     height: 20px;
     background: yellow;
-    margin-left: 190px;
+    margin-left: 230px;
   }
 
   .history-nav {

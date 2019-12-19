@@ -28,7 +28,9 @@ export default {
 <style lang="scss">
 .file-browser-container {
   position: relative;
-
   max-width: 1000px;
+  
+  // disable user select across app
+  user-select: none;
 }
 </style>

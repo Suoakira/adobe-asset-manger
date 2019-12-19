@@ -1,6 +1,5 @@
 <template>
   <div class="windowview-container row items-start stretchy-wrapper">
-
     <VueContext ref="fb-window-view" :closeOnScroll="true">
       <template slot-scope="child">
         <!-- Only show this if .aep -->
@@ -13,8 +12,9 @@
       v-for="fileOrFolder in renderFilteredFiles(getFilesAndFolders)"
       class="col-2"
       :key="fileOrFolder.nodeKey"
-      @click="navigate(fileOrFolder)"
-    	@contextmenu.prevent="$refs['fb-window-view'].open($event, fileOrFolder)"
+      @dblclick="navigate(fileOrFolder)"
+      @click="serPreviewFile(fileOrFolder)"
+      @contextmenu.prevent="$refs['fb-window-view'].open($event, fileOrFolder)"
     >
       <FBPreviewCardFolder :folder="fileOrFolder" v-if="fileOrFolder.isDir" />
 
@@ -49,7 +49,7 @@ import fs from "fs-extra";
 import _ from "lodash";
 
 // open in finder replace with shell
-import cmd from 'node-cmd';
+import cmd from "node-cmd";
 
 // mixins
 import fileFilters from "../mixins/file-filters.js";
@@ -76,30 +76,31 @@ export default {
     FBPreviewCardAudio,
     FBPreviewCardImage,
     FBPreviewCardVideo,
-		VueContext,
-
+    VueContext
   },
   methods: {
     navigate(fileOrFolder) {
       // if not directory show preview file
-      !fileOrFolder.isDir &&
-        this.$store.dispatch("setPreviewFile", fileOrFolder);
 
       let navigatePath = fileOrFolder.nodeKey;
 
-      if (fs.existsSync(navigatePath)) {
-        this.$store.dispatch("setBrowserPath", navigatePath);
-        this.$store.dispatch("retrieveFolderContents", navigatePath);
-      }
+      this.$store.dispatch("navigatePath", fileOrFolder.nodeKey);
+    },
+
+    serPreviewFile(fileOrFolder) {
+      this.$store.dispatch("setPreviewFile", fileOrFolder);
     },
 
     revealInFinder($event, file) {
-      console.log(event, file)
-			if (fs.existsSync(file.nodeKey)) {
-			cmd.run(`open -R ${file.nodeKey.replace(/(\s+)/g, '\\$1')}`);
-			} else {
-				console.log("FileBrowserWindow.vueL", `${file.nodeKey} is not a valid path`)
-			}
+      console.log(event, file);
+      if (fs.existsSync(file.nodeKey)) {
+        cmd.run(`open -R ${file.nodeKey.replace(/(\s+)/g, "\\$1")}`);
+      } else {
+        console.log(
+          "FileBrowserWindow.vueL",
+          `${file.nodeKey} is not a valid path`
+        );
+      }
     },
 
     // filters
