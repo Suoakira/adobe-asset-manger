@@ -90,6 +90,10 @@ export default {
 
   setBrowserSearchTerm({ commit }, searchTerm) {
     commit("setBrowserSearchTerm", searchTerm)
+  },
+
+  toggleDisplayView({commit}) {
+    commit("toggleDisplayView")
   }
 };
 

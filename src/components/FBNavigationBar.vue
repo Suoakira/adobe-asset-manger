@@ -1,10 +1,12 @@
 <template>
   <div class="navigation-bar">
+    
     <div class="history-nav">
       <q-btn @click="backPath" color="white" text-color="black" label="<" />
       <q-btn @click="forwardPath" color="white" text-color="black" label=">" />
       <q-btn @click="refreshPath" color="white" text-color="black" label="R" />
       <q-btn @click="stepBackPath" color="white" text-color="black" label="^" />
+      <q-btn @click="toggleDisplayView" color="white" text-color="black" label="-" />
     </div>
 
     <q-input
@@ -18,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import fs from "fs-extra";
 
 export default {
@@ -26,6 +28,7 @@ export default {
     browserPath: null
   }),
   methods: {
+    ...mapActions(['toggleDisplayView']),
     handleNavInput(path) {
       this.$store.dispatch("setBrowserPath", path);
 

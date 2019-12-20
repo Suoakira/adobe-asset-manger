@@ -1,7 +1,11 @@
 <template>
   <div class="file-browser-container">
     <FBNavigationBar />
-    <FBWindowView />
+
+    <!-- show window view folders or list view  -->
+    <FBWindowView v-if="getDisplayWindowView"/>
+    <FBListView v-else />
+
     <FBSidebar />
     <FBBreadcrumbBar />
 
@@ -18,9 +22,11 @@ import FBNavigationBar from "./../components/FBNavigationBar";
 import FBSidebar from "./../components/FBSidebar";
 import FBWindowView from "./../components/FBWindowView";
 import FBBreadcrumbBar from  "./../components/FBBreadcrumbBar";
+import FBListView from "./../components/FBListView"
 
 // modals
 import FBFullscreenPreviewModal from "../components/modals/FBFullscreenPreviewModal"
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -29,7 +35,12 @@ export default {
     FBSidebar,
     FBWindowView,
     FBBreadcrumbBar,
-    FBFullscreenPreviewModal
+    FBFullscreenPreviewModal,
+    FBListView,
+  
+  },
+  computed: {
+    ...mapGetters(['getDisplayWindowView'])
   }
 };
 </script>

@@ -11,5 +11,7 @@ export default {
 
   getPreviewFile: state => state.previewFile,
 
-  getBrowserSearchTerm: state => state.browser.searchTerm
+  getBrowserSearchTerm: state => state.browser.searchTerm,
+
+  getDisplayWindowView: state => state.windowView
 };

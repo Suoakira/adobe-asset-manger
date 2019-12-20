@@ -19,6 +19,8 @@ const state = {
   filesAndFolders: [],
   // selected preview file
   previewFile: null,
+  // show browserWindowView or listView
+  windowView: true
 };
 
 export default {

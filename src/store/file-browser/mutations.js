@@ -50,4 +50,8 @@ export default {
     state.browser.searchTerm = searchTerm
   },
 
+  toggleDisplayView(state) {
+    state.windowView = !state.windowView
+  }
+
 };
