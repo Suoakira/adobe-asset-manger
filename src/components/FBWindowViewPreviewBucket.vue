@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="preview-container">
       <FBPreviewCardFolder :folder="fileOrFolder" v-if="fileOrFolder.isDir" />
 
       <FBPreviewCardAep :file="fileOrFolder" v-if="isAepFile(fileOrFolder)" />

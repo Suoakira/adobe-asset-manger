@@ -9,7 +9,11 @@
       <q-card>
         <q-card-section>
           <div v-for="savedFolder in getSavedFolders" :key="savedFolder">
-            <SavedFolderCard @click="navigate(savedFolder)" :niceName="folderNicename(savedFolder)"></SavedFolderCard>
+            <SavedFolderCard
+              @click="navigate(savedFolder)"
+              :path="savedFolder"
+              :niceName="folderNicename(savedFolder)"
+            ></SavedFolderCard>
           </div>
         </q-card-section>
       </q-card>
@@ -63,7 +67,6 @@ export default {
     },
 
     folderNicename(path) {
-
       const splitPath = path.split("/");
 
       return splitPath[splitPath.length - 1];
@@ -75,7 +78,6 @@ export default {
 
   created() {
     this.$root.$on("expandPreview", value => {
-
       this.previewExpanded = value;
     });
   },

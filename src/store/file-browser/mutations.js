@@ -48,5 +48,6 @@ export default {
 
   setBrowserSearchTerm(state, searchTerm) {
     state.browser.searchTerm = searchTerm
-  }
+  },
+
 };

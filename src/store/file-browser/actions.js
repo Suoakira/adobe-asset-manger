@@ -80,8 +80,8 @@ export default {
     }
   },
 
-  removeSavedFolder({ commit }, path) {
-    commit("removeSavedFolder", path);
+  removeFavFolder({commit}, path ) {
+    commit("removeSavedFolder", path)
   },
 
   setPreviewFile({ commit }, file) {

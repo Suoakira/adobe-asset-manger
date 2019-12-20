@@ -11,7 +11,8 @@
     overlayTransition="false"
   >
     <div class="fb-modal-preview" @click="closePreview($event)">
-
+        <FBWindowViewPreviewBucket  class="modal-preview" :fileOrFolder="getPreviewFile" />
+    <q-btn @click="$modal.hide('fullscreen-preview')" color="primary">Close</q-btn>
     </div>
   </modal>
 </template>
@@ -19,23 +20,32 @@
 <script scoped>
 import { mapActions, mapGetters } from "vuex";
 
-import fs from "fs-extra"
+import FBWindowViewPreviewBucket from "../FBWindowViewPreviewBucket";
+
+import fs from "fs-extra";
 
 export default {
-  data() {
-    return {};
-  },
-  props: {},
   components: {
-
+    FBWindowViewPreviewBucket
   },
   methods: {
-      closePreview() {
-          this.$modal.hide("fullscreen-preview")
-      }
+    closePreview(event) {
+    // padding is causing a weird aspect ratio
+
+    //   this.$modal.hide("fullscreen-preview");
+
+    },
+
+    beforeOpen() {
+
+    },
+
+    beforeClose() {
+
+    }
   },
   computed: {
-    ...mapGetters(["getPreviewFile"]),
+    ...mapGetters(["getPreviewFile"])
   }
 };
 </script>

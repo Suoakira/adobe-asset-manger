@@ -1,28 +1,7 @@
 <template>
   <div v-if="getPreviewFile !== null">
     <div class="preview">
-      <FBPreviewCardFolder :folder="getPreviewFile" v-if="getPreviewFile.isDir" />
-
-      <FBPreviewCardAep :file="getPreviewFile" v-if="isAepFile(getPreviewFile)" />
-
-      <FBPreviewCardPsd :file="getPreviewFile" v-if="isPsdFile(getPreviewFile)" />
-
-      <FBPreviewCardAi :file="getPreviewFile" v-if="isIllustratorFile(getPreviewFile)" />
-
-      <FBPreviewCardAudio
-        :file="getPreviewFile"
-        v-if="getPreviewFile.mimeType && isMimetype(getPreviewFile, 'audio') && !isAepFile(getPreviewFile)"
-      />
-
-      <FBPreviewCardImage
-        :file="getPreviewFile"
-        v-if="getPreviewFile.mimeType &&  isMimetype(getPreviewFile, 'image') && !isPsdFile(getPreviewFile)"
-      />
-
-      <FBPreviewCardVideo
-        :file="getPreviewFile"
-        v-if="getPreviewFile.mimeType && isMimetype(getPreviewFile, 'video')"
-      />
+      <FBWindowViewPreviewBucket :fileOrFolder="getPreviewFile"/>
     </div>
 
     <div class="sidebar-menu-btns">
@@ -60,7 +39,7 @@
 
       <!-- image  -->
       <FBSidebarPreviewStatsCard
-        v-if="!getPreviewFile.isDir && getPreviewFile.mimeType.includes('image')"
+        v-if="!getPreviewFile.isDir && !isPsdFile(getPreviewFile) && getPreviewFile.mimeType.includes('image')"
         label="Res"
         :data="dimensions(getPreviewFile.nodeKey)"
       />
@@ -90,14 +69,10 @@ import { mapGetters } from "vuex";
 import fileFilters from "../mixins/file-filters.js";
 import utils from "../mixins/utils.js";
 
-// preview cards
-import FBPreviewCardFolder from "./preview-cards/FBPreviewCardFolder";
-import FBPreviewCardAep from "./preview-cards/FBPreviewCardAep";
-import FBPreviewCardPsd from "./preview-cards/FBPreviewCardPsd";
-import FBPreviewCardAi from "./preview-cards/FBPreviewCardAi";
-import FBPreviewCardAudio from "./preview-cards/FBPreviewCardAudio";
-import FBPreviewCardImage from "./preview-cards/FBPreviewCardImage";
-import FBPreviewCardVideo from "./preview-cards/FBPreviewCardVideo";
+// import preview bucket
+import FBWindowViewPreviewBucket from "./FBWindowViewPreviewBucket"
+
+
 
 // stat card
 import FBSidebarPreviewStatsCard from "./FBSidebarPreviewStatsCard";
@@ -111,13 +86,7 @@ export default {
     }
   },
   components: {
-    FBPreviewCardFolder,
-    FBPreviewCardAep,
-    FBPreviewCardPsd,
-    FBPreviewCardAi,
-    FBPreviewCardAudio,
-    FBPreviewCardImage,
-    FBPreviewCardVideo,
+    FBWindowViewPreviewBucket,
     FBSidebarPreviewStatsCard
   },
   methods: {
@@ -127,7 +96,7 @@ export default {
 
     fullScreenPreview() {
       if (!this.getPreviewFile.isDir) {
-        console.log("hit");
+
         this.$modal.show("fullscreen-preview");
       }
     }

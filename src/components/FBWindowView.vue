@@ -63,7 +63,6 @@ export default {
     },
 
     revealInFinder($event, file) {
-      console.log(event, file);
       if (fs.existsSync(file.nodeKey)) {
         cmd.run(`open -R ${file.nodeKey.replace(/(\s+)/g, "\\$1")}`);
       } else {
