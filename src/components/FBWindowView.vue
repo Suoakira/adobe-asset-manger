@@ -16,28 +16,7 @@
       @click="updatePreviewFile(fileOrFolder)"
       @contextmenu.prevent="$refs['fb-window-view'].open($event, fileOrFolder)"
     >
-      <FBPreviewCardFolder :folder="fileOrFolder" v-if="fileOrFolder.isDir" />
-
-      <FBPreviewCardAep :file="fileOrFolder" v-if="isAepFile(fileOrFolder)" />
-
-      <FBPreviewCardPsd :file="fileOrFolder" v-if="isPsdFile(fileOrFolder)" />
-
-      <FBPreviewCardAi :file="fileOrFolder" v-if="isIllustratorFile(fileOrFolder)" />
-
-      <FBPreviewCardAudio
-        :file="fileOrFolder"
-        v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'audio') && !isAepFile(fileOrFolder)"
-      />
-
-      <FBPreviewCardImage
-        :file="fileOrFolder"
-        v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'image') && !isPsdFile(fileOrFolder)"
-      />
-
-      <FBPreviewCardVideo
-        :file="fileOrFolder"
-        v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'video')"
-      />
+      <FBWindowViewPreviewBucket :fileOrFolder="fileOrFolder" />
     </div>
   </div>
 </template>
@@ -51,17 +30,9 @@ import _ from "lodash";
 // open in finder replace with shell
 import cmd from "node-cmd";
 
+import FBWindowViewPreviewBucket from "./FBWindowViewPreviewBucket";
 // mixins
 import fileFilters from "../mixins/file-filters.js";
-
-// previews cards
-import FBPreviewCardFolder from "./preview-cards/FBPreviewCardFolder";
-import FBPreviewCardAep from "./preview-cards/FBPreviewCardAep";
-import FBPreviewCardPsd from "./preview-cards/FBPreviewCardPsd";
-import FBPreviewCardAi from "./preview-cards/FBPreviewCardAi";
-import FBPreviewCardAudio from "./preview-cards/FBPreviewCardAudio";
-import FBPreviewCardImage from "./preview-cards/FBPreviewCardImage";
-import FBPreviewCardVideo from "./preview-cards/FBPreviewCardVideo";
 
 export default {
   data() {
@@ -71,14 +42,7 @@ export default {
   },
   mixins: [fileFilters],
   components: {
-    FBPreviewCardFolder,
-    FBPreviewCardAep,
-    FBPreviewCardPsd,
-    FBPreviewCardAi,
-    FBPreviewCardAudio,
-    FBPreviewCardImage,
-    FBPreviewCardVideo,
-    VueContext
+    FBWindowViewPreviewBucket
   },
   methods: {
     navigate(fileOrFolder) {
@@ -147,13 +111,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getFilesAndFolders", "getPreviewFile", "getBrowserSearchTerm"]),
+    ...mapGetters([
+      "getFilesAndFolders",
+      "getPreviewFile",
+      "getBrowserSearchTerm"
+    ]),
     renderFilteredFiles() {
       //  filter file extensions
       let filteredFilesAndFolders = this.getFilesAndFolders.filter(file => {
-       return  this.filterFileExtensions(file) && file.label.includes(this.getBrowserSearchTerm)
-      }
-      );
+        return (
+          this.filterFileExtensions(file) &&
+          file.label.includes(this.getBrowserSearchTerm)
+        );
+      });
 
       (this.filteredFilesAndFolders = filteredFilesAndFolders.sort((a, b) => {
         // sort label a-z
