@@ -1,7 +1,6 @@
 <template>
   <div class="listview-container">
-    <h5>List view</h5>
-    <q-btn @click="convertToNodes(getFilesAndFolders)">Test</q-btn>
+
     <div class="q-pa-md q-gutter-sm">
       <q-tree
       :nodes="lazy"
@@ -75,14 +74,12 @@ export default {
         };
       });
 
-      // this.lazy = fileTreeNodes
 
-      console.log("fileTreeNodes", fileTreeNodes);
       return fileTreeNodes.filter(file => file.expandable);
     },
 
     retrieveFilesAndFolders() {
-      console.log(this.getFilesAndFolders);
+
       return this.getFilesAndFolders;
     }
   },
