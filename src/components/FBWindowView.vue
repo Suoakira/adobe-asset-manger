@@ -153,6 +153,7 @@ export default {
 .windowview-container {
   width: 100%;
   max-width: 780px;
+  left: 269px;
   top: 40px;
   height: 100%;
   background: purple;

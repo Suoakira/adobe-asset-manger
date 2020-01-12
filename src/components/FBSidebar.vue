@@ -95,7 +95,8 @@ export default {
 <style lang="scss" scoped>
 .fb-sidebar {
   position: fixed;
-  left: 780px;
+  left: 1049px;
+
   top: 0;
   background: blue;
   width: 220px;

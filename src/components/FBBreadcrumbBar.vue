@@ -54,6 +54,7 @@ export default {
 .breadcrumb-bar {
   background: red;
   position: fixed;
+  left: 269px;
   width: 780px;
   height: 25px;
   bottom: 0;

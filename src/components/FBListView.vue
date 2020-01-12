@@ -7,7 +7,7 @@
       :nodes="lazy"
       icon="folder"
       default-expand-all
-      node-key="label"
+      node-key="filePath"
       @lazy-load="onLazyLoad"
       />
     </div>
@@ -16,6 +16,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import uuidv1 from 'uuid/v1';
 
 export default {
   data() {
@@ -53,35 +54,20 @@ export default {
 
       this.convertToNodes(this.getFilesAndFolders)
 
-      // setTimeout(() => {
-        // simulate loading and setting an empty node
         if (key.indexOf("Lazy load empty") > -1) {
           done([]);
           return;
         }
 
-        done(this.convertToNodes(this.getFilesAndFolders))
+        const childNodes = this.convertToNodes(this.getFilesAndFolders)
+        done(childNodes)
 
-
-      //   const label = node.label;
-      //   done([
-      //     { label: `${label}.1` },
-      //     { label: `${label}.2`, lazy: true },
-      //     {
-      //       label: `${label}.3`,
-      //       children: [
-      //         { label: `${label}.3.1`, lazy: true },
-      //         { label: `${label}.3.2`, lazy: true }
-      //       ]
-      //     }
-      //   ]);
-      // }, 1000);
     },
 
     convertToNodes(filesAndFolders) {
       const fileTreeNodes = filesAndFolders.map(file => {
         return {
-          label: file.label + Date.now(),
+          label: file.label,
           expandable: file.isDir,
           lazy: file.isDir,
           filePath: file.nodeKey,
@@ -114,10 +100,9 @@ export default {
 <style lang="scss" scoped>
 .listview-container {
   position: fixed;
-  right: 407px;
-  width: 300px;
+  width: 269px;
   max-width: 780px;
-  top: 40px;
+  top: 0px;
   height: 100%;
   background: pink;
 
