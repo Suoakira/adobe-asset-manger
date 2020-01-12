@@ -127,7 +127,8 @@ const helperMethods = {
       extension: path.extname(nodeKey),
       rootDir: folderPath,
       mimeType: mimeType,
-      stat: fileStats
+      stat: fileStats,
+      children: []
     };
   }
 };

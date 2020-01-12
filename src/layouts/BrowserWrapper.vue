@@ -4,7 +4,7 @@
 
     <!-- show window view folders or list view  -->
     <FBWindowView v-if="getDisplayWindowView"/>
-    <FBListView v-else />
+    <FBListView />
 
     <FBSidebar />
     <FBBreadcrumbBar />

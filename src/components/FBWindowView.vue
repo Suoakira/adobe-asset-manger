@@ -42,7 +42,8 @@ export default {
   },
   mixins: [fileFilters],
   components: {
-    FBWindowViewPreviewBucket
+    FBWindowViewPreviewBucket,
+    VueContext
   },
   methods: {
     navigate(fileOrFolder) {
