@@ -20,3 +20,53 @@ $positive  : #21BA45;
 $negative  : #C10015;
 $info      : #31CCEC;
 $warning   : #F2C037;
+
+
+
+
+/* ==============================
+	Color
+============================== */
+// text colors
+$color-nav-txt: #232323;
+$color-sb-txt: #ffffff;
+
+// background colors
+$color-body-bg: #232323;
+$color-card-bg: #1A1A1A;
+$color-filter-bg: #2F2F2F;
+$color-sb-settings-bg: #272727;
+$background-sb-file-browser: rgb(59, 52, 52);
+
+// buttons
+$color-active-but: #5357FF;
+$color-del-but: #EB4F46;
+
+// cards
+$card-border-selected: #6157FF;
+
+// item settings
+$item-settings-panel-bg: #2B2B2B;
+
+
+/* ==============================
+	Typography
+============================== */
+$font-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+$font-default-bold: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+
+
+
+
+/* ==============================
+	Breakpoints
+============================== */
+$grid-breakpoints: (
+	xxs: 0,
+	xs: 300px,
+	sm: 568px,
+	md: 667px,
+	lg: 768px,
+	xl: 992px,
+	xxl: 1200px,
+);

@@ -9,7 +9,11 @@
       <q-card>
         <q-card-section>
           <div v-for="savedFolder in getSavedFolders" :key="savedFolder">
-            <SavedFolderCard @click="navigate(savedFolder)" :niceName="folderNicename(savedFolder)"></SavedFolderCard>
+            <SavedFolderCard
+              @click="navigate(savedFolder)"
+              :path="savedFolder"
+              :niceName="folderNicename(savedFolder)"
+            ></SavedFolderCard>
           </div>
         </q-card-section>
       </q-card>
@@ -74,7 +78,6 @@ export default {
 
   created() {
     this.$root.$on("expandPreview", value => {
-      console.log("fired");
       this.previewExpanded = value;
     });
   },
@@ -92,7 +95,8 @@ export default {
 <style lang="scss" scoped>
 .fb-sidebar {
   position: fixed;
-  left: 780px;
+  left: 1049px;
+
   top: 0;
   background: blue;
   width: 220px;

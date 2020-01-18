@@ -1,26 +1,44 @@
 <template>
   <div class="file-browser-container">
     <FBNavigationBar />
-    <FBWindowView />
+
+    <!-- show window view folders or list view  -->
+    <FBWindowView v-if="getDisplayWindowView"/>
+    <FBListView />
+
     <FBSidebar />
     <FBBreadcrumbBar />
+
+    <!-- modals  -->
+    <FBFullscreenPreviewModal />
   </div>
 </template>
 
 <script>
-import FBFooterPath from "./../components/FBFooterPath";
+
+// main component buckets
 import FBNavigationBar from "./../components/FBNavigationBar";
 import FBSidebar from "./../components/FBSidebar";
 import FBWindowView from "./../components/FBWindowView";
 import FBBreadcrumbBar from  "./../components/FBBreadcrumbBar";
+import FBListView from "./../components/FBListView"
+
+// modals
+import FBFullscreenPreviewModal from "../components/modals/FBFullscreenPreviewModal"
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
-    FBFooterPath,
     FBNavigationBar,
     FBSidebar,
     FBWindowView,
-    FBBreadcrumbBar
+    FBBreadcrumbBar,
+    FBFullscreenPreviewModal,
+    FBListView,
+  
+  },
+  computed: {
+    ...mapGetters(['getDisplayWindowView'])
   }
 };
 </script>
@@ -28,7 +46,12 @@ export default {
 <style lang="scss">
 .file-browser-container {
   position: relative;
-
-  max-width: 1000px;
+  max-width: 1269px;
+  width: 100vw;
+  height: 100vh;
+  background: $color-body-bg;
+  
+  // disable user select across app
+  user-select: none;
 }
 </style>

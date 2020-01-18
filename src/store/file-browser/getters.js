@@ -9,5 +9,9 @@ export default {
 
   getSavedFolders: state => state.savedFolders,
 
-  getPreviewFile: state => state.previewFile
+  getPreviewFile: state => state.previewFile,
+
+  getBrowserSearchTerm: state => state.browser.searchTerm,
+
+  getDisplayWindowView: state => state.windowView
 };

@@ -28,11 +28,13 @@ export default {
     state.browser.historyCounter = value;
   },
 
-  addSavedFolder(state, path) {
-    if (state.savedFolders.includes(path)) {
-      alert("That is already a saved folder");
+  saveAsFavFolder(state, folderPath) {
+
+    if (state.savedFolders.includes(folderPath)) {
+
+      state.savedFolders = state.savedFolders.filter(folderPath => folderPath !== folderPath)
     } else {
-      state.savedFolders.push(path);
+      state.savedFolders.push(folderPath);
     }
   },
 
@@ -42,5 +44,14 @@ export default {
 
   setPreviewFile(state, file) {
     state.previewFile = file
+  },
+
+  setBrowserSearchTerm(state, searchTerm) {
+    state.browser.searchTerm = searchTerm
+  },
+
+  toggleDisplayView(state) {
+    state.windowView = !state.windowView
   }
+
 };

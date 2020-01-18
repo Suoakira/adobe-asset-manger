@@ -1,20 +1,64 @@
 <template>
   <div v-if="getPreviewFile !== null">
+    <div class="preview">
+      <FBWindowViewPreviewBucket :fileOrFolder="getPreviewFile"/>
+    </div>
 
-      <FBPreviewCardFolder :folder="getPreviewFile" v-if="getPreviewFile.isDir" />
+    <div class="sidebar-menu-btns">
+      <q-btn 
+        @click="fullScreenPreview" 
+        color="primary" 
+        text-color="white" 
+        label="Preview" 
+      />
+      <q-btn
+        @click="saveAsFav(getPreviewFile)"
+        color="primary"
+        text-color="white"
+        :label="folderIsSaved ? 'Un-star' : 'Star'"
+      />
+    </div>
 
-      <FBPreviewCardAep :file="getPreviewFile" v-if="isAepFile(getPreviewFile)" />
+    <div class="file-stats">
+      <h5>File Stats</h5>
 
-      <FBPreviewCardPsd :file="getPreviewFile" v-if="isPsdFile(getPreviewFile)" />
+      <!-- name  -->
+      <FBSidebarPreviewStatsCard label="Name" :data="getPreviewFile.label" />
 
-      <FBPreviewCardAi :file="getPreviewFile" v-if="isIllustratorFile(getPreviewFile)" />
+      <!-- type  -->
+      <FBSidebarPreviewStatsCard
+        v-if="!getPreviewFile.isDir"
+        label="Type"
+        :data="
+        `${isAepFile(getPreviewFile) ? 'After Effects file':
+        isPsdFile(getPreviewFile) ? 'Photoshop file':
+        isIllustratorFile(getPreviewFile) ? 'Illustrator file' :
+        getPreviewFile.extension.slice(1).toUpperCase()} `
+      "
+      />
 
-      <FBPreviewCardAudio :file="getPreviewFile" v-if="getPreviewFile.mimeType && isMimetype(getPreviewFile, 'audio') && !isAepFile(getPreviewFile)" />
+      <!-- image  -->
+      <FBSidebarPreviewStatsCard
+        v-if="!getPreviewFile.isDir && !isPsdFile(getPreviewFile) && getPreviewFile.mimeType.includes('image')"
+        label="Res"
+        :data="dimensions(getPreviewFile.nodeKey)"
+      />
 
-      <FBPreviewCardImage :file="getPreviewFile" v-if="getPreviewFile.mimeType &&  isMimetype(getPreviewFile, 'image') && !isPsdFile(getPreviewFile)" />
+      <!-- size  -->
+      <FBSidebarPreviewStatsCard
+        label="Size"
+        :data="`${convertBytesToMegaBytes(getPreviewFile.stat.size)}mb`"
+      />
 
-      <FBPreviewCardVideo :file="getPreviewFile" v-if="getPreviewFile.mimeType && isMimetype(getPreviewFile, 'video')"  />
+      <!-- created  -->
+      <FBSidebarPreviewStatsCard label="Created at" data="placeholder" />
 
+      <!-- last updated  -->
+      <FBSidebarPreviewStatsCard label="Updated at" data="placeholder" />
+
+      <!-- path  -->
+      <FBSidebarPreviewStatsCard label="Path" :data="getPreviewFile.nodeKey" />
+    </div>
   </div>
 </template>
 
@@ -22,30 +66,40 @@
 import { mapGetters } from "vuex";
 
 // mixins
-import fileFilters from "../mixins/file-filters.js"
+import fileFilters from "../mixins/file-filters.js";
+import utils from "../mixins/utils.js";
 
-// preview cards
-import FBPreviewCardFolder from "./preview-cards/FBPreviewCardFolder";
-import FBPreviewCardAep from "./preview-cards/FBPreviewCardAep";
-import FBPreviewCardPsd from "./preview-cards/FBPreviewCardPsd";
-import FBPreviewCardAi from "./preview-cards/FBPreviewCardAi";
-import FBPreviewCardAudio from "./preview-cards/FBPreviewCardAudio";
-import FBPreviewCardImage from "./preview-cards/FBPreviewCardImage";
-import FBPreviewCardVideo from "./preview-cards/FBPreviewCardVideo";
+// import preview bucket
+import FBWindowViewPreviewBucket from "./FBWindowViewPreviewBucket"
+
+
+
+// stat card
+import FBSidebarPreviewStatsCard from "./FBSidebarPreviewStatsCard";
 export default {
-  mixins: [fileFilters],
+  mixins: [fileFilters, utils],
 
   computed: {
-    ...mapGetters(["getPreviewFile"])
+    ...mapGetters(["getPreviewFile", "getSavedFolders"]),
+    folderIsSaved() {
+      return this.getSavedFolders.includes(this.getPreviewFile.nodeKey);
+    }
   },
   components: {
-    FBPreviewCardFolder,
-    FBPreviewCardAep,
-    FBPreviewCardPsd,
-    FBPreviewCardAi,
-    FBPreviewCardAudio,
-    FBPreviewCardImage,
-    FBPreviewCardVideo
+    FBWindowViewPreviewBucket,
+    FBSidebarPreviewStatsCard
+  },
+  methods: {
+    saveAsFav(folder) {
+      this.$store.dispatch("saveAsFavFolder", this.getPreviewFile);
+    },
+
+    fullScreenPreview() {
+      if (!this.getPreviewFile.isDir) {
+
+        this.$modal.show("fullscreen-preview");
+      }
+    }
   }
 };
 </script>

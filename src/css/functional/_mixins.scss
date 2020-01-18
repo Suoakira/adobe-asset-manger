@@ -1,0 +1,14 @@
+// header
+@mixin typography-h(
+	$font-size,
+	$color,
+	$letter_space,
+	$line_height,
+	$font_weight
+) {
+	font-size: $font-size !important;
+	color: $color !important;
+	letter-spacing: $letter_space !important;
+	line-height: $line_height !important;
+	font-weight: $font_weight !important;
+}

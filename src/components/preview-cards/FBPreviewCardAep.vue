@@ -1,13 +1,8 @@
 <template>
   <div class="fb-image-preview">
-    <div class="preview-image">
+
       <img src="../../assets/images/aep.png" />
-    </div>
-    <div>
-        <span class="title">
-            {{file.label}}
-        </span>
-    </div>
+
   </div>
 
 </template>
@@ -26,25 +21,24 @@ export default {
 <style lang="scss">
 
 .fb-image-preview {
-  text-align: center;
-  position: relative;
+    height: 100%;
+    width: 100%;
+  
+    position: relative;
 //   padding-bottom: 56.25%;
 
   img {
-    // width: 100%;
-    border-radius: 2px;
+
     max-height: 100%;
     max-width: 100%;
-    margin: auto;
+    height: 100%;
+    width: auto;
+
     position: absolute;
-    transform: translate(-50%, -50%);
     top: 50%;
-  }
+    left: 50%;
 
-  .title {    
-
-      position: relative;
-
+    transform: translate(-50%, -50%);
 
   }
 }

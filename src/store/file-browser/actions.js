@@ -24,7 +24,7 @@ export default {
     }
   },
 
-  
+
   retrieveFolderContents({ commit, dispatch }, folderPath) {
 
     // hack way of telling if the path is coming from history nav buttons
@@ -34,9 +34,9 @@ export default {
     } else {
       folderPath = folderPath.slice(0, folderPath.length - 11);
     }
-    
+
     const isDir = fs.lstatSync(folderPath).isDirectory();
-    
+
     const folderContents = isDir ? fs.readdirSync(folderPath) : []
     const mapedNodes = helperMethods.filterFilesAndFolders(folderContents).map(fileOrFolder => helperMethods.createNode(fileOrFolder, folderPath));
 
@@ -70,16 +70,30 @@ export default {
     }
   },
 
-  addSavedFolder({ commit }, path) {
-    commit("addSavedFolder", path);
+  saveAsFavFolder({ commit }, folder) {
+    const {isDir, nodeKey} = folder
+
+    if (isDir) {
+      commit("saveAsFavFolder", nodeKey);
+    } else {
+      console.log("Sorry that isnt a folder");
+    }
   },
 
-  removeSavedFolder({ commit }, path) {
-    commit("removeSavedFolder", path);
+  removeFavFolder({commit}, path ) {
+    commit("removeSavedFolder", path)
   },
 
-  setPreviewFile({commit}, file) {
+  setPreviewFile({ commit }, file) {
     commit("setPreviewFile", file)
+  },
+
+  setBrowserSearchTerm({ commit }, searchTerm) {
+    commit("setBrowserSearchTerm", searchTerm)
+  },
+
+  toggleDisplayView({commit}) {
+    commit("toggleDisplayView")
   }
 };
 
@@ -113,7 +127,8 @@ const helperMethods = {
       extension: path.extname(nodeKey),
       rootDir: folderPath,
       mimeType: mimeType,
-      stat: fileStats
+      stat: fileStats,
+      children: []
     };
   }
 };
