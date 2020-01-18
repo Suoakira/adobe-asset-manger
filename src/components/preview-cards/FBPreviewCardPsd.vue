@@ -3,11 +3,7 @@
     <div class="preview-image">
       <img src="../../assets/images/psd.png" />
     </div>
-    <div>
-        <span class="title">
-            {{file.label}}
-        </span>
-    </div>
+
   </div>
 
 </template>
@@ -41,12 +37,6 @@ export default {
     top: 50%;
   }
 
-  .title {    
-
-      position: relative;
-
-
-  }
 }
 
 </style>

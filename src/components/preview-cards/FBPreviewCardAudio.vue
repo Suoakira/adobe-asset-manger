@@ -3,11 +3,6 @@
     <div class="preview-image">
       <img src="../../assets/images/mp3.jpg" />
     </div>
-    <div>
-        <span class="title">
-            {{file.label}}
-        </span>
-    </div>
   </div>
 
 </template>
@@ -41,12 +36,6 @@ export default {
     top: 50%;
   }
 
-  .title {    
-
-      position: relative;
-
-
-  }
 }
 
 </style>

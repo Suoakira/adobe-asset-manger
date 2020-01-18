@@ -1,1 +1,18 @@
 // app global css in SCSS form
+
+
+@import "./functional/_mixins";
+@import "./functional/_variables";
+
+// Headers
+h1 {
+    @include typography-h(24px, #FFFFFF, 0.48px, 26px, 700)
+}
+
+h2 {
+    @include typography-h(22px, #FFFFFF, 0.44px, 26px, 700)
+}
+
+h5 {
+    @include typography-h(13px, #FFFFFF, 0, 26px, 700)
+}

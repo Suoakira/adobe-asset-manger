@@ -3,11 +3,6 @@
     <div class="preview-image">
       <img src="../../assets/images/dark_folder.svg" />
     </div>
-    <div>
-        <span class="title">
-            {{folder.label}}
-        </span>
-    </div>
   </div>
 
 </template>

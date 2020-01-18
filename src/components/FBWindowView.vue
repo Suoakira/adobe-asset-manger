@@ -1,5 +1,5 @@
 <template>
-  <div class="windowview-container row items-start stretchy-wrapper">
+  <div class="windowview-container row items-start">
     <VueContext ref="fb-window-view" :closeOnScroll="true">
       <template slot-scope="child">
         <!-- Only show this if .aep -->
@@ -16,7 +16,7 @@
       @click="updatePreviewFile(fileOrFolder)"
       @contextmenu.prevent="$refs['fb-window-view'].open($event, fileOrFolder)"
     >
-      <FBWindowViewPreviewBucket :fileOrFolder="fileOrFolder" />
+      <FBWindowViewPreviewBucket class="stretchy-wrapper" :fileOrFolder="fileOrFolder" />
     </div>
   </div>
 </template>
@@ -153,18 +153,20 @@ export default {
 .windowview-container {
   width: 100%;
   max-width: 780px;
-  left: 269px;
   top: 40px;
+  left: 269px;
   height: 100%;
   background: purple;
+  position: relative;
+
 
   .selected-file {
     background: yellow;
   }
 }
 
-// aspect ratio  | padding-bottom value
 // --------------|----------------------
+// aspect ratio  | padding-bottom value
 //     16:9      |       56.25%
 //     4:3       |       75%
 //     3:2       |       66.66%
@@ -172,8 +174,12 @@ export default {
 
 .stretchy-wrapper {
   width: 100%;
-  padding-bottom: 62.5%; /* 16:9 */
+  max-height: 100%;
+  max-width: 100%;
+  padding-bottom: 75%; /* 16:9 */
   position: relative;
+
+
 
   //   border-radius: 4px;
   //   border: 9px solid rgba(255, 0, 0, 0);
