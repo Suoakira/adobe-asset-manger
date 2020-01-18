@@ -10,13 +10,17 @@
 
     <div
       v-for="fileOrFolder in renderFilteredFiles"
-      :class="`col-2 ${selectedFilePath === fileOrFolder.nodeKey ? 'selected-file' : '' }`"
+      :class="`col-2 file-col`"
       :key="fileOrFolder.nodeKey"
       @dblclick="navigate(fileOrFolder)"
       @click="updatePreviewFile(fileOrFolder)"
       @contextmenu.prevent="$refs['fb-window-view'].open($event, fileOrFolder)"
     >
-      <FBWindowViewPreviewBucket class="stretchy-wrapper" :fileOrFolder="fileOrFolder" />
+      <FBWindowViewPreviewBucket
+        :selectedFilePath="selectedFilePath"
+        :class="`stretchy-wrapper ${selectedFilePath === fileOrFolder.nodeKey ? 'selected-file' : '' }`"
+        :fileOrFolder="fileOrFolder"
+      />
     </div>
   </div>
 </template>
@@ -155,14 +159,11 @@ export default {
   max-width: 780px;
   top: 40px;
   left: 269px;
-  height: 100%;
-  background: purple;
+
+
   position: relative;
 
 
-  .selected-file {
-    background: yellow;
-  }
 }
 
 // --------------|----------------------
@@ -172,20 +173,33 @@ export default {
 //     3:2       |       66.66%
 //     8:5       |       62.5%
 
+.file-col {
+  text-align: center;
+  position: relative;
+  // margin: 0.5%;
+  padding-left: 1.75%;
+  padding-right: 1.75%;
+  cursor: default;
+
+  &.custom-five-cols {
+    -webkit-box-flex: 0;
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}
+
 .stretchy-wrapper {
   width: 100%;
-  max-height: 100%;
+  height: 100%;
   max-width: 100%;
-  padding-bottom: 75%; /* 16:9 */
+
+
+  padding-bottom: calc(56.25% + 60px); /* 16:9 */
   position: relative;
+  border-radius: 4px;
+  // margin: 9px;
+  z-index: 1;
 
-
-
-  //   border-radius: 4px;
-  //   border: 9px solid rgba(255, 0, 0, 0);
-  &.selected {
-    border: 9px solid #282828;
-  }
 }
 
 // .stretchy-wrapper-child {

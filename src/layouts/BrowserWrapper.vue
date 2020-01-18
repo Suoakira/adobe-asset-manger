@@ -46,7 +46,10 @@ export default {
 <style lang="scss">
 .file-browser-container {
   position: relative;
-  max-width: 1000px;
+  max-width: 1269px;
+  width: 100vw;
+  height: 100vh;
+  background: $color-body-bg;
   
   // disable user select across app
   user-select: none;

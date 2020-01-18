@@ -1,37 +1,41 @@
 <template>
-<div>
+  <div>
     <div class="preview-container">
-        <FBPreviewCardFolder :folder="fileOrFolder" v-if="fileOrFolder.isDir" />
+      <div class="image-preview">
+      <FBPreviewCardFolder :folder="fileOrFolder" v-if="fileOrFolder.isDir" />
 
-        <FBPreviewCardAep :file="fileOrFolder" v-if="isAepFile(fileOrFolder)" />
+      <FBPreviewCardAep :file="fileOrFolder" v-if="isAepFile(fileOrFolder)" />
 
-        <FBPreviewCardPsd :file="fileOrFolder" v-if="isPsdFile(fileOrFolder)" />
+      <FBPreviewCardPsd :file="fileOrFolder" v-if="isPsdFile(fileOrFolder)" />
 
-        <FBPreviewCardAi :file="fileOrFolder" v-if="isIllustratorFile(fileOrFolder)" />
+      <FBPreviewCardAi :file="fileOrFolder" v-if="isIllustratorFile(fileOrFolder)" />
 
-        <FBPreviewCardAudio
-          :file="fileOrFolder"
-          v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'audio') && !isAepFile(fileOrFolder)"
-        />
+      <FBPreviewCardAudio
+        :file="fileOrFolder"
+        v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'audio') && !isAepFile(fileOrFolder)"
+      />
 
-        <FBPreviewCardImage
-          :file="fileOrFolder"
-          v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'image') && !isPsdFile(fileOrFolder)"
-        />
+      <FBPreviewCardImage
+        :file="fileOrFolder"
+        v-if="fileOrFolder.mimeType && isMimetype(fileOƒrFolder, 'image') && !isPsdFile(fileOrFolder)"
+      />
 
-        <FBPreviewCardVideo
-          :file="fileOrFolder"
-          v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'video')"
-        />
-    </div>
-    <div class="title">
-        {{fileOrFolder.label}}
+      <FBPreviewCardVideo
+        :file="fileOrFolder"
+        v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'video')"
+      />
+
+      <div class="title-bar">
+        <div :class="`file-name-container ${selectedFilePath === fileOrFolder.nodeKey && 'selected' }`">
+          <div :class="`file-name ${selectedFilePath === fileOrFolder.nodeKey && 'selected-background' }`">{{fileOrFolder.label}}</div>
+        </div>
+      </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-
 // mixins
 import fileFilters from "../mixins/file-filters.js";
 
@@ -47,11 +51,12 @@ import FBPreviewCardVideo from "./preview-cards/FBPreviewCardVideo";
 export default {
   data() {
     return {
-      selectedFilePath: null
+
     };
   },
   props: {
-      fileOrFolder: Object,
+    fileOrFolder: Object,
+    selectedFilePath: String
   },
   mixins: [fileFilters],
   components: {
@@ -61,30 +66,102 @@ export default {
     FBPreviewCardAi,
     FBPreviewCardAudio,
     FBPreviewCardImage,
-    FBPreviewCardVideo,
-  },
+    FBPreviewCardVideo
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 
 .preview-container {
-  position: absolute;
-  width: 80%;
 
-  // top: 0;
-  // bottom: 0;
-  // left: 0;
-  // right: 0;
-  // width: 100%;
-  // height: 100%;
+.image-preview {
+  position: absolute;
+
+  height: 75%;
+
+  width: 100%;
+
+
   max-height: 100%;
   max-width: 100%;
-  top:50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 
-  background:  yellow;
+    border: 9px solid transparent;
+
+
+
+    &:hover {
+
+      border: 9px solid lighten(black, 15%);
+      background: lighten(black, 15%);
+    }
+
+    &.selected {
+      // border: 9px solid #282828;
+      border: 9px solid lighten(black, 15%);
+      background: lighten(black, 15%);
+
+
+    }
+
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+
+  // background: yellow;
   // border: green 2px solid;
+  .file-title {
+    text-align: center;
+    margin: 0 auto;
+    font-size: 12px !important;
+    font-weight: 600;
+  }
+
+  .file-item {
+    width: 65px;
+    height: 65px;
+    -webkit-user-select: none;
+  }
+
+  .title-bar {
+    top: 9px;
+    position: relative;
+    height: 32px;
+    z-index: 2;
+  }
+
+  .file-name-container {
+    max-height: 34px;
+    /* height: 25px; */
+    opacity: 0.4;
+    font-weight: 400;
+    font-size: 11px;
+    color: #ffffff;
+    max-width: 100%;
+    word-wrap: break-word;
+
+    .file-name {
+      position: relative;
+      -webkit-user-select: none;
+
+      &.selected-background {
+        opacity: 1;
+
+        background: #5357ff;
+        border-radius: 3px;
+        padding: 2px 4px;
+        display: inline-block;
+        word-break: break-word;
+      }
+    }
+
+    &.selected {
+      opacity: 1;
+      font-weight: 700;
+      -webkit-user-select: none;
+    }
+  }
+}
+
 }
 </style>
