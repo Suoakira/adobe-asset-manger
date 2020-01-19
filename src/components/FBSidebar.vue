@@ -1,17 +1,12 @@
 <template>
   <div class="fb-sidebar">
-    <q-expansion-item
-      expand-separator
-      v-model="favTabExpanded"
-      label="Saved Folders"
-      caption="your saved folders"
-    >
+    <q-expansion-item expand-separator v-model="favTabExpanded" label="Librarys">
       <q-card>
         <q-card-section>
           <div v-for="savedFolder in getSavedFolders" :key="savedFolder">
+
             <SavedFolderCard
-              @click="navigate(savedFolder)"
-              :path="savedFolder"
+              :savedFolderPath="savedFolder"
               :niceName="folderNicename(savedFolder)"
             ></SavedFolderCard>
           </div>
@@ -23,7 +18,6 @@
       expand-separator
       v-model="previewExpanded"
       label="Info & Preview"
-      caption="select a file to find out more info"
     >
       <q-card>
         <q-card-section>
@@ -59,12 +53,6 @@ export default {
     handleClickPreviewExpanded() {
       this.previewExpanded = !this.previewExpanded;
     },
-    navigate(paramPath) {
-      this.$store.dispatch("setBrowserPath", paramPath);
-      if (fs.existsSync(paramPath)) {
-        this.$store.dispatch("retrieveFolderContents", paramPath);
-      }
-    },
 
     folderNicename(path) {
       const splitPath = path.split("/");
@@ -73,7 +61,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getSavedFolders"])
+    ...mapGetters(["getSavedFolders", "getBrowserPath"])
   },
 
   created() {
@@ -92,15 +80,40 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .fb-sidebar {
   position: fixed;
   left: 1049px;
+  
 
   top: 0;
-  background: blue;
+  background: #2e2e2e;
+
   width: 220px;
   height: 100%;
+
+  .q-item__label {
+    opacity: 0.35;
+    font-size: 10px;
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  .q-item__label--caption {
+    opacity: 0.35;
+    font-size: 10px;
+    color: #ffffff;
+    font-weight: 300;
+  }
+
+  .q-expansion-item__toggle-icon {
+    font-size: 16px !important;
+  }
+
+  .q-card__section {
+    padding: 0;
+    background: #272727;
+  }
 
   //   .accordion-fav-folder {
   //     padding: 0;

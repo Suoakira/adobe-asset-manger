@@ -5,6 +5,8 @@
 </template>
 
 <script>
+
+
 import BrowserWrapper from "./layouts/BrowserWrapper";
 
 export default {

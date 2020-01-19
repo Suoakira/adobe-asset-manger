@@ -33,7 +33,7 @@ export default {
   opacity: 0.5;
   font-weight: 900;
   font-size: 11px;
-  color: black;
+  color: white;
   float: left !important;
   text-align: right;
   padding-right: 4px;
@@ -45,7 +45,7 @@ export default {
   opacity: 0.4;
   font-weight: 500;
   font-size: 11px;
-  color: black;
+  color: white;
   text-align: left;
   padding-left: 4px;
 

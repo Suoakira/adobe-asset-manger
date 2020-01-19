@@ -1,8 +1,8 @@
 <template>
   <div class="fb-image-preview">
-    <div class="preview-image">
+
       <img :src="`file://${file.nodeKey}`" />
-    </div>
+
   </div>
 </template>
 
@@ -11,6 +11,7 @@
 export default {
   props: {
     file: Object,
+    path: String
   },
 
   created() {
@@ -20,21 +21,4 @@ export default {
 </script>
 
 <style lang="scss">
-.fb-image-preview {
-  text-align: center;
-
-
-  img {
-    // width: 100%;
-    border-radius: 2px;
-    max-height: 100%;
-    max-width: 100%;
-    margin: auto;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-  }
-
-
-}
 </style>

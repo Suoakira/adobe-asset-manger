@@ -1,16 +1,11 @@
 <template>
   <div v-if="getPreviewFile !== null">
-    <div class="preview">
-      <FBWindowViewPreviewBucket :fileOrFolder="getPreviewFile"/>
+    <div class="sb-preview">
+      <FBSidebarViewPreviewBucket :fileOrFolder="getPreviewFile" />
     </div>
 
     <div class="sidebar-menu-btns">
-      <q-btn 
-        @click="fullScreenPreview" 
-        color="primary" 
-        text-color="white" 
-        label="Preview" 
-      />
+      <q-btn @click="fullScreenPreview" color="primary" text-color="white" label="Preview" />
       <q-btn
         @click="saveAsFav(getPreviewFile)"
         color="primary"
@@ -20,7 +15,6 @@
     </div>
 
     <div class="file-stats">
-      <h5>File Stats</h5>
 
       <!-- name  -->
       <FBSidebarPreviewStatsCard label="Name" :data="getPreviewFile.label" />
@@ -70,9 +64,7 @@ import fileFilters from "../mixins/file-filters.js";
 import utils from "../mixins/utils.js";
 
 // import preview bucket
-import FBWindowViewPreviewBucket from "./FBWindowViewPreviewBucket"
-
-
+import FBSidebarViewPreviewBucket from "./FBSidebarViewPreviewBucket";
 
 // stat card
 import FBSidebarPreviewStatsCard from "./FBSidebarPreviewStatsCard";
@@ -86,8 +78,8 @@ export default {
     }
   },
   components: {
-    FBWindowViewPreviewBucket,
-    FBSidebarPreviewStatsCard
+    FBSidebarPreviewStatsCard,
+    FBSidebarViewPreviewBucket
   },
   methods: {
     saveAsFav(folder) {
@@ -96,7 +88,6 @@ export default {
 
     fullScreenPreview() {
       if (!this.getPreviewFile.isDir) {
-
         this.$modal.show("fullscreen-preview");
       }
     }
@@ -105,4 +96,10 @@ export default {
 </script>
 
 <style lang="scss">
+
+.sb-preview {
+  height: 222px;
+
+  width: 222px;
+}
 </style>

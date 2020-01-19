@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="preview-container">
-      <div class="image-preview">
+      <div :class="`image-preview ${selectedFilePath === fileOrFolder.nodeKey && 'selected' }`">
       <FBPreviewCardFolder :folder="fileOrFolder" v-if="fileOrFolder.isDir" />
 
       <FBPreviewCardAep :file="fileOrFolder" v-if="isAepFile(fileOrFolder)" />
@@ -17,7 +17,7 @@
 
       <FBPreviewCardImage
         :file="fileOrFolder"
-        v-if="fileOrFolder.mimeType && isMimetype(fileOƒrFolder, 'image') && !isPsdFile(fileOrFolder)"
+        v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'image') && !isPsdFile(fileOrFolder)"
       />
 
       <FBPreviewCardVideo
@@ -52,6 +52,7 @@ export default {
   data() {
     return {
 
+
     };
   },
   props: {
@@ -75,38 +76,40 @@ export default {
 
 .preview-container {
 
-.image-preview {
+
+
+  
+  .image-preview {
+  
   position: absolute;
 
-  height: 75%;
-
   width: 100%;
+  height: auto;
 
 
   max-height: 100%;
   max-width: 100%;
 
-    border: 9px solid transparent;
+  border: 9px solid transparent;
 
 
 
     &:hover {
-
-      border: 9px solid lighten(black, 15%);
-      background: lighten(black, 15%);
+      
+      border: 9px solid lighten(red, 15%);
+      // background: lighten(black, 15%);
     }
 
     &.selected {
+      border: 9px solid lighten(red, 15%);
+
       // border: 9px solid #282828;
-      border: 9px solid lighten(black, 15%);
-      background: lighten(black, 15%);
+      // border: 9px solid lighten(black, 15%);
+      // background: lighten(black, 15%);
 
 
     }
 
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
 
   // background: yellow;
   // border: green 2px solid;

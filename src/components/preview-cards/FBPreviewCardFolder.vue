@@ -1,25 +1,18 @@
 <template>
   <div class="fb-image-preview">
-    <div class="preview-image">
-      <img src="../../assets/images/dark_folder.svg" />
-    </div>
+    <img src="../../assets/images/dark_folder.svg" />
   </div>
-
 </template>
 
 <script>
 export default {
-
-    props: {
-        folder: Object
-    }
-    
-}
+  props: {
+    folder: Object
+  }
+};
 </script>
 
 
 <style lang="scss">
-
-
 </style>
     

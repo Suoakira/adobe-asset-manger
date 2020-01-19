@@ -1,8 +1,8 @@
 <template>
   <div class="fb-video-preview">
-    <div class="preview-video" >
+
       <video @mouseover="playVideo($event)" @mouseout="stopVideo($event)" :ref="`videoPlayer_${file.label}`" :src="`file://${file.nodeKey}`" type="video/mp4" :controls="controls" loop muted></video>
-    </div>
+
   </div>
 </template>
 

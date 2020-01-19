@@ -8,6 +8,8 @@
       </template>
     </VueContext>
 
+    
+
     <div
       v-for="fileOrFolder in renderFilteredFiles"
       :class="`col-2 file-col`"
@@ -16,6 +18,7 @@
       @click="updatePreviewFile(fileOrFolder)"
       @contextmenu.prevent="$refs['fb-window-view'].open($event, fileOrFolder)"
     >
+    
       <FBWindowViewPreviewBucket
         :selectedFilePath="selectedFilePath"
         :class="`stretchy-wrapper ${selectedFilePath === fileOrFolder.nodeKey ? 'selected-file' : '' }`"
@@ -155,6 +158,7 @@ export default {
 
 <style lang="scss" scoped>
 .windowview-container {
+
   width: 100%;
   max-width: 780px;
   top: 40px;
@@ -177,8 +181,6 @@ export default {
   text-align: center;
   position: relative;
   // margin: 0.5%;
-  padding-left: 1.75%;
-  padding-right: 1.75%;
   cursor: default;
 
   &.custom-five-cols {
@@ -189,27 +191,8 @@ export default {
 }
 
 .stretchy-wrapper {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-
-
-  padding-bottom: calc(56.25% + 60px); /* 16:9 */
-  position: relative;
-  border-radius: 4px;
-  // margin: 9px;
-  z-index: 1;
+padding-bottom: 100%;
 
 }
 
-// .stretchy-wrapper-child {
-//   position: absolute;
-//   top: 0;
-//   bottom: 0;
-//   left: 0;
-//   right: 0;
-//   color: white;
-//   font-size: 24px;
-//   text-align: center;
-// }
 </style>
