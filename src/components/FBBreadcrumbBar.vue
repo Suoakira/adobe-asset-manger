@@ -5,7 +5,7 @@
       <div class="path-scroll-wrapper" ref="path-scroll">
         <span class="path-txt" v-for="crumb in breadcrumbPath" :key="crumb.constructedPath">
 
-          <span class="crumb-text-no-hover">/</span>
+          <span class="crumb-text-no-hover"><i class="fas fa-angle-double-right"></i></span>
           <span class="crumb-text" @click="navigate(crumb.constructedPath)">{{ crumb.path }}</span>
         </span>
       </div>
@@ -19,7 +19,7 @@ import fs from "fs-extra";
 export default {
   methods: {
     navigate(crumbPath) {
-      console.log("__crumb path");
+
       this.$store.dispatch("navigatePath", crumbPath);
     }
   },

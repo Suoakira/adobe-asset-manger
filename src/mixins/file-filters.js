@@ -27,5 +27,33 @@ export default {
             return file.mimeType && file.mimeType.includes(type);
         },
 
+    },
+
+    getAssetPaths(file) {
+        if (isAepFile(file)) {
+
+            return "../../assets/images/aep.png"
+        } else if (isIllustratorFile(file)) {
+
+            return "../../assets/images/ai.png"
+
+            //check
+        } else if (isMimetype(file)) {
+
+            return "../../assets/images/mp3.jpg"
+
+            //check
+        } else if (isFolder) {
+
+            return "../../assets/images/dark_folder.svg"
+
+            //check
+        } else if (isMimetype) {
+
+            return `file://${file.nodeKey}`
+        } else if (isPsdFile(file)) {
+
+            return "../../assets/images/psd.png"
+        }
     }
 }

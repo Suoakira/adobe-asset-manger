@@ -12,7 +12,7 @@
 
     <div
       v-for="fileOrFolder in renderFilteredFiles"
-      :class="` custom-eight-cols file-col`"
+      :class="`custom-eight-cols file-col`"
       :key="fileOrFolder.nodeKey"
       @dblclick="navigate(fileOrFolder)"
       @click="updatePreviewFile(fileOrFolder)"

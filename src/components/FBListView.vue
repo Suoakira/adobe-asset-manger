@@ -94,14 +94,35 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .listview-container {
   position: fixed;
   width: 269px;
   max-width: 780px;
   top: 0px;
   height: 100%;
-  background: pink;
+  background: #2e2e2e;
+
+ .q-mr-xs {
+        color: #80D3F7;
+
+  }
+
+  .q-tree__node-header-content {
+    width: 70%;
+    float: right;
+    opacity: 0.4;
+    font-weight: 500;
+    font-size: 11px;
+    color: white;
+    text-align: left;
+    padding-left: 4px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+  }
 
   .selected-file {
     background: yellow;
