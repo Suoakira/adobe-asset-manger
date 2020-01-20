@@ -27,7 +27,7 @@
 
       <div class="title-bar">
         <div :class="`file-name-container ${selectedFilePath === fileOrFolder.nodeKey && 'selected' }`">
-          <div :class="`file-name ${selectedFilePath === fileOrFolder.nodeKey && 'selected-background' }`">{{fileOrFolder.label}}</div>
+          <div :class="`file-name ${selectedFilePath === fileOrFolder.nodeKey && 'selected-background' }`">{{truncate(fileOrFolder.label, 20, "...", fileOrFolder)}}</div>
         </div>
       </div>
       </div>
@@ -38,6 +38,7 @@
 <script>
 // mixins
 import fileFilters from "../mixins/file-filters.js";
+import utils from "../mixins/utils"
 
 // previews cards
 import FBPreviewCardFolder from "./preview-cards/FBPreviewCardFolder";
@@ -59,7 +60,7 @@ export default {
     fileOrFolder: Object,
     selectedFilePath: String
   },
-  mixins: [fileFilters],
+  mixins: [fileFilters, utils],
   components: {
     FBPreviewCardFolder,
     FBPreviewCardAep,
@@ -94,21 +95,21 @@ export default {
 
 
 
-    &:hover {
+    // &:hover {
       
-      border: 9px solid lighten(red, 15%);
-      // background: lighten(black, 15%);
-    }
+    //   border: 9px solid lighten(red, 15%);
+    //   // background: lighten(black, 15%);
+    // }
 
-    &.selected {
-      border: 9px solid lighten(red, 15%);
+    // &.selected {
+    //   border: 9px solid lighten(red, 15%);
 
       // border: 9px solid #282828;
       // border: 9px solid lighten(black, 15%);
       // background: lighten(black, 15%);
 
 
-    }
+    // }
 
 
   // background: yellow;

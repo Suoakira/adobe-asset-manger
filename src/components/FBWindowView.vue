@@ -12,7 +12,7 @@
 
     <div
       v-for="fileOrFolder in renderFilteredFiles"
-      :class="`col-2 file-col`"
+      :class="` custom-eight-cols file-col`"
       :key="fileOrFolder.nodeKey"
       @dblclick="navigate(fileOrFolder)"
       @click="updatePreviewFile(fileOrFolder)"
@@ -183,10 +183,10 @@ export default {
   // margin: 0.5%;
   cursor: default;
 
-  &.custom-five-cols {
+  &.custom-eight-cols {
     -webkit-box-flex: 0;
-    flex: 0 0 20%;
-    max-width: 20%;
+    flex: 0 0 12.5%;
+    max-width: 12.5%;
   }
 }
 
