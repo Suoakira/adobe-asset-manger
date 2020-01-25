@@ -1,4 +1,5 @@
 import { Script } from "vm";
+import path from "path"
 
 // contains filters used through the file browser
 export default {
@@ -27,33 +28,32 @@ export default {
             return file.mimeType && file.mimeType.includes(type);
         },
 
+        getAssetPaths(file) {
+            if (this.isAepFile(file)) {
+
+                return "file://" + path.resolve(__dirname + "../../assets/images/aep.png")
+            } else if (this.isIllustratorFile(file)) {
+
+                return "file://" + path.resolve(__dirname + "../../assets/images/ai.png")
+
+            } else if (file.mimeType && this.isMimetype(file, "audio") && !this.isAepFile(file)) {
+
+                return "file://" + path.resolve(__dirname + "../../assets/images/mp3.jpg")
+
+            } else if (file.isDir) {
+
+                return "file://" + path.resolve(__dirname + "../../assets/images/dark_folder.svg")
+
+                //check
+            } else if (file.mimeType && this.isMimetype(file, 'image') && !this.isPsdFile(file)) {
+                
+                return `file://${file.nodeKey}`
+                
+            } else if (this.isPsdFile(file)) {
+
+                return "file://" + path.resolve(__dirname + "../../assets/images/psd.png")
+            }
+        }
     },
 
-    getAssetPaths(file) {
-        if (isAepFile(file)) {
-
-            return "../../assets/images/aep.png"
-        } else if (isIllustratorFile(file)) {
-
-            return "../../assets/images/ai.png"
-
-            //check
-        } else if (isMimetype(file)) {
-
-            return "../../assets/images/mp3.jpg"
-
-            //check
-        } else if (isFolder) {
-
-            return "../../assets/images/dark_folder.svg"
-
-            //check
-        } else if (isMimetype) {
-
-            return `file://${file.nodeKey}`
-        } else if (isPsdFile(file)) {
-
-            return "../../assets/images/psd.png"
-        }
-    }
 }

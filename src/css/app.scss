@@ -22,9 +22,8 @@ h5 {
 
 // Global sass
 
+// image
 .fb-image-preview {
-    // height: 100%;
-    // width: 100%;
     text-align: center;
     padding-bottom: 56.25%;
     position: relative;
@@ -43,6 +42,34 @@ h5 {
     left: 50%;
     transform: translate(-50%, -50%);
 
+  }
+}
+
+//video 
+.fb-video-preview {
+
+    text-align: center;
+    padding-bottom: 56.25%;
+    position: relative;
+
+    height: 100%;
+    width: 100%;
+
+  .preview-video {
+
+  }
+
+  video {
+    top: 0;
+    position: absolute;
+    border-radius: 2px;
+    max-height: 100%;
+    max-width: 100%;
+
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
   }
 }

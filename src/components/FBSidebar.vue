@@ -9,6 +9,7 @@
               :savedFolderPath="savedFolder"
               :niceName="folderNicename(savedFolder)"
             ></SavedFolderCard>
+
           </div>
         </q-card-section>
       </q-card>
@@ -83,7 +84,7 @@ export default {
 <style lang="scss" >
 .fb-sidebar {
   position: fixed;
-  left: 1049px;
+  left: 980px;
   
 
   top: 0;

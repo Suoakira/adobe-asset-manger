@@ -58,7 +58,7 @@ export default {
   background: #232323;
   position: absolute;
   right: 0;
-  left: 269px;
+  left: 200px;
   height: 25px;
   bottom: 0;
   z-index: 4;

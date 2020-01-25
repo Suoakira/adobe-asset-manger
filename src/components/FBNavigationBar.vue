@@ -118,7 +118,7 @@ export default {
 <style lang="scss" scoped>
 .navigation-bar {
   position: fixed;
-  left: 269px;
+  left: 200px;
   top: 0;
   width: 100%;
   z-index: 2;

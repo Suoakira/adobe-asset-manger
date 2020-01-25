@@ -30,26 +30,4 @@ export default {
 </script>
 
 <style lang="scss">
-.fb-video-preview {
-
-    text-align: center;
-    padding-bottom: 56.25%;
-    position: relative;
-
-
-  .preview-video {
-
-  }
-
-  video {
-    position: absolute;
-    border-radius: 2px;
-    max-height: 100%;
-    max-width: 100%;
-
-    transform: translate(-50%, -50%);
-    top: 50%;
-    // position: absolute;
-  }
-}
 </style>

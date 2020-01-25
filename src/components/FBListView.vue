@@ -97,7 +97,7 @@ export default {
 <style lang="scss" >
 .listview-container {
   position: fixed;
-  width: 269px;
+  width: 200px;
   max-width: 780px;
   top: 0px;
   height: 100%;

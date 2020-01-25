@@ -28,7 +28,8 @@
     "quasar": "^1.0.0",
     "uuid": "^3.3.3",
     "vue-context": "^5.0.0",
-    "vue-js-modal": "^1.3.31"
+    "vue-js-modal": "^1.3.31",
+    "vuex-persistedstate": "^2.7.0"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0",

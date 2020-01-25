@@ -46,7 +46,7 @@ export default {
 <style lang="scss">
 .file-browser-container {
   position: relative;
-  max-width: 1269px;
+  max-width: 1200px;
   width: 100vw;
   height: 100vh;
   background: $color-body-bg;
