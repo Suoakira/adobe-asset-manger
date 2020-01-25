@@ -1,21 +1,42 @@
 <template>
   <div class="navigation-bar">
-
     <div class="header-title">
       <h2>AE-Explorer</h2>
     </div>
 
-
     <div class="history-nav">
       <div class="history-btns">
-        <i @click="backPath" class="fas fa-arrow-left"></i>
-        <i @click="forwardPath" class="fas fa-arrow-right"></i>
+        <i
+          @click="backPath"
+          @mouseover="hoveredBtn = 'navback'"
+          @mouseout="hoveredBtn = null"
+          :class="`fas fa-arrow-left ${hoveredBtn === 'navback' && 'active'}`"
+        ></i>
+        <i
+          @click="forwardPath"
+          @mouseover="hoveredBtn = 'navforward'"
+          @mouseout="hoveredBtn = null"
+          :class="`fas fa-arrow-right ${hoveredBtn === 'navforward' && 'active'}`"
+        ></i>
       </div>
 
-      <div class="stepback-btn">
-        <i class="fas fa-level-up-alt"></i>
+      <div
+        @click="stepBackPath"
+        @mouseover="hoveredBtn = 'stepback'"
+        @mouseout="hoveredBtn = null"
+        class="stepback-btn"
+      >
+        <i :class="`fas fa-level-up-alt ${hoveredBtn === 'stepback' && 'active'}`"></i>
       </div>
-      <!-- <i @click="refreshPath" class="fas fa-redo-alt"></i> -->
+
+      <div
+        @click="refreshPath"
+        @mouseover="hoveredBtn = 'refresh'"
+        @mouseout="hoveredBtn = null"
+        :class="`refresh-btn ${hoveredBtn === 'refresh' && 'active'}`"
+      >
+        <i :class="`fas fa-redo-alt ${hoveredBtn === 'refresh' && 'active'}`"></i>
+      </div>
     </div>
 
     <q-input
@@ -24,7 +45,9 @@
       @input="value => handleNavInput(value)"
     />
 
-    <q-input class="browser-search" v-model="browserSearch"></q-input>
+    <!-- <q-input class="browser-search" v-model="browserSearch"></q-input> -->
+
+    <hr :class="`loader-temp ${showLoader && 'active'}`" />
   </div>
 </template>
 
@@ -34,8 +57,10 @@ import fs from "fs-extra";
 
 export default {
   data: () => ({
-    browserPath: null, 
+    browserPath: null,
     toggleSearch: null,
+    hoveredBtn: null,
+    showLoader: null
   }),
   methods: {
     ...mapActions(["toggleDisplayView"]),
@@ -49,6 +74,8 @@ export default {
 
     refreshPath() {
       this.handleNavInput(this.getBrowserPath);
+
+      this.dummyLoader()
     },
 
     //
@@ -71,6 +98,15 @@ export default {
     backPath() {
       this.$store.dispatch("incrementHistoryCounter");
       this.setHistoryPath();
+
+
+    },
+
+    dummyLoader() {
+      (this.showLoader = true),
+        setTimeout(() => {
+          this.showLoader = false;
+        }, 500);
     },
 
     forwardPath() {
@@ -134,9 +170,9 @@ export default {
   z-index: 2;
   max-width: 980px;
   background: #272727;
+
   height: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-
 
   .header-title {
     position: absolute;
@@ -146,17 +182,15 @@ export default {
 
     height: 40px;
     width: 200px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
 
-      h2 {
-        position: relative;
-        top: -10px;
-        left: 21px;
-        opacity: 0.6;
-
-
-      }
+    h2 {
+      position: relative;
+      top: -10px;
+      left: 21px;
+      opacity: 0.6;
+    }
   }
 
   .navigation-input {
@@ -165,21 +199,21 @@ export default {
     transform: translateY(-50%);
     width: 50%;
     height: 30px;
-    background:black;
+    background: black;
     border-radius: 4px;
 
-    margin-left: 350px;;
+    margin-left: 350px;
     color: white;
   }
 
   .history-nav {
     display: inline-block;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-
+    top: 55%;
+    transform: translateY(-55%);
 
     .history-btns {
+      cursor: pointer;
       position: relative;
       display: inline-block;
       left: 219px;
@@ -189,10 +223,24 @@ export default {
     }
 
     .stepback-btn {
-      left: 260px;
+      cursor: pointer;
+
+      top: -2px;
+      left: 264px;
       position: relative;
       display: inline-block;
       // background: pink;
+      padding: 4px 3px;
+      border-radius: 4px;
+    }
+
+    .refresh-btn {
+      cursor: pointer;
+
+      left: 758px;
+      position: relative;
+      display: inline-block;
+
       padding: 2px 3px;
       border-radius: 4px;
     }
@@ -214,8 +262,24 @@ export default {
     opacity: 0.4;
     margin: 0px 4px;
 
-    &:hover {
+    &.active {
       opacity: 0.6;
+    }
+  }
+
+  .loader-temp {
+    position: absolute;
+    bottom: -8px;
+    width: 0px;
+    left: 200px;
+
+    opacity: 1;
+    border: 0px;
+    transition: width 500ms ease;
+
+    &.active {
+      border-bottom: 2px solid white;
+      width: 778px;
     }
   }
 }
