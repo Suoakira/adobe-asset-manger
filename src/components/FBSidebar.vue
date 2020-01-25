@@ -88,7 +88,8 @@ export default {
   
 
   top: 0;
-  background: #2e2e2e;
+  background: #272727;
+      box-shadow: 0 30px 8px 0 rgba(0, 0, 0, 0.2);
 
   width: 220px;
   height: 100%;

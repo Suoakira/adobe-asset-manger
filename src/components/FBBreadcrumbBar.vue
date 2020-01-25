@@ -62,7 +62,7 @@ export default {
   height: 25px;
   bottom: 0;
   z-index: 4;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
   .hide-browse-path-input {
     display: none;

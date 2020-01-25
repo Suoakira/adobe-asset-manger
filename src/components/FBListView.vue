@@ -101,7 +101,8 @@ export default {
   max-width: 780px;
   top: 0px;
   height: 100%;
-  background: #2e2e2e;
+  background: #272727;
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
 
  .q-mr-xs {
         color: #80D3F7;

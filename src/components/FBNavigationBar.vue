@@ -1,12 +1,21 @@
 <template>
   <div class="navigation-bar">
-    
+
+    <div class="header-title">
+      <h2>AE-Explorer</h2>
+    </div>
+
+
     <div class="history-nav">
-      <q-btn @click="backPath" color="white" text-color="black" label="<" />
-      <q-btn @click="forwardPath" color="white" text-color="black" label=">" />
-      <q-btn @click="refreshPath" color="white" text-color="black" label="R" />
-      <q-btn @click="stepBackPath" color="white" text-color="black" label="^" />
-      <q-btn @click="toggleDisplayView" color="white" text-color="black" label="-" />
+      <div class="history-btns">
+        <i @click="backPath" class="fas fa-arrow-left"></i>
+        <i @click="forwardPath" class="fas fa-arrow-right"></i>
+      </div>
+
+      <div class="stepback-btn">
+        <i class="fas fa-level-up-alt"></i>
+      </div>
+      <!-- <i @click="refreshPath" class="fas fa-redo-alt"></i> -->
     </div>
 
     <q-input
@@ -25,10 +34,11 @@ import fs from "fs-extra";
 
 export default {
   data: () => ({
-    browserPath: null
+    browserPath: null, 
+    toggleSearch: null,
   }),
   methods: {
-    ...mapActions(['toggleDisplayView']),
+    ...mapActions(["toggleDisplayView"]),
     handleNavInput(path) {
       this.$store.dispatch("setBrowserPath", path);
 
@@ -118,22 +128,48 @@ export default {
 <style lang="scss" scoped>
 .navigation-bar {
   position: fixed;
-  left: 200px;
+
   top: 0;
   width: 100%;
   z-index: 2;
-  max-width: 780px;
-  background: red;
+  max-width: 980px;
+  background: #272727;
   height: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+
+  .header-title {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+
+    height: 40px;
+    width: 200px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+
+      h2 {
+        position: relative;
+        top: -10px;
+        left: 21px;
+        opacity: 0.6;
+
+
+      }
+  }
 
   .navigation-input {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     width: 50%;
-    height: 20px;
-    background: yellow;
-    margin-left: 230px;
+    height: 30px;
+    background:black;
+    border-radius: 4px;
+
+    margin-left: 350px;;
+    color: white;
   }
 
   .history-nav {
@@ -141,7 +177,25 @@ export default {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: purple;
+
+
+    .history-btns {
+      position: relative;
+      display: inline-block;
+      left: 219px;
+      // background: pink;
+      padding: 2px 10px;
+      border-radius: 4px;
+    }
+
+    .stepback-btn {
+      left: 260px;
+      position: relative;
+      display: inline-block;
+      // background: pink;
+      padding: 2px 3px;
+      border-radius: 4px;
+    }
   }
 
   .browser-search {
@@ -152,6 +206,17 @@ export default {
     height: 20px;
     background: yellow;
     right: 0;
+  }
+
+  // font awesome hooks
+  .fas {
+    color: white;
+    opacity: 0.4;
+    margin: 0px 4px;
+
+    &:hover {
+      opacity: 0.6;
+    }
   }
 }
 </style>
