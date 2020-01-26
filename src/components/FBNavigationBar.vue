@@ -37,15 +37,20 @@
       >
         <i :class="`fas fa-redo-alt ${hoveredBtn === 'refresh' && 'active'}`"></i>
       </div>
+
+      <div class="search-input-icon">
+        <i class="fas fa-search"></i>
+      </div>
     </div>
 
     <q-input
+       :borderless="true"
       class="navigation-input"
-      :value="getBrowserPath"
+      :value="getBrowserPath.slice(1)"
       @input="value => handleNavInput(value)"
     />
 
-    <!-- <q-input class="browser-search" v-model="browserSearch"></q-input> -->
+    <q-input :borderless="true" class="browser-search" v-model="browserSearch"></q-input>
 
     <hr :class="`loader-temp ${showLoader && 'active'}`" />
   </div>
@@ -75,7 +80,7 @@ export default {
     refreshPath() {
       this.handleNavInput(this.getBrowserPath);
 
-      this.dummyLoader()
+      this.dummyLoader();
     },
 
     //
@@ -98,8 +103,6 @@ export default {
     backPath() {
       this.$store.dispatch("incrementHistoryCounter");
       this.setHistoryPath();
-
-
     },
 
     dummyLoader() {
@@ -153,6 +156,11 @@ export default {
   watch: {
     browserSearch() {
       console.log("__ browser search term", this.getBrowserSearchTerm);
+    },
+
+    getBrowserPath() {
+      console.log("routchange");
+      this.dummyLoader();
     }
   },
   created() {
@@ -168,7 +176,7 @@ export default {
   top: 0;
   width: 100%;
   z-index: 2;
-  max-width: 980px;
+  max-width: 1200px;
   background: #272727;
 
   height: 40px;
@@ -197,7 +205,7 @@ export default {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 50%;
+    width: 500px;
     height: 30px;
     background: black;
     border-radius: 4px;
@@ -237,10 +245,18 @@ export default {
     .refresh-btn {
       cursor: pointer;
 
-      left: 758px;
+      left: 770px;
       position: relative;
       display: inline-block;
 
+      padding: 2px 3px;
+      border-radius: 4px;
+    }
+
+    .search-input-icon {
+      left: 1042px;
+      position: relative;
+      display: inline-block;
       padding: 2px 3px;
       border-radius: 4px;
     }
@@ -249,11 +265,12 @@ export default {
   .browser-search {
     position: absolute;
     top: 50%;
+    right: 50px;
     transform: translateY(-50%);
-    width: 100px;
-    height: 20px;
-    background: yellow;
-    right: 0;
+    width: 160px;
+    height: 30px;
+    background: black;
+    border-radius: 4px;
   }
 
   // font awesome hooks
@@ -269,16 +286,16 @@ export default {
 
   .loader-temp {
     position: absolute;
-    bottom: -8px;
+    bottom: -9px;
     width: 0px;
     left: 200px;
 
-    opacity: 1;
+    opacity: 0.4;
     border: 0px;
     transition: width 500ms ease;
 
     &.active {
-      border-bottom: 2px solid white;
+      border-bottom: 3px solid white;
       width: 778px;
     }
   }

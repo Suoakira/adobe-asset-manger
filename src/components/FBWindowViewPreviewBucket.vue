@@ -48,7 +48,7 @@ export default {
   components: {
     FBPreviewCardImage,
     FBPreviewCardVideo
-  }
+  },
 };
 </script>
 
