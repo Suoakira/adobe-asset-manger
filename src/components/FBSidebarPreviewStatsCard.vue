@@ -30,7 +30,7 @@ export default {
 
 .file-title {
   width: 30%;
-  opacity: 0.5;
+  opacity: 0.6;
   font-weight: 900;
   font-size: 11px;
   color: white;
@@ -42,7 +42,7 @@ export default {
 .file-data {
   width: 70%;
   float: right;
-  opacity: 0.4;
+  opacity: 0.8;
   font-weight: 500;
   font-size: 11px;
   color: white;

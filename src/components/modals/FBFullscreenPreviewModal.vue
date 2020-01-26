@@ -52,7 +52,7 @@ export default {
 
 <style lang="scss">
 .fb-modal-preview {
-  position: relative;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -71,7 +71,7 @@ export default {
     line-height: 1.5rem;
     text-align: center;
     font-size: 1.5rem;
-    opacity: 0.4;
+    opacity: 0.8;
     color: white;
     cursor: pointer;
 

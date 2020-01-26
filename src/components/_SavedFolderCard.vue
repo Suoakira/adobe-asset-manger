@@ -98,7 +98,7 @@ export default {
   }
 
   .header-title {
-    opacity: 0.4;
+    opacity: 0.6;
     font-size: 11px;
     color: #ffffff;
     font-weight: 400;
@@ -107,7 +107,7 @@ export default {
     transform: translateY(-50%);
 
     &.active {
-      opacity: 0.6;
+      opacity: 0.8;
     }
     // margin-left: 32px;
   }
@@ -121,7 +121,7 @@ export default {
 
   .fb-folder-icon {
     color: white;
-    opacity: 0.4;
+    opacity: 0.6;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -137,7 +137,6 @@ export default {
       position: absolute;
       top: 50%;
       right: 3%;
-      opacity: 0.2;
       transform: translateX(-50%) translateY(-50%);
       font-size: 12px;
       transition: opacity 350ms ease;

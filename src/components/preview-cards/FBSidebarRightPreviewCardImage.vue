@@ -1,5 +1,5 @@
 <template>
-  <div class="fb-image-preview">
+  <div class="fb-sb-image-preview">
 
       <img :src="getAssetPaths(file)" />
 

@@ -46,7 +46,7 @@
     <q-input
        :borderless="true"
       class="navigation-input"
-      :value="getBrowserPath.slice(1)"
+      :value="getBrowserPath"
       @input="value => handleNavInput(value)"
     />
 
@@ -197,7 +197,7 @@ export default {
       position: relative;
       top: -10px;
       left: 21px;
-      opacity: 0.6;
+      opacity: 0.8;
     }
   }
 
@@ -276,11 +276,11 @@ export default {
   // font awesome hooks
   .fas {
     color: white;
-    opacity: 0.4;
+    opacity: 0.6;
     margin: 0px 4px;
 
     &.active {
-      opacity: 0.6;
+      opacity: 0.8;
     }
   }
 
@@ -290,7 +290,7 @@ export default {
     width: 0px;
     left: 200px;
 
-    opacity: 0.4;
+    opacity: 0.8;
     border: 0px;
     transition: width 500ms ease;
 

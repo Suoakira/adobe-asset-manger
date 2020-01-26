@@ -1,25 +1,6 @@
 <template>
   <div class="fb-sidebar">
-    <q-expansion-item expand-separator v-model="favTabExpanded" label="Librarys">
-      <q-card>
-        <q-card-section>
-          <div v-for="savedFolder in getSavedFolders" :key="savedFolder">
-
-            <SavedFolderCard
-              :savedFolderPath="savedFolder"
-              :niceName="folderNicename(savedFolder)"
-            ></SavedFolderCard>
-
-          </div>
-        </q-card-section>
-      </q-card>
-    </q-expansion-item>
-
-    <q-expansion-item
-      expand-separator
-      v-model="previewExpanded"
-      label="Info & Preview"
-    >
+    <q-expansion-item expand-separator v-model="previewExpanded" label="Info & Preview">
       <q-card>
         <q-card-section>
           <FBSidebarPreview />
@@ -32,7 +13,6 @@
 import { mapGetters } from "vuex";
 import fs from "fs-extra";
 
-import SavedFolderCard from "./_SavedFolderCard";
 import FBSidebarPreview from "./FBSidebarPreview";
 
 export default {
@@ -40,26 +20,14 @@ export default {
     return {
       text: "test",
       favTabExpanded: true,
-      previewExpanded: false
+      previewExpanded: true
     };
   },
 
-  components: { SavedFolderCard, FBSidebarPreview },
+  components: { FBSidebarPreview },
 
   methods: {
-    handleClickFavExpanded() {
-      this.favTabExpanded = !this.favTabExpanded;
-    },
 
-    handleClickPreviewExpanded() {
-      this.previewExpanded = !this.previewExpanded;
-    },
-
-    folderNicename(path) {
-      const splitPath = path.split("/");
-
-      return splitPath[splitPath.length - 1];
-    }
   },
   computed: {
     ...mapGetters(["getSavedFolders", "getBrowserPath"])
@@ -69,11 +37,6 @@ export default {
     this.$root.$on("expandPreview", value => {
       this.previewExpanded = value;
     });
-  },
-  watch: {
-    previewExpanded() {
-      console.log("expanded preview", this.previewExpanded);
-    }
   },
   beforeDestroy() {
     this.$root.$off("expandPreview");
@@ -85,24 +48,27 @@ export default {
 .fb-sidebar {
   position: fixed;
   left: 980px;
-  
 
-  top: 0;
+  top: 40px;
   background: #272727;
-      box-shadow: 0 30px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 30px 8px 0 rgba(0, 0, 0, 0.2);
 
   width: 220px;
   height: 100%;
 
   .q-item__label {
-    opacity: 0.35;
+    opacity: 0.6;
     font-size: 10px;
     color: #ffffff;
     font-weight: 500;
   }
 
+  .q-item {
+    background: #2e2e2e;
+  }
+
   .q-item__label--caption {
-    opacity: 0.35;
+    opacity: 0.6;
     font-size: 10px;
     color: #ffffff;
     font-weight: 300;

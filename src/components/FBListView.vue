@@ -95,14 +95,11 @@ export default {
 </script>
 
 <style lang="scss" >
+
 .listview-container {
-  position: fixed;
-  width: 200px;
-  max-width: 780px;
-  top: 0px;
-  height: 100%;
-  background: #272727;
-  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+width: 100%;
+height: 100%;
+position: relative;
 
  .q-mr-xs {
         color: #80D3F7;
@@ -112,7 +109,7 @@ export default {
   .q-tree__node-header-content {
     width: 70%;
     float: right;
-    opacity: 0.4;
+    opacity: 0.6;
     font-weight: 500;
     font-size: 11px;
     color: white;

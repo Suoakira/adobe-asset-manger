@@ -1,8 +1,8 @@
 <template>
   <div class="sb-preview-container">
-    <FBPreviewCardImage :file="fileOrFolder" />
+    <FBSidebarRightPreviewCardImage :file="fileOrFolder" />
 
-    <FBPreviewCardVideo
+    <FBSidebarRightPreviewCardVideo
       :file="fileOrFolder"
       v-if="fileOrFolder.mimeType && isMimetype(fileOrFolder, 'video')"
     />
@@ -14,8 +14,8 @@
 import fileFilters from "../mixins/file-filters.js";
 
 // previews cards
-import FBPreviewCardImage from "./preview-cards/FBPreviewCardImage";
-import FBPreviewCardVideo from "./preview-cards/FBPreviewCardVideo";
+import FBSidebarRightPreviewCardImage from "./preview-cards/FBSidebarRightPreviewCardImage";
+import FBSidebarRightPreviewCardVideo from "./preview-cards/FBSidebarRightPreviewCardVideo";
 
 export default {
   props: {
@@ -23,8 +23,8 @@ export default {
   },
   mixins: [fileFilters],
   components: {
-    FBPreviewCardImage,
-    FBPreviewCardVideo
+    FBSidebarRightPreviewCardImage,
+    FBSidebarRightPreviewCardVideo
   }
 };
 </script>

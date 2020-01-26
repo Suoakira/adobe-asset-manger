@@ -82,7 +82,7 @@ export default {
 
     z-index: 2;
     margin-left: 10px;
-    opacity: .2;
+    opacity: 0.6;
     color: white;
     cursor: pointer;
     transition: opacity 100ms ease;
@@ -90,7 +90,7 @@ export default {
     position: relative;
 
     &:hover {
-      opacity: .6;
+      opacity: 0.8;
     }
   }
 
@@ -143,7 +143,7 @@ export default {
 
       &:hover {
         .edit-pencil-icon {
-          opacity: 0.2;
+          opacity: 0.8;
         }
       }
 
@@ -168,13 +168,13 @@ export default {
           cursor: pointer;
           position: relative;
           color: #ffffff;
-          opacity: 0.35;
+          opacity: 0.6;
           top: -7px;
           transition: opacity 0.1s ease;
           transform: translateY(-55%);
 
           &:hover {
-            opacity: 0.6;
+            opacity: 0.8;
             text-decoration: none;
           }
         }
@@ -184,7 +184,7 @@ export default {
           position: relative;
           top: -35%;
           transform: translateY(-55%);
-          opacity: 0.6;
+          opacity: 0.8;
           cursor: default;
 
           i {
@@ -202,7 +202,7 @@ export default {
         left: 8px;
         transition: opacity 100ms ease;
         &:hover {
-          opacity: 0.6;
+          opacity: 0.8;
         }
       }
     }
@@ -216,7 +216,7 @@ export default {
 
     .lazy-txt {
       position: absolute;
-      opacity: 0.3;
+      opacity: 0.6;
       font-weight: 400;
       font-size: 11px;
       color: #ffffff;

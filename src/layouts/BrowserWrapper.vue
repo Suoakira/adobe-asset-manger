@@ -4,9 +4,10 @@
 
     <!-- show window view folders or list view  -->
     <FBWindowView v-if="getDisplayWindowView"/>
-    <FBListView />
+    <FBSiderbarLeft />
 
-    <FBSidebar />
+
+    <FBSidebarRight />
     <FBBreadcrumbBar />
 
     <!-- modals  -->
@@ -18,10 +19,10 @@
 
 // main component buckets
 import FBNavigationBar from "./../components/FBNavigationBar";
-import FBSidebar from "./../components/FBSidebar";
+import FBSidebarRight from "./../components/FBSidebarRight";
 import FBWindowView from "./../components/FBWindowView";
 import FBBreadcrumbBar from  "./../components/FBBreadcrumbBar";
-import FBListView from "./../components/FBListView"
+import FBSiderbarLeft from "./../components/FBSidebarLeft"
 
 // modals
 import FBFullscreenPreviewModal from "../components/modals/FBFullscreenPreviewModal"
@@ -30,11 +31,11 @@ import { mapGetters } from 'vuex';
 export default {
   components: {
     FBNavigationBar,
-    FBSidebar,
+    FBSidebarRight,
     FBWindowView,
     FBBreadcrumbBar,
     FBFullscreenPreviewModal,
-    FBListView,
+    FBSiderbarLeft,
   
   },
   computed: {
