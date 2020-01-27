@@ -5,6 +5,9 @@
 @import "./functional/_variables";
 @import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");
 
+// context menu css
+@import  '~vue-context/dist/css/vue-context.css';
+
 
 // Headers
 h1 {
@@ -98,6 +101,7 @@ h5 {
 
     &:hover {
       cursor: pointer;
+      color: rgba(255,255,255, .80);
 
       left: 50%;
       top: 50%;
@@ -107,6 +111,62 @@ h5 {
 
   }
 }
+
+.context-menu {
+  color: rgba(255,255,255, .80);
+	background: #272727 !important;
+	box-shadow: 0 32px 34px -10px rgba(0,0,0,0.50) !important;
+	border-radius: 4px !important;
+	border: none !important;
+	padding: 0 !important;
+	overflow: hidden !important;
+
+	li {
+		padding: 0.2rem 0.7rem;
+		cursor: pointer !important;
+
+		&:hover {
+			background: lighten(#272727,4%) ;
+		}
+
+		&.context-header {
+			background: lighten(#272727,4%) ;
+
+			font-size: 0.55rem;
+			text-transform: uppercase;
+			font-weight: 800;
+			letter-spacing: 0.36px;
+			padding: 0.2rem 0.4rem;
+
+
+
+			&:hover{
+			background: lighten(#272727,4%) ;
+
+
+			}
+		}
+
+
+		.icon {
+			float: left;
+			margin: 0px 5px 0 -5px;
+		}
+
+
+		p {
+
+			display: inline-block;
+			color: white;
+			margin: 0;
+			padding: 0;
+			opacity: 0.4;
+			font-size: 0.75rem;
+			letter-spacing: -0.2px;
+		}
+		
+	}
+} // .context-menu
 
 //video 
 .fb-sb-video-preview {

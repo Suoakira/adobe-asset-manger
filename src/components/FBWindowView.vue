@@ -1,9 +1,17 @@
 <template>
   <div class="windowview-container row items-start">
-    <VueContext ref="fb-window-view" :closeOnScroll="true">
+    <VueContext ref="fbWindowView" class="context-menu" :closeOnScroll="true">
       <template slot-scope="child">
         <!-- Only show this if .aep -->
-        <li @click="revealInFinder($event, child.data)">Reveal in Finder</li>
+				<li class="context-header">{{child.data.label}}</li>
+
+        <li @click="revealInFinder($event, child.data)"><p>Reveal in Finder</p></li>
+        <li ><p>Save Folder</p></li>
+        <li ><p>Import</p></li>
+
+
+
+
         <!-- <li @click.prevent="">{{child.data}}</li> -->
       </template>
     </VueContext>
@@ -16,8 +24,9 @@
       :key="fileOrFolder.nodeKey"
       @dblclick="navigate(fileOrFolder)"
       @click="updatePreviewFile(fileOrFolder)"
-      @contextmenu.prevent="$refs['fb-window-view'].open($event, fileOrFolder)"
+      @contextmenu.prevent="$refs.fbWindowView.open($event, fileOrFolder)"
     >
+
     
       <FBWindowViewPreviewBucket
         :selectedFilePath="selectedFilePath"
