@@ -5,130 +5,156 @@ import fs from "fs-extra";
 import blacklistedPaths from "./blacklisted-paths";
 
 export default {
-  setBrowserPath({ commit }, path) {
-    commit("setBrowserPath", path);
-  },
+	setBrowserPath({ commit }, path) {
 
-  updateBrowserHistory({ commit, getters }, path) {
+		commit("setBrowserPath", path);
+	},
 
-    const { getBrowserHistory } = getters;
-    let lastPath = getBrowserHistory[getBrowserHistory.length - 1];
+	updateBrowserHistory({ commit, getters }, path) {
 
-    const pathValid = fs.existsSync(path);
+		const { getBrowserHistory } = getters;
+		let lastPath = getBrowserHistory[getBrowserHistory.length - 1];
 
-    if (getBrowserHistory.length > 20 && lastPath != path && pathValid) {
-      commit("removeBrowserHistory");
-      commit("addBrowserHistory", path);
-    } else if (lastPath != path && pathValid) {
-      commit("addBrowserHistory", path);
-    }
-  },
+		const pathValid = fs.existsSync(path);
+
+		if (getBrowserHistory.length > 20 && lastPath != path && pathValid) {
+
+			commit("removeBrowserHistory");
+			commit("addBrowserHistory", path);
+		} else if (lastPath != path && pathValid) {
+
+			commit("addBrowserHistory", path);
+		}
+	},
 
 
-  retrieveFolderContents({ commit, dispatch }, folderPath) {
+	retrieveFolderContents({ commit, dispatch }, folderPath) {
 
-    // hack way of telling if the path is coming from history nav buttons
-    if (!folderPath.includes("__HISTORY__")) {
-      dispatch("setHistoryCounter");
-      dispatch("updateBrowserHistory", folderPath);
-    } else {
-      folderPath = folderPath.slice(0, folderPath.length - 11);
-    }
+		// hack way of telling if the path is coming from history nav buttons
+		if (!folderPath.includes("__HISTORY__")) {
 
-    const isDir = fs.lstatSync(folderPath).isDirectory();
+			dispatch("setHistoryCounter");
+			dispatch("updateBrowserHistory", folderPath);
+		} else {
 
-    const folderContents = isDir ? fs.readdirSync(folderPath) : []
-    const mapedNodes = helperMethods.filterFilesAndFolders(folderContents).map(fileOrFolder => helperMethods.createNode(fileOrFolder, folderPath));
+			folderPath = folderPath.slice(0, folderPath.length - 11);
+		}
 
-    if (folderContents.length > 0) {
-      commit("setFilesAndFolders", mapedNodes);
-    }
-  },
+		const isDir = fs.lstatSync(folderPath).isDirectory();
 
-  navigatePath({ commit, dispatch }, path) {
-    dispatch("setBrowserPath", path);
+		const folderContents = isDir ? fs.readdirSync(folderPath) : []
+		const mapedNodes = helperMethods.filterFilesAndFolders(folderContents).map(fileOrFolder => helperMethods.createNode(fileOrFolder, folderPath));
 
-    if (fs.existsSync(path)) {
+		if (folderContents.length > 0) {
+			commit("setFilesAndFolders", mapedNodes);
+		}
 
-      dispatch("retrieveFolderContents", path);
-    }
-  },
+	},
 
-  setHistoryCounter({ commit }, value = 1) {
-    commit("setHistoryCounter", value);
-  },
+	navigatePath({ commit, dispatch }, path) {
 
-  incrementHistoryCounter({ commit, getters }, value = 1) {
-    if (getters.getHistoryCounter < getters.getBrowserHistory.length) {
-      commit("incrementHistoryCounter", value);
-    }
-  },
+		dispatch("setBrowserPath", path);
 
-  decrementHistoryCounter({ commit, getters }, value = 1) {
-    if (getters.getHistoryCounter > 1) {
-      commit("decrementHistoryCounter", value);
-    }
-  },
+		if (fs.existsSync(path)) {
 
-  saveAsFavFolder({ commit }, folder) {
-    const {isDir, nodeKey} = folder
+			dispatch("retrieveFolderContents", path);
+		}
+	},
 
-    if (isDir) {
-      commit("saveAsFavFolder", nodeKey);
-    } else {
-      console.log("Sorry that isnt a folder");
-    }
-  },
+	setHistoryCounter({ commit }, value = 1) {
 
-  removeFavFolder({commit}, path ) {
-    commit("removeSavedFolder", path)
-  },
+		commit("setHistoryCounter", value);
+	},
 
-  setPreviewFile({ commit }, file) {
-    commit("setPreviewFile", file)
-  },
+	incrementHistoryCounter({ commit, getters }, value = 1) {
 
-  setBrowserSearchTerm({ commit }, searchTerm) {
-    commit("setBrowserSearchTerm", searchTerm)
-  },
+		if (getters.getHistoryCounter < getters.getBrowserHistory.length) {
 
-  toggleDisplayView({commit}) {
-    commit("toggleDisplayView")
-  }
+			commit("incrementHistoryCounter", value);
+		}
+	},
+
+	decrementHistoryCounter({ commit, getters }, value = 1) {
+
+		if (getters.getHistoryCounter > 1) {
+
+			commit("decrementHistoryCounter", value);
+		}
+	},
+
+	saveAsFavFolder({ commit }, folder) {
+
+		const {isDir, nodeKey} = folder
+
+		if (isDir) {
+
+			commit("saveAsFavFolder", nodeKey);
+		} else {
+
+			console.log("Sorry that isnt a folder");
+		}
+	},
+
+	removeFavFolder({commit}, path ) {
+
+		commit("removeSavedFolder", path)
+	},
+
+	setPreviewFile({ commit }, file) {
+
+		commit("setPreviewFile", file)
+	},
+
+	setBrowserSearchTerm({ commit }, searchTerm) {
+
+		commit("setBrowserSearchTerm", searchTerm)
+	},
+
+	toggleDisplayView({commit}) {
+
+		commit("toggleDisplayView")
+	},
+
+	setNumCols({ commit }, numCols) {
+		commit("setNumCols", numCols)
+	}
 };
 
 const helperMethods = {
 
-  filterFilesAndFolders(filesAndFolders) {
-    let folderContents = filesAndFolders.filter(
-      fileOrFolder =>
+	filterFilesAndFolders(filesAndFolders) {
 
-        // !blacklistedPaths.includes(fileOrFolder.nodeKey) &&
-        fileOrFolder.charAt(0) !== "." &&
-        fileOrFolder.substr(fileOrFolder.length - 4) !== ".app"
+		let folderContents = filesAndFolders.filter(
 
-    );
+			fileOrFolder =>
 
-    return folderContents;
-  },
+				// !blacklistedPaths.includes(fileOrFolder.nodeKey) &&
+				fileOrFolder.charAt(0) !== "." &&
+				fileOrFolder.substr(fileOrFolder.length - 4) !== ".app"
 
-  createNode(file, folderPath) {
+		);
 
-    const nodeKey = folderPath + "/" + file
-    const fileStats = fs.lstatSync(nodeKey)
-    // get file mime type
-    const mimeType = mime.lookup(nodeKey);
+		return folderContents;
+	},
 
-    // create object
-    return {
-      label: file,
-      nodeKey: nodeKey,
-      isDir: fileStats.isDirectory(),
-      extension: path.extname(nodeKey),
-      rootDir: folderPath,
-      mimeType: mimeType,
-      stat: fileStats,
-      children: []
-    };
-  }
+	createNode(file, folderPath) {
+
+		const nodeKey = folderPath + "/" + file
+
+		const fileStats = fs.lstatSync(nodeKey)
+		// get file mime type
+		const mimeType = mime.lookup(nodeKey);
+
+		// create object
+		return {
+			label: file,
+			nodeKey: nodeKey,
+			isDir: fileStats.isDirectory(),
+			extension: path.extname(nodeKey),
+			rootDir: folderPath,
+			mimeType: mimeType,
+			stat: fileStats,
+			children: []
+		};
+	}
 };

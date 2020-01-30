@@ -1,18 +1,20 @@
 <template>
-  <div class="file-browser-container">
-    <FBNavigationBar />
+	<div class="file-browser-container">
 
-    <!-- show window view folders or list view  -->
-    <FBWindowView v-if="getDisplayWindowView"/>
-    <FBSiderbarLeft />
+		<FBNavigationBar />
+
+		<!-- show window view folders or list view  -->
+		<FBWindowView v-if="getDisplayWindowView"/>
+		<FBSiderbarLeft />
 
 
-    <FBSidebarRight />
-    <FBBreadcrumbBar />
+		<FBSidebarRight />
+		<FBBreadcrumbBar />
 
-    <!-- modals  -->
-    <FBFullscreenPreviewModal />
-  </div>
+		<!-- modals  -->
+		<FBFullscreenPreviewModal />
+		
+	</div>
 </template>
 
 <script>
@@ -29,30 +31,30 @@ import FBFullscreenPreviewModal from "../components/modals/FBFullscreenPreviewMo
 import { mapGetters } from 'vuex';
 
 export default {
-  components: {
-    FBNavigationBar,
-    FBSidebarRight,
-    FBWindowView,
-    FBBreadcrumbBar,
-    FBFullscreenPreviewModal,
-    FBSiderbarLeft,
-  
-  },
-  computed: {
-    ...mapGetters(['getDisplayWindowView'])
-  }
+	components: {
+		FBNavigationBar,
+		FBSidebarRight,
+		FBWindowView,
+		FBBreadcrumbBar,
+		FBFullscreenPreviewModal,
+		FBSiderbarLeft,
+	
+	},
+	computed: {
+		...mapGetters(['getDisplayWindowView'])
+	}
 };
 </script>
 
 <style lang="scss">
 .file-browser-container {
-  position: relative;
-  max-width: 1200px;
-  width: 100vw;
-  height: 100vh;
-  background: $color-body-bg;
-  
-  // disable user select across app
-  user-select: none;
+	position: relative;
+	max-width: 1200px;
+	width: 100vw;
+	height: 100vh;
+	background: $color-body-bg;
+	
+	// disable user select across app
+	user-select: none;
 }
 </style>

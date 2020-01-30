@@ -1,9 +1,9 @@
 <template>
-  <div class="fb-sb-image-preview">
+	<div class="fb-sb-image-preview">
 
-      <img :src="getAssetPaths(file)" />
+			<img :src="getAssetPaths(file)" />
 
-  </div>
+	</div>
 </template>
 
 <script>
@@ -12,16 +12,16 @@ import path from "path"
 
 
 export default {
-  mixins: [fileFiltersMix],
-  props: {
-    file: Object,
-    path: String
-  },
-  
+	mixins: [fileFiltersMix],
+	props: {
+		file: Object,
+		path: String
+	},
+	
 
-  created() {
-      console.log("image createdhook", this.file)
-  }
+	created() {
+			console.log("image createdhook", this.file)
+	}
 };
 </script>
 
