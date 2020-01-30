@@ -10,6 +10,7 @@
 			@lazy-load="onLazyLoad"
 			/>
 		</div>
+		
 	</div>
 </template>
 

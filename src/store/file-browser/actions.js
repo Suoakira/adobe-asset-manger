@@ -116,6 +116,7 @@ export default {
 	},
 
 	setNumCols({ commit }, numCols) {
+		
 		commit("setNumCols", numCols)
 	}
 };

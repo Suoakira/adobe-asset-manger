@@ -20,7 +20,7 @@
 
 		<div
 			v-for="fileOrFolder in renderFilteredFiles"
-			:class="`custom-eight-cols file-col`"
+			:class="`${numColsClassName} file-col`"
 			:key="fileOrFolder.nodeKey"
 			@dblclick="navigate(fileOrFolder)"
 			@click="updatePreviewFile(fileOrFolder)"
@@ -52,17 +52,23 @@ import FBWindowViewPreviewBucket from "./FBWindowViewPreviewBucket";
 import fileFilters from "../mixins/file-filters.js";
 
 export default {
+	
 	data() {
 		return {
-			selectedFilePath: null
+			selectedFilePath: null,
+			numColsClassName: 'custom-eight-cols'
 		};
 	},
+
 	mixins: [fileFilters],
+
 	components: {
 		FBWindowViewPreviewBucket,
 		VueContext
 	},
+
 	methods: {
+
 		navigate(fileOrFolder) {
 			this.$store.dispatch("navigatePath", fileOrFolder.nodeKey);
 		},
@@ -127,12 +133,15 @@ export default {
 			}
 		}
 	},
+
 	computed: {
 		...mapGetters([
 			"getFilesAndFolders",
 			"getPreviewFile",
-			"getBrowserSearchTerm"
+			"getBrowserSearchTerm",
+			"getNumCols"
 		]),
+
 		renderFilteredFiles() {
 			//  filter file extensions
 			let filteredFilesAndFolders = this.getFilesAndFolders.filter(file => {
@@ -158,11 +167,31 @@ export default {
 			return this.filteredFilesAndFolders;
 		}
 	},
+
 	watch: {
 		getPreviewFile() {
 			console.log("__preview", this.getPreviewFile);
+		},
+
+		getNumCols() {
+			if (this.getNumCols === 8) {
+				this.numColsClassName = 'custom-eight-cols'
+			} else if (this.getNumCols === 6) {
+				this.numColsClassName = 'col-2'
+			} else if (this.getNumCols === 4) {
+				this.numColsClassName = 'col-3'
+			} else if (this.getNumCols === 3) {
+				this.numColsClassName = 'col-4'
+			} else if (this.getNumCols === 2) {
+				this.numColsClassName = 'col-6'
+			} else if (this.getNumCols === 1) {
+				this.numColsClassName = 'col-12'
+			} 
+			console.log("numCols", this.getNumCols)
+
 		}
-	}
+ 	}
+	
 };
 </script>
 
