@@ -175,19 +175,24 @@ export default {
 
 		getNumCols() {
 			if (this.getNumCols === 8) {
+
 				this.numColsClassName = 'custom-eight-cols'
 			} else if (this.getNumCols === 6) {
+
 				this.numColsClassName = 'col-2'
 			} else if (this.getNumCols === 4) {
+
 				this.numColsClassName = 'col-3'
 			} else if (this.getNumCols === 3) {
+
 				this.numColsClassName = 'col-4'
 			} else if (this.getNumCols === 2) {
+
 				this.numColsClassName = 'col-6'
 			} else if (this.getNumCols === 1) {
+
 				this.numColsClassName = 'col-12'
 			} 
-			console.log("numCols", this.getNumCols)
 
 		}
  	}

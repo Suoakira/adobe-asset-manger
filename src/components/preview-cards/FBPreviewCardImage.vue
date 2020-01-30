@@ -1,7 +1,10 @@
 <template>
 	<div class="fb-image-preview">
 
-			<img :src="getAssetPaths(file)" />
+			<img
+				:class="`${file.isDir && 'folder'}`" 
+				:src="getAssetPaths(file)" 
+				/>
 
 	</div>
 </template>

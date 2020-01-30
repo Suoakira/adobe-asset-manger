@@ -11,15 +11,15 @@
 
 // Headers
 h1 {
-    @include typography-h(24px, #FFFFFF, 0.48px, 26px, 700)
+		@include typography-h(24px, #FFFFFF, 0.48px, 26px, 700)
 }
 
 h2 {
-    @include typography-h(22px, #FFFFFF, 0.44px, 26px, 700)
+		@include typography-h(22px, #FFFFFF, 0.44px, 26px, 700)
 }
 
 h5 {
-    @include typography-h(13px, #FFFFFF, 0, 26px, 700)
+		@include typography-h(13px, #FFFFFF, 0, 26px, 700)
 }
 
 
@@ -27,93 +27,100 @@ h5 {
 
 // image
 .fb-image-preview {
-    text-align: center;
-    padding-bottom: 56.25%;
-    position: relative;
-    height: 100%;
-    width: auto;
+		text-align: center;
+		padding-bottom: 56.25%;
+		position: relative;
+		height: 100%;
+		width: auto;
 
-  img {
-    position: absolute;
-    border-radius: 2px;
-    max-height: 100%;
-    max-width: 100%;
- 
+		
+		img {
+			position: absolute;
+			border-radius: 2px;
+			max-height: 100%;
+			max-width: 100%;
+			
+				&.folder {
+					width: 100%;
+				}
 
 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 
-  }
+	}
 }
 
 //video 
 .fb-video-preview {
 
-    text-align: center;
-    padding-bottom: 56.25%;
-    position: relative;
+		text-align: center;
+		padding-bottom: 56.25%;
+		position: relative;
 
-    height: 100%;
-    width: 100%;
+		height: 100%;
+		width: 100%;
 
-  .preview-video {
+	.preview-video {
 
-  }
+	}
 
-  video {
-    position: absolute;
-    border-radius: 2px;
-    max-height: 100%;
-    max-width: 100%;
+	video {
+		position: absolute;
+		border-radius: 2px;
+		max-height: 100%;
+		max-width: 100%;
  
 
 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 
-  }
+	}
 }
 
 // image
 .fb-sb-image-preview {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
 
 
-  img {
-    position: absolute;
-    max-height: 100%;
-    max-width: 90%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: transform 300ms ease;
+	img {
+		position: absolute;
+		max-height: 100%;
+		max-width: 90%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		transition: transform 300ms ease;
+
+			&.folder {
+				width: 100%;
+			}
 
 
+		&:hover {
+			cursor: pointer;
+			color: rgba(255,255,255, .80);
 
-    &:hover {
-      cursor: pointer;
-      color: rgba(255,255,255, .80);
+			left: 50%;
+			top: 50%;
 
-      left: 50%;
-      top: 50%;
+			transform: scale(0.95) translate(-52.5%, -52.5%);;
+		}
 
-      transform: scale(0.95) translate(-52.5%, -52.5%);;
-    }
-
-  }
+	}
 }
 
 .context-menu {
-  color: rgba(255,255,255, .80);
+	color: rgba(255,255,255, .80);
 	background: #272727 !important;
 	box-shadow: 0 20px 20px -10px rgba(0,0,0,0.50) !important;
 	border-radius: 4px !important;
@@ -171,42 +178,42 @@ h5 {
 //video 
 .fb-sb-video-preview {
 
-    text-align: center;
+		text-align: center;
 
-    position: relative;
+		position: relative;
 
-    height: 100%;
-    width: 100%;
+		height: 100%;
+		width: 100%;
 
-  .preview-video {
+	.preview-video {
 
-  }
+	}
 
-  video {
-    position: absolute;
-    border-radius: 2px;
-    max-height: 100%;
-    max-width: 100%;
+	video {
+		position: absolute;
+		border-radius: 2px;
+		max-height: 100%;
+		max-width: 100%;
  
 
 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 
-  }
+	}
 }
 
 // nav input
-  .q-field__native {
-    padding-left: 8px;
-    color: white;
-    opacity: 0.8;
-    font-weight: 500;
+	.q-field__native {
+		padding-left: 8px;
+		color: white;
+		opacity: 0.8;
+		font-weight: 500;
 
-  }
+	}
 
 
-  .q-field__focused {
+	.q-field__focused {
 
-  }
+	}

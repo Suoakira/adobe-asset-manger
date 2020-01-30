@@ -74,7 +74,7 @@ export default {
 <style lang="scss">
 .breadcrumb-bar {
 	background: #232323;
-	position: absolute;
+	position: fixed;
 	right: 0;
 	left: 200px;
 	height: 25px;
