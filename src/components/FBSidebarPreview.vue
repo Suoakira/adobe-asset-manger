@@ -1,18 +1,11 @@
 <template>
-	<div v-if="getPreviewFile !== null">
+	<div class="sb-container" v-if="getPreviewFile !== null">
 		<div class="sb-preview">
-			<FBSidebarViewPreviewBucket :fileOrFolder="getPreviewFile" />
-		</div>
-
-		<div class="sidebar-menu-btns">
-			<q-btn @click="fullScreenPreview" color="primary" text-color="white" label="Preview" />
-			<q-btn
-				@click="saveAsFav(getPreviewFile)"
-				color="primary"
-				text-color="white"
-				:label="folderIsSaved ? 'Un-star' : 'Star'"
+			<FBSidebarViewPreviewBucket 
+				:fileOrFolder="getPreviewFile" 
 			/>
 		</div>
+
 
 		<div class="file-stats">
 
@@ -52,6 +45,7 @@
 
 			<!-- path  -->
 			<FBSidebarPreviewStatsCard label="Path" :data="getPreviewFile.nodeKey" />
+
 		</div>
 	</div>
 </template>
@@ -68,6 +62,7 @@ import FBSidebarViewPreviewBucket from "./FBSidebarViewPreviewBucket";
 
 // stat card
 import FBSidebarPreviewStatsCard from "./FBSidebarPreviewStatsCard";
+
 export default {
 	mixins: [fileFilters, utils],
 
@@ -77,29 +72,37 @@ export default {
 			return this.getSavedFolders.includes(this.getPreviewFile.nodeKey);
 		}
 	},
+
 	components: {
 		FBSidebarPreviewStatsCard,
 		FBSidebarViewPreviewBucket
 	},
-	methods: {
-		saveAsFav(folder) {
-			this.$store.dispatch("saveAsFavFolder", this.getPreviewFile);
-		},
-
-		fullScreenPreview() {
-			if (!this.getPreviewFile.isDir) {
-				this.$modal.show("fullscreen-preview");
-			}
-		}
-	}
 };
 </script>
 
 <style lang="scss">
 
-.sb-preview {
-	height: 222px;
 
-	width: 222px;
+.sb-container {
+	position: relative;
+	width: 100%;
+
+	.sb-preview {
+		height: 222px;
+
+		width: 100%;
+		position: relative;
+		padding: 10px;
+
+	}
+
+	.file-stats {
+		width: 80%;
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+   text-overflow: ellipsis;
+	}
+
 }
 </style>

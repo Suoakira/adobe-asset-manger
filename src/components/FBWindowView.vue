@@ -3,15 +3,14 @@
 		<VueContext ref="fbWindowView" class="context-menu" :closeOnScroll="true">
 			<template slot-scope="child">
 				<!-- Only show this if .aep -->
-				<li class="context-header">{{ child.data !==null && child.data.label  }}</li>
+				<div v-if="child.data !== null">
+					<li class="context-header">{{ child.data !==null && child.data.label  }}</li>
 
-				<li @click="revealInFinder($event, child.data)"><p>Reveal in Finder</p></li>
-				<li ><p>Save Folder</p></li>
-				<li ><p>Import</p></li>
-
-
-
-
+					<li @click="revealInFinder($event, child.data)"><p>Reveal in Finder</p></li>
+					<li v-if="child.data.isDir" @click="saveAsFavFolder(child.data)"><p>Save Folder</p></li>
+					<li ><p>Import</p></li>
+				</div>
+				
 				<!-- <li @click.prevent="">{{child.data}}</li> -->
 			</template>
 		</VueContext>
@@ -95,6 +94,11 @@ export default {
 					`${file.nodeKey} is not a valid path`
 				);
 			}
+		},
+
+		saveAsFavFolder(folder) {
+			console.log("__folder", folder)
+			this.$store.dispatch("saveAsFavFolder", folder);
 		},
 
 		// filters

@@ -81,6 +81,7 @@ export default {
 	bottom: 0;
 	z-index: 4;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	width: 780px;
 
 	.num-cols-slider {
 		position: absolute;

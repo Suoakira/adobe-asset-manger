@@ -1,6 +1,6 @@
 <template>
 	<div class="sidebar-left-container">
-		<q-expansion-item expand-separator v-model="favTabExpanded" label="Librarys">
+		<q-expansion-item expand-separator v-model="favTabExpanded" label="Folders">
 
 			<q-card>
 				<q-card-section>

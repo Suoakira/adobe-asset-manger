@@ -52,6 +52,7 @@ export default {
 	color: white;
 	text-align: left;
 	padding-left: 4px;
+	text-overflow: ellipsis;
 
 
 }

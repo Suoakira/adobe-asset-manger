@@ -176,7 +176,7 @@ export default {
 	top: 0;
 	width: 100%;
 	z-index: 2;
-	max-width: 1200px;
+	max-width: 1244px;
 	background: #272727;
 
 	height: 40px;
@@ -254,7 +254,7 @@ export default {
 		}
 
 		.search-input-icon {
-			left: 1042px;
+			left: 1090px;
 			position: relative;
 			display: inline-block;
 			padding: 2px 3px;
