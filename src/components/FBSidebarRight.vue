@@ -1,12 +1,12 @@
 <template>
-	<div class="fb-sidebar-right">
-		<q-expansion-item expand-separator v-model="previewExpanded" label="Info & Preview">
-			<q-card>
-				<q-card-section>
-					<FBSidebarPreview />
-				</q-card-section>
-			</q-card>
-		</q-expansion-item>
+	<div :class="`fb-sidebar-right  ${getRightSidebarExpanded &&'close-sidebar'}`">
+
+		<h5 class="close-arrow">
+			Preview
+		</h5>
+
+		<FBSidebarPreview />
+
 	</div>
 </template>
 <script>
@@ -16,6 +16,7 @@ import fs from "fs-extra";
 import FBSidebarPreview from "./FBSidebarPreview";
 
 export default {
+
 	data() {
 		return {
 			text: "test",
@@ -26,11 +27,8 @@ export default {
 
 	components: { FBSidebarPreview },
 
-	methods: {
-
-	},
 	computed: {
-		...mapGetters(["getSavedFolders", "getBrowserPath"])
+		...mapGetters(["getSavedFolders", "getBrowserPath", "getRightSidebarExpanded"])
 	},
 
 	created() {
@@ -38,6 +36,7 @@ export default {
 			this.previewExpanded = value;
 		});
 	},
+
 	beforeDestroy() {
 		this.$root.$off("expandPreview");
 	}
@@ -56,6 +55,16 @@ export default {
 
 	width: 265px;
 	height: 100%;
+
+	transition: transform 200ms ease;
+
+	&.close-sidebar {
+		transform: translateX(100%)
+	}
+
+	.close-arrow {
+		margin: 0;
+	}
 
 	.q-item__label {
 		opacity: 0.6;

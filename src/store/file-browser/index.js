@@ -15,6 +15,10 @@ const state = {
 		searchTerm: "",
 
 	},
+	// sidebar states
+	sidebar: {
+		rightSidebarExpanded: false,
+	},
 
 	// favourite files and folders
 	savedFolders: [],
@@ -24,9 +28,6 @@ const state = {
 
 	// selected preview file
 	previewFile: null,
-
-	// show browserWindowView or listView
-	windowView: true,
 
 	// get gridSize
 	numCols: 5

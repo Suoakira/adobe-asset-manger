@@ -1,18 +1,23 @@
 <template>
-	<div class="windowview-container row items-start">
+	<div :class="`windowview-container row items-start ${getRightSidebarExpanded && 'sidebar-closed'}`">
+
 		<VueContext ref="fbWindowView" class="context-menu" :closeOnScroll="true">
+
 			<template slot-scope="child">
 				<!-- Only show this if .aep -->
 				<div v-if="child.data !== null">
+
 					<li class="context-header">{{ child.data !==null && child.data.label  }}</li>
 
 					<li @click="revealInFinder($event, child.data)"><p>Reveal in Finder</p></li>
 					<li v-if="child.data.isDir" @click="saveAsFavFolder(child.data)"><p>Save Folder</p></li>
 					<li ><p>Import</p></li>
+
 				</div>
 				
 				<!-- <li @click.prevent="">{{child.data}}</li> -->
 			</template>
+
 		</VueContext>
 
 		
@@ -143,7 +148,8 @@ export default {
 			"getFilesAndFolders",
 			"getPreviewFile",
 			"getBrowserSearchTerm",
-			"getNumCols"
+			"getNumCols",
+			"getRightSidebarExpanded"
 		]),
 
 		renderFilteredFiles() {
@@ -212,8 +218,14 @@ export default {
 	top: 40px;
 	left: 200px;
 
+	transition: max-width 200ms ease;
+
 
 	position: relative;
+
+	&.sidebar-closed {
+		max-width: 1045px;
+	}
 
 
 }

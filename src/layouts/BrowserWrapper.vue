@@ -4,7 +4,7 @@
 		<FBNavigationBar />
 
 		<!-- show window view folders or list view  -->
-		<FBWindowView v-if="getDisplayWindowView"/>
+		<FBWindowView />
 		<FBSiderbarLeft />
 
 
@@ -32,24 +32,30 @@ import { mapGetters } from 'vuex';
 
 export default {
 	components: {
+
 		FBNavigationBar,
 		FBSidebarRight,
 		FBWindowView,
 		FBBreadcrumbBar,
 		FBFullscreenPreviewModal,
 		FBSiderbarLeft,
-	
 	},
-	computed: {
-		...mapGetters(['getDisplayWindowView'])
-	}
+
+	watch: {
+
+		$route(to, from) {
+
+		}
+
+	},
+
 };
 </script>
 
 <style lang="scss">
 .file-browser-container {
 	position: relative;
-	max-width: 1200px;
+	max-width: 1265px;
 	width: 100vw;
 	height: 100vh;
 	background: $color-body-bg;

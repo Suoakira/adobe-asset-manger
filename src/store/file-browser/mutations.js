@@ -60,13 +60,13 @@ export default {
 		state.browser.searchTerm = searchTerm
 	},
 
-	toggleDisplayView(state) {
-		
-		state.windowView = !state.windowView
-	},
-
 	setNumCols(state, numCols) {
 		
 		state.numCols = numCols
+	},
+
+	setRightSidebarState(state, value) {
+
+		state.sidebar.rightSidebarExpanded = value
 	}
 };

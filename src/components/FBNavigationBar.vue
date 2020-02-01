@@ -38,9 +38,16 @@
 				<i :class="`fas fa-redo-alt ${hoveredBtn === 'refresh' && 'active'}`"></i>
 			</div>
 
-			<div class="search-input-icon">
+			<div class="right-nav-icons">
+
 				<i class="fas fa-search"></i>
+				<i  
+					@click="toggleRightSidebarExpanded"
+					class="fas fa-bars fa-lg">
+				</i>
 			</div>
+
+
 		</div>
 
 		<q-input
@@ -68,7 +75,8 @@ export default {
 		showLoader: null
 	}),
 	methods: {
-		...mapActions(["toggleDisplayView"]),
+		...mapActions(["toggleRightSidebarExpanded"]),
+
 		handleNavInput(path) {
 			this.$store.dispatch("setBrowserPath", path);
 
@@ -253,19 +261,34 @@ export default {
 			border-radius: 4px;
 		}
 
-		.search-input-icon {
-			left: 1090px;
+		.right-nav-icons {
+			top: -1px;
 			position: relative;
 			display: inline-block;
 			padding: 2px 3px;
 			border-radius: 4px;
+
+			.fa-search {
+				position: relative;
+				left: 1040px;
+			}
+
+			.fa-bars {
+				position: relative;
+				left: 1078px;
+				
+				&:hover {
+					opacity: 0.8;
+				}
+			}
+			
 		}
 	}
 
 	.browser-search {
 		position: absolute;
 		top: 50%;
-		right: 50px;
+		right: 99px;
 		transform: translateY(-50%);
 		width: 160px;
 		height: 30px;

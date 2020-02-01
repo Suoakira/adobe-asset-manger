@@ -1,5 +1,5 @@
 <template>
-	<div class="breadcrumb-bar">
+	<div :class="`breadcrumb-bar ${getRightSidebarExpanded && 'sidebar-closed'}`">
 		
 		<i class="fas fa-folder open-folder"></i>
 
@@ -17,9 +17,8 @@
 
 		</div>
 		
-		<div class="num-cols-slider">
-			<FBGridSlider />
-		</div>
+		<FBGridSlider />
+
 
 	</div>
 </template>
@@ -41,7 +40,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(["getBrowserPath"]),
+		...mapGetters(["getBrowserPath", "getRightSidebarExpanded"]),
 		breadcrumbPath() {
 
 			const pathBuilder = this.getBrowserPath.split("/");
@@ -82,13 +81,12 @@ export default {
 	z-index: 4;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	width: 780px;
+	transition: width 200ms ease;
 
-	.num-cols-slider {
-		position: absolute;
-		top: -11px;
-		right: 250px;
-		width: 100px;
+	&.sidebar-closed {
+		width: 1045px;
 	}
+
 
 	.hide-browse-path-input {
 		display: none;

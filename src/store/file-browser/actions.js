@@ -118,6 +118,19 @@ export default {
 	setNumCols({ commit }, numCols) {
 		
 		commit("setNumCols", numCols)
+	},
+
+	toggleRightSidebarExpanded({ commit, state }) {
+
+		const { rightSidebarExpanded } = state.sidebar
+
+		if (rightSidebarExpanded) {
+
+			commit("setRightSidebarState", false)
+		} else {
+
+			commit("setRightSidebarState", true)
+		}
 	}
 };
 

@@ -13,7 +13,7 @@ export default {
 
 	getBrowserSearchTerm: state => state.browser.searchTerm,
 
-	getDisplayWindowView: state => state.windowView,
+	getNumCols: state => state.numCols,
 
-	getNumCols: state => state.numCols
+	getRightSidebarExpanded: state => state.sidebar.rightSidebarExpanded 
 };
