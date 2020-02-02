@@ -15,5 +15,7 @@ export default {
 
 	getNumCols: state => state.numCols,
 
-	getRightSidebarExpanded: state => state.sidebar.rightSidebarExpanded 
+	getRightSidebarExpanded: state => state.sidebar.rightSidebarExpanded,
+
+	getShowUnsplashWindow: state => state.navbar.showUnsplashWindow
 };

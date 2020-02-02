@@ -46,7 +46,11 @@
 					class="fas fa-bars fa-lg">
 				</i>
 				
-				<i class="fas fa-camera"></i>
+				<i 
+					@click="toggleShowUnsplashWindow"
+					:class="`fas fa-camera ${!getShowUnsplashWindow ? 'active' : ''}`"
+				>
+				</i>
 			</div>
 
 
@@ -77,7 +81,7 @@ export default {
 		showLoader: null
 	}),
 	methods: {
-		...mapActions(["toggleRightSidebarExpanded"]),
+		...mapActions(["toggleRightSidebarExpanded", "toggleShowUnsplashWindow"]),
 
 		handleNavInput(path) {
 			this.$store.dispatch("setBrowserPath", path);
@@ -149,10 +153,13 @@ export default {
 
 	computed: {
 		...mapGetters([
+
 			"getBrowserPath",
 			"getHistoryCounter",
 			"getBrowserHistory",
-			"getBrowserSearchTerm"
+			"getBrowserSearchTerm",
+			"getShowUnsplashWindow"
+
 		]),
 		browserSearch: {
 			get() {
@@ -169,7 +176,6 @@ export default {
 		},
 
 		getBrowserPath() {
-			console.log("routchange");
 			this.dummyLoader();
 		}
 	},
@@ -276,6 +282,7 @@ export default {
 			}
 
 			.fa-bars {
+				cursor: pointer;
 				position: relative;
 				left: 1078px;
 				
@@ -285,11 +292,17 @@ export default {
 			}
 
 			.fa-camera {
+				cursor: pointer;
 				position: relative;
 				left: 1018px;
 				
 				&:hover {
 					opacity: 0.8;
+				}
+
+				&.active {
+					color: $color-active-but;
+					opacity: 1;
 				}
 			}	
 			

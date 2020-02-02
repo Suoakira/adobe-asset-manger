@@ -68,5 +68,10 @@ export default {
 	setRightSidebarState(state, value) {
 
 		state.sidebar.rightSidebarExpanded = value
-	}
+	},
+
+	setShowUnsplashWindow(state, value) {
+
+		state.navbar.showUnsplashWindow = value
+	},
 };

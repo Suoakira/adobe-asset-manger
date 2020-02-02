@@ -131,6 +131,19 @@ export default {
 
 			commit("setRightSidebarState", true)
 		}
+	},
+
+	toggleShowUnsplashWindow({ commit, state }) {
+
+		const { showUnsplashWindow } = state.navbar
+
+		if (showUnsplashWindow) {
+
+			commit("setShowUnsplashWindow", false)
+		} else {
+
+			commit("setShowUnsplashWindow", true)
+		}
 	}
 };
 

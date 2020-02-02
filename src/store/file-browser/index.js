@@ -20,6 +20,10 @@ const state = {
 		rightSidebarExpanded: false,
 	},
 
+	navbar: {
+		showUnsplashWindow: false,
+	},
+
 	// favourite files and folders
 	savedFolders: [],
 

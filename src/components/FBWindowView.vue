@@ -1,5 +1,5 @@
 <template>
-	<div :class="`windowview-container row items-start ${getRightSidebarExpanded && 'sidebar-closed'}`">
+	<div class="main-body">
 
 		<VueContext ref="fbWindowView" class="context-menu" :closeOnScroll="true">
 
@@ -22,27 +22,40 @@
 
 		
 
-		<!-- <div
-			v-for="fileOrFolder in renderFilteredFiles"
-			:class="`${numColsClassName} file-col`"
-			:key="fileOrFolder.nodeKey"
-			@dblclick="navigate(fileOrFolder)"
-			@click="updatePreviewFile(fileOrFolder)"
-			@contextmenu.prevent="$refs.fbWindowView.open($event, fileOrFolder)"
-		>
+		<div :class="`windowview-container row items-start ${getRightSidebarExpanded && 'sidebar-closed'}`" v-if="getShowUnsplashWindow">
 
-		
-			<FBWindowViewPreviewBucket
-				:selectedFilePath="selectedFilePath"
-				:class="`stretchy-wrapper ${selectedFilePath === fileOrFolder.nodeKey ? 'selected-file' : '' }`"
-				:fileOrFolder="fileOrFolder"
+			<div
+				v-for="fileOrFolder in renderFilteredFiles"
+				:class="`${numColsClassName} file-col`"
+				:key="fileOrFolder.nodeKey"
+				@dblclick="navigate(fileOrFolder)"
+				@click="updatePreviewFile(fileOrFolder)"
+				@contextmenu.prevent="$refs.fbWindowView.open($event, fileOrFolder)"
+			>
+
+			
+				<FBWindowViewPreviewBucket
+					:selectedFilePath="selectedFilePath"
+					:class="`stretchy-wrapper ${selectedFilePath === fileOrFolder.nodeKey ? 'selected-file' : '' }`"
+					:fileOrFolder="fileOrFolder"
+				/>
+
+
+			</div>
+
+		</div>
+
+		<div
+			v-else
+			:class="`windowview-container row items-start ${getRightSidebarExpanded && 'sidebar-closed'}`"
+			>
+			<FBWindowViewUnsplash 
+
+				:numColsClassName="numColsClassName"
 			/>
-
-
-		</div> -->
-
-		<FBWindowViewUnsplash :numColsClassName="numColsClassName"/>
+		</div>
 	</div>
+	
 </template>
 
 <script>
@@ -155,7 +168,8 @@ export default {
 			"getPreviewFile",
 			"getBrowserSearchTerm",
 			"getNumCols",
-			"getRightSidebarExpanded"
+			"getRightSidebarExpanded",
+			"getShowUnsplashWindow"
 		]),
 
 		renderFilteredFiles() {
