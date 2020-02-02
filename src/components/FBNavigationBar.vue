@@ -47,6 +47,7 @@
 				</i>
 				
 				<i 
+					v-popover:unsplash
 					@click="toggleShowUnsplashWindow"
 					:class="`fas fa-camera ${!getShowUnsplashWindow ? 'active' : ''}`"
 				>
@@ -57,7 +58,7 @@
 		</div>
 
 		<q-input
-			 :borderless="true"
+			:borderless="true"
 			class="navigation-input"
 			:value="getBrowserPath"
 			@input="value => handleNavInput(value)"
@@ -191,7 +192,7 @@ export default {
 
 	top: 0;
 	width: 100%;
-	z-index: 2;
+	z-index: 4;
 	max-width: 1244px;
 	background: #272727;
 
@@ -295,6 +296,7 @@ export default {
 				cursor: pointer;
 				position: relative;
 				left: 1018px;
+				transition: transform 300ms ease;
 				
 				&:hover {
 					opacity: 0.8;
@@ -303,6 +305,7 @@ export default {
 				&.active {
 					color: $color-active-but;
 					opacity: 1;
+					transform: scale(1.3)
 				}
 			}	
 			

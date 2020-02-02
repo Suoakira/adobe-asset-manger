@@ -1,46 +1,67 @@
 <template>
         
-        <div>
-            <div class="unsplash">
-            <h5>creatorUnsplash</h5>
+    <popover class="unsplash-popover" :width="635" name="unsplash">
+        <div class="unsplash-container">
+            <div class="unsplash-menu"> 
+                
+                <h5>beautiful royality free stock photos... courtesy of Unsplash   
+                    <q-badge>
+                        NEW!<q-icon color="white" />
+                    </q-badge>
+                </h5>
 
-            <q-input class="unsplash-input" v-model="searchTerm"></q-input>
-            <q-btn @click="getPhotos">Get Photos</q-btn>
+                <div class="inline-form">
+                    <q-input
+                        :borderless="true" 
+                        input-class="unsplash-input" 
+                        v-model="searchTerm"></q-input>
+                </div>
 
-        </div>
+                <div class="inline-form">
+                    <q-btn 
+                        class="unsplash-btn"
+                        @click="getPhotos">search
+                    </q-btn>
+                </div>
 
 
-        <div class="unsplash-container row items-start">
+				
 
-            <div
-                v-for="searchResult in unsplashSearchResults"
-                :class="`${numColsClassName} file-col unsplash`"
-                :key="searchResult.id"
-                @contextmenu.prevent="$refs.fbUnsplashWindow.open($event, searchResult)"
-            >
+            </div>
 
 
-                <div class="image-preview">
+            <div class="unsplash-grid row items-start">
 
-                    <div class="fb-image-preview">
+                <div
+                    v-for="searchResult in unsplashSearchResults"
+                    class=" col-3 file-col unsplash"
+                    :key="searchResult.id"
+                    @contextmenu.prevent="$refs.fbUnsplashWindow.open($event, searchResult)"
+                >
 
-                        <img :src="searchResult.urls.thumb" />
 
-                    </div>
+                    <div class="image-preview">
 
-                    <div class="title-bar">
-                        <div class="file-name-container selected">
-                            <div class="file-name selected-background">
-                                ...by {{searchResult.user.first_name}} {{searchResult.user.last_name}}
+                        <div class="fb-image-preview">
+
+                            <img :src="searchResult.urls.thumb" />
+
+                        </div>
+
+                        <div class="title-bar">
+                            <div class="file-name-container selected">
+                                <div class="file-name selected-background">
+                                    ...by {{searchResult.user.first_name}} {{searchResult.user.last_name}}
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
-
             </div>
-        </div>
 
-    </div>
+        </div>
+    </popover>
 </template>
 
 <script>
@@ -86,27 +107,81 @@ export default {
 
 <style lang="scss">
 
+.q-badge {
+    background: $card-border-selected;
+
+}
+
+.vue-popover[style] {
+    width: 635px !important;
+    left: 576px !important;
+    top: 50px !important;
+    height: 500px;
+    background: #2e2e2e;
+    position: fixed;
+}
+
 .unsplash-container {
+    margin: 5px;
     position: relative;
+    max-height: 450px;
+    overflow: scroll;
+
+
+        .unsplash-menu {
+
+            right: 0px;
+            position: sticky;
+            top: 0px;
+
+            h5 {
+                margin: 0;
+            }
+
+            z-index: 3;
+            background: #2e2e2e;
+
+            .inline-form{
+                display:inline-block;
+            }
+        }
 
     .unsplash {
         display: block;
         position: relative;
     }
 
+    .unsplash-grid {
+
+        position: relative;
+        top: 0px;
+    }
+
     .title-bar {
-		top: 9px;
+        top: 9px;
 		position: relative;
 		height: 32px;
 		z-index: 2;
     }
 
     .unsplash-input {
-        height: 40px;
+        display: inline-block;
+        position:relative;
+        margin-left: 7.5px;
+
         background: black;
         border-radius: 4px;
-        position: sticky;
-        top: 0px;
+        height: 40px;
+
+        width: 512.5px;
+
+
+    }
+    .unsplash-btn {
+        position: relative;
+        display: inline-block;
+        color: white;
+        background: $card-border-selected;
     }
 
 	.file-name-container {
