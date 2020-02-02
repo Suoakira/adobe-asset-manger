@@ -1,40 +1,34 @@
 <template>
-  <div class="fb-image-preview">
-    <div class="preview-image">
-      <img :src="`file://${file.nodeKey}`" />
-    </div>
-  </div>
+	<div class="fb-image-preview">
+
+			<img
+				:class="`${file.isDir && 'folder'}`" 
+				:src="getAssetPaths(file)" 
+				/>
+
+	</div>
 </template>
 
 <script>
+import fileFiltersMix from "../../mixins/file-filters" 
+import path from "path"
+
 
 export default {
-  props: {
-    file: Object,
-  },
+	mixins: [fileFiltersMix],
+	props: {
+		file: Object,
+		path: String
+	},
+	
 
-  created() {
-      console.log("image createdhook", this.file)
-  }
+	created() {
+			console.log("image createdhook", this.file)
+	}
 };
 </script>
 
 <style lang="scss">
-.fb-image-preview {
-  text-align: center;
 
 
-  img {
-    // width: 100%;
-    border-radius: 2px;
-    max-height: 100%;
-    max-width: 100%;
-    margin: auto;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-  }
-
-
-}
 </style>

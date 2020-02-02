@@ -5,7 +5,7 @@ export default {
     methods: {
 
         truncate(fullStr, strLen, separator, folder) {
-            if (!folder.data.isDir) {
+            if (!folder.isDir) {
                 if (fullStr.length <= strLen) return fullStr;
 
                 separator = separator || "...";

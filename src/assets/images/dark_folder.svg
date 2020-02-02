@@ -1,65 +1,47 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="73" height="57" viewBox="0 0 73 57">
   <defs>
-    <path id="icon_folder_large-a" d="M4.5,0 L20.4544132,0 C21.6446671,-6.62735303e-16 22.7730936,0.530068331 23.5330258,1.44615097 L25.8461859,4.2346179 C26.5111265,5.03619021 27.4984997,5.5 28.5399718,5.5 L68.5,5.5 C70.9852814,5.5 73,7.51471863 73,10 L73,54 C73,55.6568542 71.6568542,57 70,57 L3,57 C1.34314575,57 2.02906125e-16,55.6568542 0,54 L0,4.5 C-3.04359188e-16,2.01471863 2.01471863,4.56538782e-16 4.5,0 Z"/>
-    <linearGradient id="icon_folder_large-c" x1="50%" x2="50%" y1="0%" y2="100%">
-      <stop offset="0%" stop-color="#303030"/>
-      <stop offset="100%" stop-color="#2E2E2E"/>
+    <path id="folder---blue-a" d="M4.5,0 L20.4544132,0 C21.6446671,-6.62735303e-16 22.7730936,0.530068331 23.5330258,1.44615097 L25.8461859,4.2346179 C26.5111265,5.03619021 27.4984997,5.5 28.5399718,5.5 L68.5,5.5 C70.9852814,5.5 73,7.51471863 73,10 L73,54 C73,55.6568542 71.6568542,57 70,57 L3,57 C1.34314575,57 2.02906125e-16,55.6568542 0,54 L0,4.5 C-3.04359188e-16,2.01471863 2.01471863,4.56538782e-16 4.5,0 Z"/>
+    <linearGradient id="folder---blue-c" x1="50%" x2="50%" y1="100%" y2="0%">
+      <stop offset="0%" stop-color="#89D9FA"/>
+      <stop offset="100%" stop-color="#79D0F5"/>
     </linearGradient>
-    <path id="icon_folder_large-b" d="M4.5,9.21155559 L68.5,9.21155559 C70.9852814,9.21155559 73,11.2262742 73,13.7115556 L73,54 C73,55.6568542 71.6568542,57 70,57 L3,57 C1.34314575,57 6.46995335e-16,55.6568542 0,54 L0,13.7115556 C-3.04359188e-16,11.2262742 2.01471863,9.21155559 4.5,9.21155559 Z"/>
-    <rect id="icon_folder_large-f" width="73" height="1.5" x="0" y="51"/>
-    <filter id="icon_folder_large-e" width="109.6%" height="566.7%" x="-4.8%" y="-166.7%" filterUnits="objectBoundingBox">
-      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
-      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1"/>
-      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0339270105 0"/>
-    </filter>
-    <filter id="icon_folder_large-g" width="109.6%" height="566.7%" x="-4.8%" y="-166.7%" filterUnits="objectBoundingBox">
+    <path id="folder---blue-b" d="M4.5,9.21155559 L68.5,9.21155559 C70.9852814,9.21155559 73,11.2262742 73,13.7115556 L73,54 C73,55.6568542 71.6568542,57 70,57 L3,57 C1.34314575,57 6.46995335e-16,55.6568542 0,54 L0,13.7115556 C-3.04359188e-16,11.2262742 2.01471863,9.21155559 4.5,9.21155559 Z"/>
+    <rect id="folder---blue-f" width="73" height="1.5" x="0" y="51"/>
+    <filter id="folder---blue-e" width="104.1%" height="300%" x="-2.1%" y="-100%" filterUnits="objectBoundingBox">
       <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="1"/>
       <feOffset dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"/>
       <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
-      <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.0487598339 0"/>
+      <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.19140625 0"/>
     </filter>
-    <rect id="icon_folder_large-i" width="73" height="1.5" x="0" y="53"/>
-    <filter id="icon_folder_large-h" width="109.6%" height="566.7%" x="-4.8%" y="-166.7%" filterUnits="objectBoundingBox">
-      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
-      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1"/>
-      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0339270105 0"/>
-    </filter>
-    <filter id="icon_folder_large-j" width="109.6%" height="566.7%" x="-4.8%" y="-166.7%" filterUnits="objectBoundingBox">
+    <rect id="folder---blue-h" width="73" height="1.5" x="0" y="53"/>
+    <filter id="folder---blue-g" width="104.1%" height="300%" x="-2.1%" y="-100%" filterUnits="objectBoundingBox">
       <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="1"/>
       <feOffset dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"/>
       <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
-      <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.0487598339 0"/>
+      <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.19140625 0"/>
     </filter>
-    <rect id="icon_folder_large-l" width="73" height="1.5" x="0" y="55"/>
-    <filter id="icon_folder_large-k" width="109.6%" height="566.7%" x="-4.8%" y="-166.7%" filterUnits="objectBoundingBox">
-      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
-      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1"/>
-      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0339270105 0"/>
-    </filter>
-    <filter id="icon_folder_large-m" width="109.6%" height="566.7%" x="-4.8%" y="-166.7%" filterUnits="objectBoundingBox">
+    <rect id="folder---blue-j" width="73" height="1.5" x="0" y="55"/>
+    <filter id="folder---blue-i" width="104.1%" height="300%" x="-2.1%" y="-100%" filterUnits="objectBoundingBox">
       <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="1"/>
       <feOffset dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"/>
       <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
-      <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.0487598339 0"/>
+      <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.19140625 0"/>
     </filter>
   </defs>
   <g fill="none" fill-rule="evenodd">
-    <use fill="#383838" xlink:href="#icon_folder_large-a"/>
-    <mask id="icon_folder_large-d" fill="#fff">
-      <use xlink:href="#icon_folder_large-b"/>
+    <use fill="#A4E4FF" xlink:href="#folder---blue-a"/>
+    <mask id="folder---blue-d" fill="#fff">
+      <use xlink:href="#folder---blue-b"/>
     </mask>
-    <use fill="url(#icon_folder_large-c)" xlink:href="#icon_folder_large-b"/>
-    <g fill="#000" mask="url(#icon_folder_large-d)" opacity=".6">
-      <use filter="url(#icon_folder_large-e)" xlink:href="#icon_folder_large-f"/>
-      <use filter="url(#icon_folder_large-g)" xlink:href="#icon_folder_large-f"/>
+    <use fill="url(#folder---blue-c)" xlink:href="#folder---blue-b"/>
+    <g fill="#000" mask="url(#folder---blue-d)">
+      <use filter="url(#folder---blue-e)" xlink:href="#folder---blue-f"/>
     </g>
-    <g fill="#000" mask="url(#icon_folder_large-d)" opacity=".6">
-      <use filter="url(#icon_folder_large-h)" xlink:href="#icon_folder_large-i"/>
-      <use filter="url(#icon_folder_large-j)" xlink:href="#icon_folder_large-i"/>
+    <g fill="#000" mask="url(#folder---blue-d)">
+      <use filter="url(#folder---blue-g)" xlink:href="#folder---blue-h"/>
     </g>
-    <g fill="#000" mask="url(#icon_folder_large-d)" opacity=".6">
-      <use filter="url(#icon_folder_large-k)" xlink:href="#icon_folder_large-l"/>
-      <use filter="url(#icon_folder_large-m)" xlink:href="#icon_folder_large-l"/>
+    <g fill="#000" mask="url(#folder---blue-d)">
+      <use filter="url(#folder---blue-i)" xlink:href="#folder---blue-j"/>
     </g>
   </g>
 </svg>

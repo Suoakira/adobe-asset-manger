@@ -5,7 +5,11 @@
 </template>
 
 <script>
+
+
 import BrowserWrapper from "./layouts/BrowserWrapper";
+
+
 
 export default {
   components: {
@@ -13,6 +17,15 @@ export default {
   }
 };
 </script>
+
+
+<style lang="scss">
+
+  body {
+    background:$color-body-bg;
+  }
+</style>
+
 
 
 

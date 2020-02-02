@@ -1,57 +1,66 @@
 <template>
-  <div class="file-browser-container">
-    <FBNavigationBar />
+	<div class="file-browser-container">
 
-    <!-- show window view folders or list view  -->
-    <FBWindowView v-if="getDisplayWindowView"/>
-    <FBListView />
+		<FBNavigationBar />
 
-    <FBSidebar />
-    <FBBreadcrumbBar />
+		<!-- show window view folders or list view  -->
+		<FBWindowView />
+		<FBSiderbarLeft />
 
-    <!-- modals  -->
-    <FBFullscreenPreviewModal />
-  </div>
+
+		<FBSidebarRight />
+		<FBBreadcrumbBar />
+
+		<!-- modals  -->
+		<FBFullscreenPreviewModal />
+		
+	</div>
 </template>
 
 <script>
 
 // main component buckets
 import FBNavigationBar from "./../components/FBNavigationBar";
-import FBSidebar from "./../components/FBSidebar";
+import FBSidebarRight from "./../components/FBSidebarRight";
 import FBWindowView from "./../components/FBWindowView";
 import FBBreadcrumbBar from  "./../components/FBBreadcrumbBar";
-import FBListView from "./../components/FBListView"
+import FBSiderbarLeft from "./../components/FBSidebarLeft"
 
 // modals
 import FBFullscreenPreviewModal from "../components/modals/FBFullscreenPreviewModal"
 import { mapGetters } from 'vuex';
 
 export default {
-  components: {
-    FBNavigationBar,
-    FBSidebar,
-    FBWindowView,
-    FBBreadcrumbBar,
-    FBFullscreenPreviewModal,
-    FBListView,
-  
-  },
-  computed: {
-    ...mapGetters(['getDisplayWindowView'])
-  }
+	components: {
+
+		FBNavigationBar,
+		FBSidebarRight,
+		FBWindowView,
+		FBBreadcrumbBar,
+		FBFullscreenPreviewModal,
+		FBSiderbarLeft,
+	},
+
+	watch: {
+
+		$route(to, from) {
+
+		}
+
+	},
+
 };
 </script>
 
 <style lang="scss">
 .file-browser-container {
-  position: relative;
-  max-width: 1269px;
-  width: 100vw;
-  height: 100vh;
-  background: $color-body-bg;
-  
-  // disable user select across app
-  user-select: none;
+	position: relative;
+	max-width: 1265px;
+	width: 100vw;
+	height: 100vh;
+	background: $color-body-bg;
+	
+	// disable user select across app
+	user-select: none;
 }
 </style>
