@@ -43,7 +43,7 @@
 				<i class="fas fa-search"></i>
 				<i  
 					@click="toggleRightSidebarExpanded"
-					class="fas fa-bars fa-lg">
+					:class="`fas fa-bars fa-lg ${!getRightSidebarExpanded ? 'active' : ''}`">
 				</i>
 				
 				<i 
@@ -159,7 +159,8 @@ export default {
 			"getHistoryCounter",
 			"getBrowserHistory",
 			"getBrowserSearchTerm",
-			"getShowUnsplashWindow"
+			"getShowUnsplashWindow",
+			"getRightSidebarExpanded"
 
 		]),
 		browserSearch: {
@@ -289,6 +290,12 @@ export default {
 				
 				&:hover {
 					opacity: 0.8;
+				}
+
+				&.active {
+					color: $color-active-but;
+					opacity: 1;
+					transform: scale(1.3)
 				}
 			}
 

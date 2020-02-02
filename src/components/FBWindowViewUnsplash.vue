@@ -12,6 +12,7 @@
 
                 <div class="inline-form">
                     <q-input
+                        ref="unsplash-input"
                         :borderless="true" 
                         input-class="unsplash-input" 
                         v-model="searchTerm"></q-input>
@@ -38,8 +39,11 @@
 					    <li class="context-header">Save to Folder</li>
 
                         <li v-for="folder in getSavedFolders" :key="folder"> 
-                            <p>
-                            {{ folderNicename(folder)}}
+
+                            <p @click="test(child.data, folder)">
+
+                              {{ folderNicename(folder)}}
+
                             </p>
                         </li>
 
@@ -79,6 +83,8 @@
                     </div>
 
                 </div>
+
+                <div :if="unsplashSearchResults.length < 1"><h5>... search</h5></div>
             </div>
 
         </div>
@@ -88,6 +94,11 @@
 <script>
 import Unsplash, { toJson } from "unsplash-js";
 import { VueContext } from "vue-context";
+import axios from "axios";
+import fs from "fs-extra";
+import download from "image-downloader"
+var https = require('https');
+
 
 // in gitignore
 import API_KEYS from "../../configApi";
@@ -101,6 +112,7 @@ const unsplash = new Unsplash({
 export default {
 	data() {
 		return {
+
 			searchTerm: null,
             unsplashSearchResults: [],
             
@@ -118,6 +130,15 @@ export default {
 
 
 	methods: {
+
+        test(unsplashObj, folder) {
+
+            const unsplashDownload = unsplashObj.urls.full
+            console.log(folder.slice(1))
+            this.downloadImage(unsplashDownload, folder.slice(1))
+            console.log("folder", folder)
+        },
+
 		// seem to be sorted by likes
 		getPhotos() {
 
@@ -134,12 +155,26 @@ export default {
 			const splitPath = path.split("/");
 
 			return splitPath[splitPath.length - 1];
-		}
+        },
+        
+        downloadImage(url, image_path) {
+
+
+//Node.js Function to save image from External URL.
+        var fullUrl = url;
+        var file = fs.createWriteStream(image_path);
+        var request = https.get(url, function(response) {
+        response.pipe(file);
+        });
+        }
+
     },
-    
+
     computed: {
         ...mapGetters(['getSavedFolders'])
-    }
+    },
+
+
 };
 </script>
 
