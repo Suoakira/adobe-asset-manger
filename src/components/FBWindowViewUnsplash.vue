@@ -29,6 +29,27 @@
 
             </div>
 
+            <VueContext ref="fbUnsplashWindow" class="context-menu" :closeOnScroll="true">
+
+                <template slot-scope="child">
+
+                    <div v-if="child.data !== null">
+
+					    <li class="context-header">Save to Folder</li>
+
+                        <li v-for="folder in getSavedFolders" :key="folder"> 
+                            <p>
+                            {{ folderNicename(folder)}}
+                            </p>
+                        </li>
+
+                    </div>
+                    
+                    <!-- <li @click.prevent="">{{child.data}}</li> -->
+                </template>
+
+            </VueContext>
+
 
             <div class="unsplash-grid row items-start">
 
@@ -66,8 +87,11 @@
 
 <script>
 import Unsplash, { toJson } from "unsplash-js";
+import { VueContext } from "vue-context";
+
 // in gitignore
 import API_KEYS from "../../configApi";
+import { mapGetters } from 'vuex';
 
 const unsplash = new Unsplash({
 	accessKey: API_KEYS.unsplash.publicKey,
@@ -88,6 +112,10 @@ export default {
         numColsClassName: String,
     },
 
+    components: {
+        VueContext
+    },
+
 
 	methods: {
 		// seem to be sorted by likes
@@ -100,8 +128,18 @@ export default {
 					this.unsplashSearchResults = json.results;
 					console.log("unsplashResults", json);
 				});
+        },
+
+		folderNicename(path) {
+			const splitPath = path.split("/");
+
+			return splitPath[splitPath.length - 1];
 		}
-	}
+    },
+    
+    computed: {
+        ...mapGetters(['getSavedFolders'])
+    }
 };
 </script>
 
@@ -115,17 +153,27 @@ export default {
 .vue-popover[style] {
     width: 635px !important;
     left: 576px !important;
-    top: 50px !important;
+    top: 40px !important;
     height: 500px;
     background: #2e2e2e;
     position: fixed;
+    box-shadow: none !important;
+
+    &:before {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #2e2e2e !important;
+
+        position: relative;
+        top: -11px !important;
+        left: 604px !important;
+
+    }
 }
 
 .unsplash-container {
     margin: 5px;
     position: relative;
-    max-height: 450px;
-    overflow: scroll;
 
 
         .unsplash-menu {
@@ -133,6 +181,7 @@ export default {
             right: 0px;
             position: sticky;
             top: 0px;
+            margin: 0px 5px 5px 5px;
 
             h5 {
                 margin: 0;
@@ -155,6 +204,9 @@ export default {
 
         position: relative;
         top: 0px;
+
+        max-height: 380px;
+        overflow: scroll;
     }
 
     .title-bar {
@@ -167,7 +219,8 @@ export default {
     .unsplash-input {
         display: inline-block;
         position:relative;
-        margin-left: 7.5px;
+
+        top: 2px;
 
         background: black;
         border-radius: 4px;

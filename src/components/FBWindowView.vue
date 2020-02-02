@@ -1,5 +1,5 @@
 <template>
-	<div class="main-body">
+	<div :class="`windowview-container row items-start ${getRightSidebarExpanded && 'sidebar-closed'}`">
 
 		<VueContext ref="fbWindowView" class="context-menu" :closeOnScroll="true">
 
@@ -20,10 +20,6 @@
 
 		</VueContext>
 
-		
-
-		<div :class="`windowview-container row items-start ${getRightSidebarExpanded && 'sidebar-closed'}`" v-if="getShowUnsplashWindow">
-
 			<div
 				v-for="fileOrFolder in renderFilteredFiles"
 				:class="`${numColsClassName} file-col`"
@@ -40,20 +36,14 @@
 					:fileOrFolder="fileOrFolder"
 				/>
 
-
 			</div>
 
-		</div>
+			<div :class="`windowview-container row items-start ${getRightSidebarExpanded && 'sidebar-closed'}`">
+				
+				<FBWindowViewUnsplash />
+				
+			</div>
 
-		<div
-			v-else
-			:class="`windowview-container row items-start ${getRightSidebarExpanded && 'sidebar-closed'}`"
-			>
-			<FBWindowViewUnsplash 
-
-				:numColsClassName="numColsClassName"
-			/>
-		</div>
 	</div>
 	
 </template>

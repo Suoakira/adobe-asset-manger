@@ -62,9 +62,8 @@ export default {
     watch: {
 
         getNumCols() {
-            console.log("sliderLabel", this.gridSliderLabel())
-
-            console.log(sliderLabel)
+            
+            this.gridSliderLabel()
         }
 
     },
