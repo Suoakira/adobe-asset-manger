@@ -22,7 +22,7 @@
 
 		
 
-		<div
+		<!-- <div
 			v-for="fileOrFolder in renderFilteredFiles"
 			:class="`${numColsClassName} file-col`"
 			:key="fileOrFolder.nodeKey"
@@ -37,7 +37,11 @@
 				:class="`stretchy-wrapper ${selectedFilePath === fileOrFolder.nodeKey ? 'selected-file' : '' }`"
 				:fileOrFolder="fileOrFolder"
 			/>
-		</div>
+
+
+		</div> -->
+
+		<FBWindowViewUnsplash :numColsClassName="numColsClassName"/>
 	</div>
 </template>
 
@@ -51,6 +55,7 @@ import _ from "lodash";
 import cmd from "node-cmd";
 
 import FBWindowViewPreviewBucket from "./FBWindowViewPreviewBucket";
+import FBWindowViewUnsplash from "./FBWindowViewUnsplash"
 
 // mixins
 import fileFilters from "../mixins/file-filters.js";
@@ -68,7 +73,8 @@ export default {
 
 	components: {
 		FBWindowViewPreviewBucket,
-		VueContext
+		VueContext,
+		FBWindowViewUnsplash
 	},
 
 	methods: {
@@ -184,33 +190,38 @@ export default {
 		},
 
 		getNumCols() {
-			if (this.getNumCols === 8) {
-
-				this.numColsClassName = 'custom-eight-cols'
-			} else if (this.getNumCols === 6) {
-
-				this.numColsClassName = 'col-2'
+			if (this.getNumCols === 5) {
+				
+				this.numColsClassName = 'col-12'
 			} else if (this.getNumCols === 4) {
-
-				this.numColsClassName = 'col-3'
+					
+				this.numColsClassName = 'col-6'
 			} else if (this.getNumCols === 3) {
-
+				
 				this.numColsClassName = 'col-4'
 			} else if (this.getNumCols === 2) {
-
-				this.numColsClassName = 'col-6'
+				
+				this.numColsClassName = 'col-3'
 			} else if (this.getNumCols === 1) {
-
-				this.numColsClassName = 'col-12'
+				
+				this.numColsClassName = 'col-2'
+			} else if (this.getNumCols === 0) {
+				
+				this.numColsClassName = 'custom-eight-cols'
 			} 
 
 		}
- 	}
+	 },
+	 
+	 created() {
+
+		 this.getNumCols()
+	 }
 	
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .windowview-container {
 
 	width: 100%;

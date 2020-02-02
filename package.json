@@ -26,6 +26,7 @@
     "node-cmd": "^3.0.0",
     "path": "^0.12.7",
     "quasar": "^1.0.0",
+    "unsplash-js": "^6.0.0",
     "uuid": "^3.3.3",
     "vue-context": "^5.0.0",
     "vue-js-modal": "^1.3.31",

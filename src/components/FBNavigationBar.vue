@@ -45,6 +45,8 @@
 					@click="toggleRightSidebarExpanded"
 					class="fas fa-bars fa-lg">
 				</i>
+				
+				<i class="fas fa-camera"></i>
 			</div>
 
 
@@ -281,6 +283,15 @@ export default {
 					opacity: 0.8;
 				}
 			}
+
+			.fa-camera {
+				position: relative;
+				left: 1018px;
+				
+				&:hover {
+					opacity: 0.8;
+				}
+			}	
 			
 		}
 	}
