@@ -13,7 +13,14 @@
 		<div class="fb-modal-preview" @click="closePreview($event)">
 				<FBWindowViewPreviewBucket  class="modal-preview" :fileOrFolder="getPreviewFile" />
 				
-		<q-btn @click="$modal.hide('fullscreen-preview')" color="primary">Close</q-btn>
+		<div
+			class="close-modal-btn"
+			@click="$modal.hide('fullscreen-preview')" 
+			color="primary"
+		>
+			<i class="fas fa-times fa-2x"></i>
+
+		</div>
 
 		</div>
 	</modal>
@@ -61,6 +68,21 @@ export default {
 	z-index: 20;
 	width: 100%;
 	height: 100%;
+
+	.close-modal-btn {
+		cursor: pointer;
+		color: white;
+		opacity: 0.6;
+		padding: 10px 15px;
+		position: absolute;
+		right: 0;
+		transition: transform 200ms ease;
+
+		&:hover {
+			opacity: 0.8;
+			transform: scale(1.2);
+		}
+	}
 
 	.modal-close-button {
 		position: absolute;

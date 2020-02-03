@@ -93,8 +93,6 @@ export default {
         this.gridSliderLabel()
     }
 
-
-    
 }
 </script>
 

@@ -34,7 +34,7 @@ const state = {
 	previewFile: null,
 
 	// get gridSize
-	numCols: 5
+	numCols: 0
 };
 
 export default {

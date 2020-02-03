@@ -159,7 +159,8 @@ export default {
 			"getBrowserSearchTerm",
 			"getNumCols",
 			"getRightSidebarExpanded",
-			"getShowUnsplashWindow"
+			"getShowUnsplashWindow",
+			"getBrowserPath"
 		]),
 
 		renderFilteredFiles() {
@@ -214,7 +215,16 @@ export default {
 				this.numColsClassName = 'custom-eight-cols'
 			} 
 
+		},
+
+		getBrowserPath() {
+
+			// reset preview file an search term if browser path changes
+			this.setPreviewFile(null)
+			this.$store.dispatch("setBrowserSearchTerm", "")
+
 		}
+
 	 },
 	 
 	 created() {
