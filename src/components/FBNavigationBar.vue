@@ -40,7 +40,7 @@
 
 			<div class="right-nav-icons">
 
-				<i class="fas fa-search"></i>
+				<i :class="`fas fa-search ${getBrowserSearchTerm.length > 0 ? 'active' : ''}`"></i>
 				<i  
 					@click="toggleRightSidebarExpanded"
 					:class="`fas fa-bars fa-lg ${!getRightSidebarExpanded ? 'active' : ''}`">
@@ -66,7 +66,7 @@
 
 		<q-input :borderless="true" class="browser-search" v-model="browserSearch"></q-input>
 
-		<hr :class="`loader-temp ${showLoader && 'active'}`" />
+		<hr :class="`loader-temp ${showLoader && 'active'} ${getRightSidebarExpanded ? 'sidebar-expanded' : ''}`" />
 	</div>
 </template>
 
@@ -281,12 +281,23 @@ export default {
 			.fa-search {
 				position: relative;
 				left: 1040px;
+				transition: transform 300ms ease;
+
+
+				&.active {
+					color: $color-active-but;
+					opacity: 1;
+					transform: scale(1.3)
+				}
+
 			}
 
 			.fa-bars {
 				cursor: pointer;
 				position: relative;
 				left: 1078px;
+				transition: transform 300ms ease;
+
 				
 				&:hover {
 					opacity: 0.8;
@@ -354,6 +365,10 @@ export default {
 		&.active {
 			border-bottom: 3px solid white;
 			width: 778px;
+		
+		&.sidebar-expanded {
+			width: 1045px;
+			}
 		}
 	}
 }

@@ -1,6 +1,9 @@
 <template>
 
-    <div class="grid-slider">
+    <div 
+        @mouseover="hoverState = true"
+        @mouseleave="hoverState = null"
+        class="grid-slider">
 
         <q-slider 
             v-model="numCols" 
@@ -12,9 +15,9 @@
             snap
         />
 
-        <i class="fas fa-th"></i>
+        <i :class="`fas fa-th ${hoverState ? 'active' : ''}`"></i>
 
-        <h1></h1>
+
 
     </div>
     
@@ -27,6 +30,7 @@ export default {
     data: () => ({
 
         sliderLabel: null,
+        hoverState: null,
 
     }),
 
@@ -110,7 +114,16 @@ export default {
         position: absolute;
         top: 14px;
         right:110px;
+        transition: transform 300ms ease;
         color: $color-active-but;
+
+
+        &.active {
+
+            color: $color-active-but;
+            opacity: 1;
+            transform: scale(1.3)
+        }
 
     }
 

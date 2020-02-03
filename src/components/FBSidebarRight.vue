@@ -1,10 +1,6 @@
 <template>
 	<div :class="`fb-sidebar-right  ${getRightSidebarExpanded &&'close-sidebar'}`">
 
-		<h5 class="close-arrow">
-			Preview
-		</h5>
-
 		<FBSidebarPreview />
 
 	</div>
