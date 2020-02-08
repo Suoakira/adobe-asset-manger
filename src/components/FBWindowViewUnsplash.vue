@@ -44,6 +44,7 @@
                         <li v-for="folder in getSavedFolders" :key="folder"> 
 
                             <p @click="test(child.data, folder)">
+			<span class="icon-wrapper"><i :class="`fb-folder-icon folder fas ${iconToShow(folder)}`"></i></span>
 
                               {{ folderNicename(folder)}}
 
@@ -106,6 +107,7 @@ import { Notify } from 'quasar'
 import axios from "axios";
 import fs from "fs-extra";
 import download from "image-downloader"
+import path from "path";
 var https = require('https');
 
 
@@ -182,14 +184,34 @@ export default {
         
         downloadImage(url, image_path) {
 
+            // /Node.js Function to save image from External URL.
+            var fullUrl = url;
+            var file = fs.createWriteStream(image_path);
+            var request = https.get(url, function(response) {
+            response.pipe(file);
+            });
+        },
 
-//Node.js Function to save image from External URL.
-        var fullUrl = url;
-        var file = fs.createWriteStream(image_path);
-        var request = https.get(url, function(response) {
-        response.pipe(file);
-        });
-        }
+		iconToShow(paramPath) {
+			const ajustedParamPath = paramPath.slice(1)
+
+			const desktopPath = path.join(require("os").homedir(), "Desktop");
+			const downloadsPath = path.join(require("os").homedir(), "Downloads");
+			const documentsPath = path.join(require("os").homedir(), "Documents");
+
+			if (ajustedParamPath.includes("Volumes")) {
+				return "fa-hdd";
+			} else if (desktopPath === ajustedParamPath) {
+				return "fa-desktop";
+			} else if (downloadsPath === ajustedParamPath) {
+				return "fa-file-download";
+			} else {
+				return "fa-folder";
+			}
+				return "fa-folder";
+		
+		},
+
 
     },
 
@@ -232,6 +254,26 @@ export default {
 .unsplash-container {
     margin: 5px;
     position: relative;
+
+
+	.icon-wrapper {
+		position: relative;
+		// width: 25px;
+		// height: 24px;;
+		// display: inline-block;
+	}
+
+	.fb-folder-icon {
+        color: #80D3F7;
+        padding-right: 4px;
+		// opacity: 0.8;
+		// position: absolute;
+		// top: 50%;
+		// left: 50%;
+		// transform: translateX(-50%) translateY(-50%);
+		font-size: 14px;
+
+	}
 
 
     .unsplash-badge {
