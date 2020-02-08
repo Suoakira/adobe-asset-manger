@@ -283,7 +283,7 @@ export default {
 
 
     .unsplash-badge {
-
+        color: $active-btn-txt;
         position: absolute;
         top: 4px;
         left: 61px;
@@ -340,7 +340,7 @@ export default {
         border-radius: 4px;
         height: 40px;
 
-        width: 420.5px;
+        width: 416.5px;
 
 
     }
@@ -365,9 +365,10 @@ export default {
     }
 
     .unsplash-btn {
+        right: -8px;
         position: relative;
         display: inline-block;
-        color: white;
+        color: $active-btn-txt;
         background: $card-border-selected;
     }
 

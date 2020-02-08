@@ -129,6 +129,7 @@ export default {
 
 			&.selected-background {
 				opacity: 1;
+				color: $active-btn-txt;
 
 				background: $color-active-but;
 				border-radius: 3px;
