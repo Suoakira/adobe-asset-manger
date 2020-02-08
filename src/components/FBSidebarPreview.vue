@@ -97,11 +97,12 @@ export default {
 	}
 
 	.file-stats {
+		word-wrap: break-word;
 		width: 80%;
 		position: relative;
 		left: 50%;
 		transform: translateX(-50%);
-   text-overflow: ellipsis;
+   		text-overflow: ellipsis;
 	}
 
 }
