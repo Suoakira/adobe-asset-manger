@@ -47,7 +47,7 @@
                         <li v-for="folder in getSavedFolders" :key="folder"> 
 
                             <p @click="test(child.data, folder)">
-			                <span class="icon-wrapper"><i :class="`fb-folder-icon folder fas ${iconToShow(folder)}`"></i></span>
+			                    <span class="icon-wrapper"><i :class="`fb-folder-icon folder fas ${iconToShow(folder)}`"></i></span>
 
                               {{ folderNicename(folder)}}
 
@@ -267,20 +267,16 @@ export default {
 
 
 	.icon-wrapper {
-		position: relative;
-		// width: 25px;
-		// height: 24px;;
-		// display: inline-block;
+
+        position: relative;
+        padding-right: 2px;
+		padding-left: 4px;
 	}
 
 	.fb-folder-icon {
+
         color: #80D3F7;
         padding-right: 4px;
-		// opacity: 0.8;
-		// position: absolute;
-		// top: 50%;
-		// left: 50%;
-		// transform: translateX(-50%) translateY(-50%);
 		font-size: 14px;
 
 	}

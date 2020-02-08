@@ -4,19 +4,25 @@
 
 			<q-card>
 				<q-card-section>
-					<div 
-						:class="`drag-drop-area ${dragging ? 'dragging' : ''}`"
-						@drop.prevent="dropFolder"
+
+					<div
+												@drop.prevent="dropFolder"
 						@dragover.prevent="dragging = true"
 						@dragenter.prevent="dragging = true"
 						@dragleave.prevent="dragging = false"
 					>
-						<h5 v-if="dragging" >Drop Folder</h5>
-					</div>
+						<div 
+							:class="`drag-drop-area ${dragging ? 'dragging' : ''}`"
+
+						>
+							<h5 v-if="dragging" >Drop Folder</h5>
+						</div>
 
 						<div v-for="savedFolder in getSavedFolders" :key="savedFolder">
 							<SavedFolderCard :savedFolderPath="savedFolder" :niceName="folderNicename(savedFolder)"></SavedFolderCard>
 						</div>
+
+					</div>
 
 				</q-card-section>
 			</q-card>
@@ -113,6 +119,7 @@ export default {
 	box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
 
 	.drag-drop-area {
+		pointer-events: none;
 		position: absolute;
 		height: 100%;
 		width: 100%;

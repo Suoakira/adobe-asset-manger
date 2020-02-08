@@ -9,9 +9,31 @@
 
 					<li class="context-header">{{ child.data !==null && child.data.label  }}</li>
 
-					<li @click="revealInFinder($event, child.data)"><p>Reveal in Finder</p></li>
-					<li v-if="child.data.isDir" @click="saveAsFavFolder(child.data)"><p>Save Folder</p></li>
-					<li ><p>Import</p></li>
+					<li v-if="child.data.isDir" @click="saveAsFavFolder(child.data)">
+						<p>
+							<span class="icon-wrapper windowview-icon">
+								<i class="fas fa-save"></i>
+							</span>Save Folder
+						</p>
+					</li>
+
+
+					<li>
+						<p>
+							<span class="icon-wrapper windowview-icon">
+								<i class="fas fa-upload"></i>
+							</span>Import
+						</p>
+					</li>
+
+
+					<li @click="revealInFinder($event, child.data)">
+						<p>
+							<span class="icon-wrapper windowview-icon">
+								<i class="fas fa-share-square"></i>
+							</span>Reveal in Finder
+						</p>
+					</li>
 
 				</div>
 				
@@ -252,6 +274,20 @@ export default {
 
 	&.sidebar-closed {
 		max-width: 1045px;
+	}
+
+	.icon-wrapper {
+
+		position: relative;
+	}
+
+	.windowview-icon {
+		
+        color: #80D3F7;
+		padding-right: 6px;
+		padding-left: 4px;
+		font-size: 14px;
+
 	}
 
 
