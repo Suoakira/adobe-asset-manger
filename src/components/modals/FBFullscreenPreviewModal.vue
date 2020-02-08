@@ -72,14 +72,14 @@ export default {
 	.close-modal-btn {
 		cursor: pointer;
 		color: white;
-		opacity: 0.6;
+		opacity: 0.8;
 		padding: 10px 15px;
 		position: absolute;
 		right: 0;
 		transition: transform 200ms ease;
 
 		&:hover {
-			opacity: 0.8;
+			opacity: 1.0;
 			transform: scale(1.2);
 		}
 	}
@@ -95,7 +95,7 @@ export default {
 		line-height: 1.5rem;
 		text-align: center;
 		font-size: 1.5rem;
-		opacity: 0.8;
+		opacity: 1.0;
 		color: white;
 		cursor: pointer;
 

@@ -116,7 +116,7 @@ export default {
 	.file-name-container {
 		max-height: 34px;
 		/* height: 25px; */
-		opacity: 0.8;
+		opacity: 1;
 		font-weight: 400;
 		font-size: 11px;
 		color: #ffffff;
@@ -130,7 +130,7 @@ export default {
 			&.selected-background {
 				opacity: 1;
 
-				background: #6897bb;
+				background: $color-active-but;
 				border-radius: 3px;
 				padding: 2px 4px;
 				display: inline-block;

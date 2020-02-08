@@ -34,10 +34,10 @@ export default {
 
 .file-title {
 	width: 30%;
-	opacity: 0.6;
-	font-weight: 900;
+
+	font-weight: 700;
 	font-size: 11px;
-	color: white;
+	color: $color-active-but;
 	float: left !important;
 	text-align: right;
 	padding-right: 4px;
@@ -46,8 +46,9 @@ export default {
 .file-data {
 	width: 70%;
 	float: right;
+	opacity: 1;
 	opacity: 0.8;
-	font-weight: 500;
+	font-weight: 400;
 	font-size: 11px;
 	color: white;
 	text-align: left;

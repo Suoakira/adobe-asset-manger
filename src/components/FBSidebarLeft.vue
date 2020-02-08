@@ -68,14 +68,14 @@ export default {
 	}
 
 	.q-item__label {
-		opacity: 0.6;
+		opacity: 0.8;
 		font-size: 10px;
 		color: #ffffff;
 		font-weight: 500;
 	}
 
 	.q-item__label--caption {
-		opacity: 0.6;
+		opacity: 0.8;
 		font-size: 10px;
 		color: #ffffff;
 		font-weight: 300;
@@ -86,8 +86,12 @@ export default {
 	}
 
 	.q-card__section {
-		padding: 4px 0px 4px 16px;
+		padding: 4px 0px 4px 0px;
 		background: #272727;
+	}
+
+	.q-tree__node-header {
+		padding-left: 16px;
 	}
 
 	.q-pa-md {

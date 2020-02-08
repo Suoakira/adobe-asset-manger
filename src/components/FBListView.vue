@@ -111,7 +111,7 @@ export default {
 	.q-tree__node-header-content {
 		width: 70%;
 		float: right;
-		opacity: 0.6;
+		opacity: 0.8;
 		font-weight: 500;
 		font-size: 11px;
 		color: white;
@@ -119,7 +119,7 @@ export default {
 		padding-left: 4px;
 
 		&:hover {
-			opacity: 0.8;
+			opacity: 1;
 		}
 
 	}

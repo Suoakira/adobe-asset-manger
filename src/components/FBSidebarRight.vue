@@ -63,7 +63,7 @@ export default {
 	}
 
 	.q-item__label {
-		opacity: 0.6;
+		opacity: 0.8;
 		font-size: 10px;
 		color: #ffffff;
 		font-weight: 500;
@@ -74,7 +74,7 @@ export default {
 	}
 
 	.q-item__label--caption {
-		opacity: 0.6;
+		opacity: 0.8;
 		font-size: 10px;
 		color: #ffffff;
 		font-weight: 300;

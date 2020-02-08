@@ -139,7 +139,7 @@ h5 {
 		&.context-header {
 			background: lighten(#272727,4%) ;
 
-			font-size: 0.55rem;
+			font-size: 13px;
 			text-transform: uppercase;
 			font-weight: 800;
 			letter-spacing: 0.36px;
@@ -167,9 +167,13 @@ h5 {
 			color: white;
 			margin: 0;
 			padding: 0;
-			opacity: 0.6;
+			opacity: 0.8;
 			font-size: 0.75rem;
 			letter-spacing: -0.2px;
+
+			&:hover {
+				opacity: 1.0;
+			}
 		}
 		
 	}

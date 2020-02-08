@@ -4,11 +4,12 @@
         <div class="unsplash-container">
             <div class="unsplash-menu"> 
                 
-                <h5>beautiful royality free stock photos... courtesy of Unsplash   
-                    <q-badge>
-                        NEW!<q-icon color="white" />
-                    </q-badge>
+                <h5>Unsplash   
                 </h5>
+
+                <q-badge class="unsplash-badge">
+                    NEW!<q-icon color="white" />
+                </q-badge>
 
                 <div class="inline-form">
                     <q-input
@@ -29,6 +30,8 @@
 				
 
             </div>
+
+            
 
             <VueContext ref="fbUnsplashWindow" class="context-menu" :closeOnScroll="true">
 
@@ -84,7 +87,12 @@
 
                 </div>
 
-                <div :if="unsplashSearchResults.length < 1"><h5>... search</h5></div>
+
+                <div class="unsplash-search-empty" :if="unsplashSearchResults.length">
+
+                    <h5> search beautiful royality free images...</h5>
+                        <i class="fas fa-camera fa-3x"></i>
+                </div>
             </div>
 
         </div>
@@ -94,6 +102,7 @@
 <script>
 import Unsplash, { toJson } from "unsplash-js";
 import { VueContext } from "vue-context";
+import { Notify } from 'quasar'
 import axios from "axios";
 import fs from "fs-extra";
 import download from "image-downloader"
@@ -128,15 +137,29 @@ export default {
         VueContext
     },
 
+    watch: {
+        unsplashSearchResults() {
+            console.log("unsplashSearchResults", this.unsplashSearchResults)
+        }
+    },
+
 
 	methods: {
 
         test(unsplashObj, folder) {
 
-            const unsplashDownload = unsplashObj.urls.full
-            console.log(folder.slice(1))
-            this.downloadImage(unsplashDownload, folder.slice(1))
-            console.log("folder", folder)
+            console.log(unsplashObj)
+            // const unsplashDownload = unsplashObj.urls.full
+            // console.log(folder.slice(1))
+            // this.downloadImage(unsplashDownload, folder.slice(1))
+            // console.log("folder", folder)
+
+            this.$q.notify({
+                message: `<b>${unsplashObj.alt_description}</b> image! added to <b <span style="color: #80D3F7">${folder.slice(2)} </b>`,
+                color: '#80D3F7',
+                html: true
+            })
+            
         },
 
 		// seem to be sorted by likes
@@ -186,10 +209,10 @@ export default {
 }
 
 .vue-popover[style] {
-    width: 635px !important;
+    width: 540px !important;
     left: 576px !important;
     top: 40px !important;
-    height: 500px;
+    height: 376px;
     background: #2e2e2e;
     position: fixed;
     box-shadow: none !important;
@@ -209,6 +232,14 @@ export default {
 .unsplash-container {
     margin: 5px;
     position: relative;
+
+
+    .unsplash-badge {
+
+        position: absolute;
+        top: 4px;
+        left: 61px;
+    }
 
 
         .unsplash-menu {
@@ -239,8 +270,8 @@ export default {
 
         position: relative;
         top: 0px;
-
-        max-height: 380px;
+        height: 257px;
+        max-height: 257px;
         overflow: scroll;
     }
 
@@ -261,10 +292,30 @@ export default {
         border-radius: 4px;
         height: 40px;
 
-        width: 512.5px;
+        width: 420.5px;
 
 
     }
+
+    .unsplash-search-empty {
+        text-align: center;
+        h5 {
+            margin: 0;
+            text-align: center;
+        }
+
+        i {
+            color: $color-active-but;
+        }
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 79px;
+
+
+
+    }
+
     .unsplash-btn {
         position: relative;
         display: inline-block;
@@ -275,7 +326,7 @@ export default {
 	.file-name-container {
 		max-height: 34px;
 		/* height: 25px; */
-		opacity: 0.8;
+		opacity: 1;
 		font-weight: 400;
 		font-size: 11px;
 		color: #ffffff;
@@ -289,7 +340,7 @@ export default {
 			&.selected-background {
 				opacity: 1;
 
-				background: #6897bb;
+				background: $color-active-but;
 				border-radius: 3px;
 				padding: 2px 4px;
 				display: inline-block;

@@ -204,7 +204,7 @@ export default {
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
-		color: white;
+		color: $color-active-but;
 
 		height: 40px;
 		width: 200px;
@@ -215,7 +215,7 @@ export default {
 			position: relative;
 			top: -10px;
 			left: 21px;
-			opacity: 0.8;
+
 		}
 	}
 
@@ -300,7 +300,7 @@ export default {
 
 				
 				&:hover {
-					opacity: 0.8;
+					opacity: 1;
 				}
 
 				&.active {
@@ -317,7 +317,7 @@ export default {
 				transition: transform 300ms ease;
 				
 				&:hover {
-					opacity: 0.8;
+					opacity: 1;
 				}
 
 				&.active {
@@ -344,11 +344,11 @@ export default {
 	// font awesome hooks
 	.fas {
 		color: white;
-		opacity: 0.6;
+		opacity: 0.8;
 		margin: 0px 4px;
 
 		&.active {
-			opacity: 0.8;
+			opacity: 1;
 		}
 	}
 
@@ -358,7 +358,7 @@ export default {
 		width: 0px;
 		left: 200px;
 
-		opacity: 0.8;
+		opacity: 1;
 		border: 0px;
 		transition: width 500ms ease;
 

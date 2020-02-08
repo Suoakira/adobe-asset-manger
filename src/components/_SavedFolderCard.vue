@@ -1,5 +1,5 @@
 <template>
-	<div :class="`saved-folder ${handleMouseoverFilePath === getBrowserPath && 'active'} `"
+	<div :class="`saved-folder ${handleMouseoverFilePath === getBrowserPath && 'active'} ${getBrowserPath === savedFolderPath  ? 'active' : ''}`"
 	
 		@mouseover="handleMouseoverFilePath = getBrowserPath"
 		@mouseout="handleMouseoverFilePath = null"
@@ -8,7 +8,6 @@
 	>
 	 
 		<div      
-			:class="`${getBrowserPath === savedFolderPath  ? 'active' : ''}  `"
 			>
 			<span class="icon-wrapper"><i :class="`fb-folder-icon folder fas ${iconToShow(savedFolderPath)}`"></i></span>
 			<span :class="`header-title ${savedFolderPath === getBrowserPath && 'active'}`" > {{ niceName }}</span>
@@ -82,6 +81,7 @@ export default {
 <style lang="scss">
 
 .saved-folder {
+	padding-left: 16px;
 	// display: inline-block;
 	position: relative;
 	height: 24px;
@@ -99,7 +99,7 @@ export default {
 	}
 
 	.header-title {
-		opacity: 0.6;
+		opacity: 0.8;
 		font-size: 11px;
 		color: #ffffff;
 		font-weight: 400;
@@ -108,7 +108,7 @@ export default {
 		transform: translateY(-50%);
 
 		&.active {
-			opacity: 0.8;
+			opacity: 1;
 		}
 		// margin-left: 32px;
 	}
@@ -121,8 +121,8 @@ export default {
 	}
 
 	.fb-folder-icon {
-		color: white;
-		opacity: 0.6;
+		color: #80D3F7;
+		// opacity: 0.8;
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -134,7 +134,7 @@ export default {
 
 		.fb-folder-icon-remove {
 			color: white;
-			opacity: 0.6;
+			opacity: 0.8;
 			position: absolute;
 			top: 50%;
 			right: 3%;

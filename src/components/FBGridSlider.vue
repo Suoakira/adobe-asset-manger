@@ -134,7 +134,7 @@ export default {
         top: 50%;
         width: 100%;
         height: 3px;
-        background: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.8);
     }
 
     .q-slider {
