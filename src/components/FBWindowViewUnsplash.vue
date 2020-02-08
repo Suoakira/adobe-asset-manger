@@ -210,7 +210,7 @@ export default {
 
 .vue-popover[style] {
     width: 540px !important;
-    left: 576px !important;
+    left: 704px !important;
     top: 40px !important;
     height: 376px;
     background: #2e2e2e;
@@ -224,7 +224,7 @@ export default {
 
         position: relative;
         top: -11px !important;
-        left: 604px !important;
+        left: 476px !important;
 
     }
 }

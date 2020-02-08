@@ -4,9 +4,20 @@
 
 			<q-card>
 				<q-card-section>
-					<div v-for="savedFolder in getSavedFolders" :key="savedFolder">
-						<SavedFolderCard :savedFolderPath="savedFolder" :niceName="folderNicename(savedFolder)"></SavedFolderCard>
+					<div 
+					:class="`drag-drop-area ${dragging ? 'dragging' : ''}`"
+					@drop.prevent="dropFolder"
+					@dragover.prevent="dragging = true"
+					@dragenter.prevent="dragging = true"
+					@dragleave.prevent="dragging = false"
+					>
+						<h5 v-if="dragging" >Drop Folder</h5>
 					</div>
+
+						<div v-for="savedFolder in getSavedFolders" :key="savedFolder">
+							<SavedFolderCard :savedFolderPath="savedFolder" :niceName="folderNicename(savedFolder)"></SavedFolderCard>
+						</div>
+
 				</q-card-section>
 			</q-card>
 			
@@ -16,7 +27,13 @@
 
 			<q-card>
 				<q-card-section>
-					<FBListView />
+
+					<div class="fb-list-view-container">
+
+						<FBListView />
+
+					</div>
+
 				</q-card-section>
 			</q-card>
 
@@ -26,6 +43,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import fs from "fs-extra"
 
 import FBListView from "./FBListView";
 import SavedFolderCard from "./_SavedFolderCard";
@@ -33,7 +51,8 @@ import SavedFolderCard from "./_SavedFolderCard";
 export default {
 	data: () => ({
 		favTabExpanded: true,
-		getFileTreeExpanded: true
+		getFileTreeExpanded: true,
+		dragging: false,
 	}),
 	components: {
 		FBListView,
@@ -44,6 +63,36 @@ export default {
 			const splitPath = path.split("/");
 
 			return splitPath[splitPath.length - 1];
+		},
+
+		dropFolder(evt) {
+			console.log("event", evt.dataTransfer.files[0].path)
+
+
+			if (fs.lstatSync(evt.dataTransfer.files[0].path).isDirectory()) {
+
+			const addedFolder = { isDir: true, nodeKey: "/" + evt.dataTransfer.files[0].path}
+			this.dragging = false
+			
+
+			this.$store.dispatch("saveAsFavFolder", addedFolder);
+			
+            this.$q.notify({
+                message: `Folder added! <b <span style="color: #80D3F7">${addedFolder.nodeKey} </b>`,
+                color: '#80D3F7',
+                html: true
+			})
+			
+			} else {
+				this.$q.notify({
+					message: 'Sorry that is not a directory',
+					color: '#80D3F7',
+					html: true
+			})
+
+
+
+			}
 		}
 	},
 	computed: {
@@ -62,6 +111,35 @@ export default {
 	height: 100%;
 	background: #272727;
 	box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+
+	.drag-drop-area {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0px;
+		z-index: 2;
+		transition: background 200ms ease, border 200ms ease;
+
+		// background: red !important;
+
+			&.dragging {
+				background-color: #272727;
+				opacity: 0.9;
+				border: 5px dashed $color-active-but;
+				border-radius: 8px;
+			}
+
+			h5 {
+				pointer-events: none;
+				position: absolute;
+				left: 50%;
+				top: 22%;
+				transform: translateX(-50%);
+			}
+
+
+
+	}
 
 	.q-item {
 		background: #2e2e2e;
@@ -91,6 +169,14 @@ export default {
 	}
 
 	.q-tree__node-header {
+		// padding-left: 16px;
+	}
+
+	.q-expansion-item__content .relative-position {
+		// padding-left: 16px;
+	}
+
+	.fb-list-view-container {
 		padding-left: 16px;
 	}
 

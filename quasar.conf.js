@@ -97,8 +97,8 @@ module.exports = function (ctx) {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        // name: 'Quasar App',
-        // short_name: 'Quasar App',
+        name: 'Ae Explorer - Photoshop',
+        short_name: 'Ae Explorer - Photoshop',
         // description: 'A Quasar Framework app',
         display: 'standalone',
         orientation: 'portrait',
