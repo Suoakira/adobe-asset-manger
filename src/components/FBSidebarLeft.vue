@@ -5,11 +5,11 @@
 			<q-card>
 				<q-card-section>
 					<div 
-					:class="`drag-drop-area ${dragging ? 'dragging' : ''}`"
-					@drop.prevent="dropFolder"
-					@dragover.prevent="dragging = true"
-					@dragenter.prevent="dragging = true"
-					@dragleave.prevent="dragging = false"
+						:class="`drag-drop-area ${dragging ? 'dragging' : ''}`"
+						@drop.prevent="dropFolder"
+						@dragover.prevent="dragging = true"
+						@dragenter.prevent="dragging = true"
+						@dragleave.prevent="dragging = false"
 					>
 						<h5 v-if="dragging" >Drop Folder</h5>
 					</div>
@@ -66,7 +66,7 @@ export default {
 		},
 
 		dropFolder(evt) {
-			console.log("event", evt.dataTransfer.files[0].path)
+
 
 
 			if (fs.lstatSync(evt.dataTransfer.files[0].path).isDirectory()) {
@@ -78,7 +78,7 @@ export default {
 			this.$store.dispatch("saveAsFavFolder", addedFolder);
 			
             this.$q.notify({
-                message: `Folder added! <b <span style="color: #80D3F7">${addedFolder.nodeKey} </b>`,
+                message: `Folder added! <b <span style="color: #80D3F7">${addedFolder.nodeKey.slice(1)}</b>`,
                 color: '#80D3F7',
                 html: true
 			})
@@ -117,7 +117,7 @@ export default {
 		height: 100%;
 		width: 100%;
 		top: 0px;
-		z-index: 2;
+		z-index: 1;
 		transition: background 200ms ease, border 200ms ease;
 
 		// background: red !important;

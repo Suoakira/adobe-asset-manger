@@ -33,7 +33,10 @@
 
             
 
-            <VueContext ref="fbUnsplashWindow" class="context-menu" :closeOnScroll="true">
+            <VueContext ref="fbUnsplashWindow" class="context-menu" :closeOnScroll="true"
+                @close="rightClickTarget = null"
+
+            >
 
                 <template slot-scope="child">
 
@@ -44,7 +47,7 @@
                         <li v-for="folder in getSavedFolders" :key="folder"> 
 
                             <p @click="test(child.data, folder)">
-			<span class="icon-wrapper"><i :class="`fb-folder-icon folder fas ${iconToShow(folder)}`"></i></span>
+			                <span class="icon-wrapper"><i :class="`fb-folder-icon folder fas ${iconToShow(folder)}`"></i></span>
 
                               {{ folderNicename(folder)}}
 
@@ -66,6 +69,8 @@
                     class=" col-3 file-col unsplash"
                     :key="searchResult.id"
                     @contextmenu.prevent="$refs.fbUnsplashWindow.open($event, searchResult)"
+
+                    @click.right="rightClickTarget = searchResult.id"
                 >
 
 
@@ -78,8 +83,8 @@
                         </div>
 
                         <div class="title-bar">
-                            <div class="file-name-container selected">
-                                <div class="file-name selected-background">
+                            <div :class="`file-name-container ${rightClickTarget === searchResult.id ?  'selected' : '' }`">
+                                <div :class="`file-name  ${rightClickTarget === searchResult.id ?  'selected-background' : '' }`">
                                     ...by {{searchResult.user.first_name}} {{searchResult.user.last_name}}
                                 </div>
                             </div>
@@ -126,6 +131,7 @@ export default {
 
 			searchTerm: null,
             unsplashSearchResults: [],
+            rightClickTarget: null
             
 		};
     },
@@ -147,6 +153,10 @@ export default {
 
 
 	methods: {
+
+        contextMenuOpen(evt) {
+            console.log(evt)
+        },
 
         test(unsplashObj, folder) {
 

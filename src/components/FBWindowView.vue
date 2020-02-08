@@ -151,25 +151,7 @@ export default {
 			}
 		},
 
-		iconToShow(paramPath) {
-			const ajustedParamPath = paramPath.slice(1)
 
-			const desktopPath = path.join(require("os").homedir(), "Desktop");
-			const downloadsPath = path.join(require("os").homedir(), "Downloads");
-			const documentsPath = path.join(require("os").homedir(), "Documents");
-
-			if (ajustedParamPath.includes("Volumes")) {
-				return "fa-hdd";
-			} else if (desktopPath === ajustedParamPath) {
-				return "fa-desktop";
-			} else if (downloadsPath === ajustedParamPath) {
-				return "fa-file-download";
-			} else {
-				return "fa-folder";
-			}
-				return "fa-folder";
-		
-		},
 	},
 
 	computed: {
