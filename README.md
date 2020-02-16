@@ -1,26 +1,8 @@
-# Quasar App (ae-filebrowser)
 
-A Quasar Framework app
+ADOBE Photoshop Asset Manager (NEW!)                                                               GitHub 
+Asset Manager for photoshop, makes dealing with images and importing files a breeze.
+- Frontend: Vue, Vuex, Node.js, Scss, Adobe API, Quasar, Unsplash integration.
 
-## Install the dependencies
-```bash
-npm install
-```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
+Video-Demo | Screenshots: one | two | three | four | five
 
-### Lint the files
-```bash
-npm run lint
-```
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
