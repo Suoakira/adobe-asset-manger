@@ -9,7 +9,6 @@ I wanted to solve a common problems creatives face using Adobe products. Would i
 
  
 ## Screenshots
-Include logo/demo screenshot etc.
 ![alt text](https://i.imgur.com/MkorqtG.png "")
 
 ## Video Demo
