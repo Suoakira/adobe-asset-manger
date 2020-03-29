@@ -1,5 +1,5 @@
 
-## ADOBE Photoshop Asseet Manager
+## ADOBE Photoshop Asset Manager
 Asset Manager for photoshop that makes dealing with images and importing files a breeze. No longer will you need to search around the web for beautiful royality free stock photos, with unsplash integration built in aimed to solve common pain points for creatives.
 
 - **Frontend**: Vue, Vuex, Node.js, Scss, Adobe API, Quasar, Unsplash integration.
